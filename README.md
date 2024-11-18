@@ -1,9 +1,9 @@
 # jmin Vim / Neovim Colour schemes #
 
-A set of minimal Vim / Neovim colour schemes.
+J-Min: A set of minimal Vim / Neovim colour schemes.
 
-It comes in dark and light varieties. The default settings only highlight
-comments and strings.
+J-Min colorschemes come in dark and light varieties. The default settings only
+highlight comments and strings (and some text formatting for HTML / Markdown).
 
 There is also an even simpler 2‐colour only version.
 
@@ -61,106 +61,16 @@ Pathogen:
 
     git clone https://github.com/jmcclare/jmin.git ~/.vim/bundle/jmin
 
+This colorscheme uses undercurls in all but 16 and 2 colour terminals. To
+ensure undercurl support in [Tmux](https://github.com/tmux/tmux) add the
+following to your Tmux config:
 
-## Configuration ##
-
-Before setting the colorscheme you can set the following variables to configure
-it.
-
-For example:
-
-    let g:jmin_contrast = 'high'
-
-Or in Lua:
-
-    vim.g.jmin_contrast = "high"
-
-Some of these settings do not apply to the 2‐colour schemes. Toggle settings are
-`1` for on, `0` for off.
-
-`g:jmin_contrast`: Changes the normal text colour to have more or less contrast
-with the background.
-
-Values: `'normal'` (default), `'high'`, or `'low'`.
-
-`g:jmin_hlcomments`: Highlight comments.
-
-Values: `1` (default), `0`.
-
-`g:jmin_hlstrs`: Highlight strings.
-
-Values: `1` (default), `0`.
-
-`g:jmin_hlnum`: Highlight numerical values in code.
-
-Values: `1`, `0` (default).
-
-`g:jmin_hlkeyword`: Highlight Some Language Keywords.
-
-Values: `1`, `0` (default).
-
-`g:jmin_extrafmt`: Extra Formatting; headings, bold and em in HTML and Markdown.
-
-Values: `1` (default), `0`.
-
-`g:jmin_hlfolds`: Extra Formatting; headings, bold and em in HTML and Markdown.
-
-Values: `1` (default), `0`.
-
-`g:jmin_hllinenumbers`: Highlight Line Numbers.
-
-Values: `1` (default), `0`.
-
-`g:jmin_colorize_bold`: Colourize bold text. Useful if your font cannot be displayed in bold.
-
-Values: `1` (default), `0`.
-
-`g:jmin_16`: Use 16 colour mode.
-
-This makes it behave like a classic 16 colour terminal and disables non
-supported features like extended colours and underlines. Note that you can
-still enable some of that special formatting with options like extra
-formatting. Technically, bold works in a 16 colour terminal (it uses a brighter
-text colour), but only the extra styles will enable it.
-
-Values: `1`, `0` (default).
-
-`g:jmin_hlhtml`: Highlight HTML tags. It fades the tags to help you read the text inside them.
-
-Values: `1` (default), `0`.
-
-`g:jmin_hlquickfix`: Highlight Quickfix Window.
-
-Values: `1` (default), `0`.
-
-`g:jmin_2color`: 2 colours only. Highlighting is done entirely with swapping
-foreground and background and a bit of underline, bold, and italics. Items
-marked for highlighting with other options will still be highlighted. This can
-be combined with 16 colour mode.
+    # Undercurl and underscore support
+    set -g default-terminal "${TERM}"
+    set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'  # undercurl support
+    set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'  # underscore colours - needs tmux-3.0
 
 
-## Commands / Mappings ##
+## Configuration / Use ##
 
-The color schemes set some mappings that toggle settings and reload the scheme.
-
-`<leader>jmc`: Toggle comment highlighting. Can be changed by setting `g:jmin_toggle_comments_shortcut`.
-
-`<leader>jms`: Toggle string highlighting. Can be changed by setting `g:jmin_toggle_strings_shortcut`
-
-`<leader>jmn`: Toggle number highlighting. Can be changed by setting `g:jmin_toggle_numbers_shortcut`.
-
-`<leader>jmk`: Toggle language keyword highlighting. Can be changed by setting `g:jmin_toggle_keywords_shortcut`.
-
-`<leader>jme`: Toggle extra formatting. Can be changed by setting `g:jmin_toggle_extrafmt_shortcut`.
-
-`<leader>jmf`: Toggle fold highlighting. Can be changed by setting `g:jmin_toggle_folds_shortcut`.
-
-`<leader>jml`: Toggle line number highlighting. Can be changed by setting `g:jmin_toggle_line_numbers_shortcut`.
-
-`<leader>jmh`: Toggle HTML tags highlighting. Can be changed by setting `g:jmin_toggle_html_shortcut`.
-
-`<leader>jmq`: Toggle quickfix list highlighting. Can be changed by setting `g:jmin_toggle_quickfix_shortcut`.
-
-`<leader>jmt`: Toggle 16 colour mode. The `t` stands for “terminal”. Can be changed by setting `g:jmin_toggle_16color_terminal_shortcut`.
-
-`<leader>jm2`: Toggle 2 colour mode. Can be changed by setting `g:jmin_toggle_2color_shortcut`.
+For configuration and use instructions enter `:h jmin`

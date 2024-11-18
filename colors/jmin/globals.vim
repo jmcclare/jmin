@@ -10,37 +10,37 @@ if !exists("g:jmin_contrast")
     let g:jmin_contrast = 'normal'
 endif
 
-" Highlight Comments
+" Highlight comments
 if !exists("g:jmin_hlcomments")
     let g:jmin_hlcomments = 1
 endif
 
-" Highlight Strings
+" Highlight strings
 if !exists("g:jmin_hlstrs")
     let g:jmin_hlstrs = 1
 endif
 
-" Highlight Numbers
+" Highlight numbers
 if !exists("g:jmin_hlnum")
     let g:jmin_hlnum = 0
 endif
 
-" Highlight Some Language Keywords
+" Highlight some language keywords
 if !exists("g:jmin_hlkeyword")
     let g:jmin_hlkeyword = 0
 endif
 
-" Extra Formatting; headings, bold and em in HTML and Markdown
+" Extra formatting; headings, bold and em in HTML and Markdown
 if !exists("g:jmin_extrafmt")
     let g:jmin_extrafmt = 1
 endif
 
-" Highlight Folds
+" Highlight fold markers
 if !exists("g:jmin_hlfolds")
     let g:jmin_hlfolds = 1
 endif
 
-" Highlight Line Numbers
+" Highlight line numbers
 if !exists("g:jmin_hllinenumbers")
     let g:jmin_hllinenumbers = 1
 endif
@@ -66,7 +66,7 @@ if !exists("g:jmin_hlhtml")
     let g:jmin_hlhtml = 1
 endif
 
-" Highlight Quickfix Window
+" Highlight quickfix window
 if !exists("g:jmin_hlquickfix")
     let g:jmin_hlquickfix = 1
 endif
