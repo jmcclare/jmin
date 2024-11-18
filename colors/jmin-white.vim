@@ -1831,7 +1831,10 @@ call s:h("SignColumn", {"fg": s:signcolumn})
 call s:h("SpecialKey", {"fg": s:specialkey})
 call s:h("StatusLine", {"fg": s:statusline_fg, "bg": s:statusline_bg, "attr": s:statusline_attr})
 call s:h("StatusLineNC", { "fg": s:statusline_nc_fg, "bg": s:statusline_nc_bg, "attr": s:statusline_nc_attr })
-call s:h("VertSplit", {"fg": s:vertsplit})
+" VertSplit is used in Vim. Only the background colour matters.
+call s:h("VertSplit", {"bg": s:vertsplit})
+" VertSplit is used in Neovim for the same thing. fg and bg matter. fg is a
+" vertical bar.
 call s:h("WinSeparator", {"fg": s:vertsplit})
 
 " Highlighted
