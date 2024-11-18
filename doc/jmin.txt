@@ -22,7 +22,7 @@ terminals.
 This colorscheme uses undercurls in all but 16 and 2 colour terminals. To
 ensure undercurl support in [Tmux](https://github.com/tmux/tmux) add the
 following to your Tmux config:
->sh
+>
     # Undercurl and underscore support
     set -g default-terminal "${TERM}"
     set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'  # undercurl support
@@ -47,10 +47,9 @@ In Lua:
 >
 	vim.g.jmin_hlcomments = 0
 	vim.cmd.colorscheme("jmin-light")
-
+<
 Some of these settings do not apply to the `jmin-2color` colorscheme. None of
 them apply to `jmin-simple`.
-<
 							*g:jmin_contrast*
 `g:jmin_contrast`	string	(default "normal")
 			global
