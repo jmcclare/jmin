@@ -526,7 +526,7 @@ let s:diffadd_attr             = { "gui": "NONE", "cterm": "NONE" }
 let s:diffchange_fg            = s:none
 "let s:diffchange_bg            = s:none
 " For full colour only, use a subtle tint of the background colour.
-let s:diffchange_bg            = { "gui": "#f2fff9", "cterm": "NONE" }
+let s:diffchange_bg            = { "gui": "#ECFFF6", "cterm": "NONE" }
 let s:diffdelete_fg            = s:nearer_white
 let s:diffdelete_bg            = s:more_extreme_near_white
 let s:diffdelete_attr          = { "gui": "NONE", "cterm": "NONE" }

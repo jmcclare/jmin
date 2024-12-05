@@ -511,7 +511,7 @@ let s:diffchange_fg        = s:none
 " This works better with s:extreme_near_white background.
 "let s:diffchange_bg        = { "gui": "#e1f2ec", "cterm": "NONE" }
 " This works better with s:nearest_white background.
-let s:diffchange_bg        = { "gui": "#d3f2e8", "cterm": "NONE" }
+let s:diffchange_bg        = { "gui": "#d0f2e7", "cterm": "NONE" }
 let s:diffdelete_fg        = s:near_white
 let s:diffdelete_bg        = s:nearer_white
 let s:diffdelete_attr      = { "gui": "NONE", "cterm": "NONE" }
