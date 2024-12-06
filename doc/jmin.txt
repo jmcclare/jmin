@@ -79,7 +79,8 @@ them apply to `jmin-simple`.
 							*g:jmin_hlkeyword*
 `g:jmin_hlkeyword`	boolean	(default 0)
 			global
-	Highlight built in language keywords and syntax.
+	Highlight built in language keywords and syntax—The `Statement`,
+	`PreProc` and `Type` highlight groups.
 
 							*g:jmin_extrafmt*
 `g:jmin_extrafmt`	boolean	(default 1)

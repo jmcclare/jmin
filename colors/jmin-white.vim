@@ -617,19 +617,22 @@ let s:spellrare_guisp  = s:spellrare_fg
 " safely degrade to underlines. There will be no special colour, but there is
 " no direct way to test for support of these features.
 if (has('termguicolors') && &termguicolors) || has('gui_running')
-    " Set text to normal colours
+    " Set text colours to empty dictionaries so that s:hmod will set no
+    " colours for spelling error text. The text’s existing colours will be
+    " used instead.
+    "
     " Set all styles to undercurl
-    let s:spellbad_fg      = s:norm_fg
-    let s:spellbad_bg      = s:norm_bg
+    let s:spellbad_fg      = {}
+    let s:spellbad_bg      = {}
     let s:spellbad_attr    = { "gui": "undercurl", "cterm": "undercurl" }
-    let s:spellcap_fg      = s:norm_fg
-    let s:spellcap_bg      = s:norm_bg
+    let s:spellcap_fg      = {}
+    let s:spellcap_bg      = {}
     let s:spellcap_attr    = { "gui": "undercurl", "cterm": "undercurl" }
-    let s:spelllocal_fg    = s:norm_fg
-    let s:spelllocal_bg    = s:norm_bg
+    let s:spelllocal_fg    = {}
+    let s:spelllocal_bg    = {}
     let s:spelllocal_attr  = { "gui": "undercurl", "cterm": "undercurl" }
-    let s:spellrare_fg     = s:norm_fg
-    let s:spellrare_bg     = s:norm_bg
+    let s:spellrare_fg     = {}
+    let s:spellrare_bg     = {}
     let s:spellrare_attr   = { "gui": "undercurl", "cterm": "undercurl" }
 endif
 
@@ -1545,6 +1548,7 @@ function! JMinExtraFmt()
         call s:h("htmlBold", { "attr": s:none })
         call s:h("htmlItalic", { "attr": s:none })
         call s:h("mkdHeading", { "attr": s:none })
+        call s:h("Title", { "attr": s:none })
     else
         let g:jmin_extrafmt = 1
         call s:h("htmlH1", { "fg": s:html_h1_fg, "attr": s:html_h1_attr })
@@ -1552,6 +1556,7 @@ function! JMinExtraFmt()
         call s:h("htmlBold", { "fg": s:html_bold_fg, "attr": s:html_bold_attr })
         call s:h("htmlItalic", { "attr": s:html_italic_attr })
         call s:h("mkdHeading", { "fg": s:html_h1_fg, "attr": s:html_h1_attr })
+        call s:h("Title", { "fg": s:html_h1_fg, "attr": s:html_h1_attr })
     end
 endfunction
 command! JMinExtraFmt call JMinExtraFmt()
@@ -1709,6 +1714,43 @@ function! s:h(group, style)
     \ "cterm="   (has_key(a:style, "attr")  ? a:style.attr.cterm : "NONE")
 endfunction
 
+"
+" s:hmod — set parts of highlight group using variables
+"
+" Params:
+"
+"   fg: dictionary with gui and cterm colour attributes
+"   bg: dictionary with gui and cterm colour attributes
+"   guisp: dictionary with gui and cterm colour attributes, cterm attribute is
+"       ignored. Uses the same format as the other colours for ease of use.
+"   attr: dictionary with gui and cterm attributes. See :h attr-list
+"
+" All params are optional. Missing params will not be set.
+"
+function! s:hmod(group, style)
+  if has_key(a:style, "fg") && has_key(a:style.fg, "gui")
+      execute "highlight" a:group "guifg=" a:style.fg.gui
+  endif
+  if has_key(a:style, "bg") && has_key(a:style.fg, "gui")
+      execute "highlight" a:group "guibg=" a:style.bg.gui
+  endif
+  if has_key(a:style, "guisp") && has_key(a:style.guisp, "gui")
+      execute "highlight" a:group "guisp=" a:style.guisp.gui
+  endif
+  if has_key(a:style, "attr") && has_key(a:style.attr, "gui")
+      execute "highlight" a:group "gui=" a:style.attr.gui
+  endif
+  if has_key(a:style, "fg") && has_key(a:style.fg, "cterm")
+      execute "highlight" a:group "ctermfg=" a:style.fg.cterm
+  endif
+  if has_key(a:style, "bg") && has_key(a:style.bg, "cterm")
+      execute "highlight" a:group "ctermbg=" a:style.bg.cterm
+  endif
+  if has_key(a:style, "attr") && has_key(a:style.attr, "cterm")
+      execute "highlight" a:group "cterm=" a:style.attr.cterm
+  endif
+endfunction
+
 " Takes only a highlight group name and sets all attributes to NONE, ie. sets
 " them to match the normal highlight group.
 function! s:noh(group)
@@ -1716,7 +1758,6 @@ function! s:noh(group)
     "call s:h(a:group,        {"bg": s:norm_bg, "fg": s:norm_fg, "attr": { "gui": "NONE", "cterm": "NONE" },})
     call s:h(a:group,        {"bg": s:none, "fg": s:norm_fg, "attr": { "gui": "NONE", "cterm": "NONE" },})
 endfunction
-
 
 " Set both backgrounds to bg and both foregrounds to fg.
 function! s:default(group)
@@ -1733,66 +1774,6 @@ call s:h("Normal",        {"bg": s:norm_bg, "fg": s:norm_fg})
 " efficiency, and to not break the default links (so as to not mess up other
 " color schemes that depend on them), remove the unnecessary highlight (or no
 " highlight) declarations below.
-
-"
-" These are toggled by options. They default to normal, or unhighlighted.
-"
-
-" Toggle option twice to activate it.
-"
-" This silly trick lets us use the toggle function to set these highlights
-" instead of repeating the code here.
-call JMinComments()
-call JMinComments()
-
-" Toggle option twice to activate it.
-"
-" This silly trick lets us use the toggle function to set these highlights
-" instead of repeating the code here.
-call JMinFolds()
-call JMinFolds()
-
-" Toggle option twice to activate it.
-"
-" This silly trick lets us use the toggle function to set these highlights
-" instead of repeating the code here.
-call JMinLineNumbers()
-call JMinLineNumbers()
-
-" Toggle option twice to activate it.
-"
-" This silly trick lets us use the toggle function to set these highlights
-" instead of repeating the code here.
-call JMinStrings()
-call JMinStrings()
-
-" Toggle option twice to activate it.
-"
-" This silly trick lets us use the toggle function to set these highlights
-" instead of repeating the code here.
-call JMinNumbers()
-call JMinNumbers()
-
-" Toggle option twice to activate it.
-"
-" This silly trick lets us use the toggle function to set these highlights
-" instead of repeating the code here.
-call JMinKeyword()
-call JMinKeyword()
-
-" Toggle option twice to activate it.
-"
-" This silly trick lets us use the toggle function to set these highlights
-" instead of repeating the code here.
-call JMinHTMLTags()
-call JMinHTMLTags()
-
-" Toggle option twice to activate it.
-"
-" This silly trick lets us use the toggle function to set these highlights
-" instead of repeating the code here.
-call JMinExtraFmt()
-call JMinExtraFmt()
 
 call s:h("helpHyperTextJump", { "attr": s:help_hypertext_jump_attr })
 
@@ -1907,10 +1888,10 @@ call s:h("GitGutterChange", {"fg": s:gitgutterchange_fg})
 call s:h("GitGutterDelete", {"fg": s:gitgutterdelete_fg})
 call s:h("GitGutterChangeDelete", {"fg": s:gitgutterchangedelete_fg})
 
-call s:h("SpellBad", { "fg": s:spellbad_fg, "bg": s:spellbad_bg, "guisp": s:spellbad_guisp, "attr": s:spellbad_attr })
-call s:h("SpellCap", { "fg": s:spellcap_fg, "bg": s:spellcap_bg, "guisp": s:spellcap_guisp, "attr": s:spellcap_attr })
-call s:h("SpellLocal", { "fg": s:spelllocal_fg, "bg": s:spelllocal_bg, "guisp": s:spelllocal_guisp, "attr": s:spelllocal_attr })
-call s:h("SpellRare", { "fg": s:spellrare_fg, "bg": s:spellrare_bg, "guisp": s:spellrare_guisp, "attr": s:spellrare_attr })
+call s:hmod("SpellBad", { "fg": s:spellbad_fg, "bg": s:spellbad_bg, "guisp": s:spellbad_guisp, "attr": s:spellbad_attr })
+call s:hmod("SpellCap", { "fg": s:spellcap_fg, "bg": s:spellcap_bg, "guisp": s:spellcap_guisp, "attr": s:spellcap_attr })
+call s:hmod("SpellLocal", { "fg": s:spelllocal_fg, "bg": s:spelllocal_bg, "guisp": s:spelllocal_guisp, "attr": s:spelllocal_attr })
+call s:hmod("SpellRare", { "fg": s:spellrare_fg, "bg": s:spellrare_bg, "guisp": s:spellrare_guisp, "attr": s:spellrare_attr })
 
 " Unhighlighted
 "
@@ -2005,6 +1986,7 @@ if has('nvim')
     "hi link @variable Identifier
     hi link @markup.raw.block.markdown String
     hi link @markup.raw.markdown_inline String
+    hi link @markup.raw String
     hi link @markup.heading.1.markdown htmlH1
     hi link @markup.heading.2.markdown htmlH1
     hi link @markup.heading.3.markdown htmlH1
@@ -2027,3 +2009,64 @@ call s:h("DiagnosticUnderlineHint", { "fg": s:diagnosticunderlinehint_fg, "bg": 
 call s:h("DiagnosticUnderlineOk", { "fg": s:diagnosticunderlineok_fg, "bg": s:diagnosticunderlineok_bg, "guisp": s:diagnosticunderlineok_guisp, "attr": s:diagnosticunderlineok_attr })
 call s:h("NormalFloat", { "fg": s:normalfloat_fg, "bg": s:normalfloat_bg })
 call s:h("FloatBorder", { "fg": s:floatborder_fg, "bg": s:floatborder_bg })
+
+
+"
+" These are toggled by options. They default to normal, or unhighlighted.
+"
+
+" Toggle option twice to activate it.
+"
+" This silly trick lets us use the toggle function to set these highlights
+" instead of repeating the code here.
+call JMinComments()
+call JMinComments()
+
+" Toggle option twice to activate it.
+"
+" This silly trick lets us use the toggle function to set these highlights
+" instead of repeating the code here.
+call JMinFolds()
+call JMinFolds()
+
+" Toggle option twice to activate it.
+"
+" This silly trick lets us use the toggle function to set these highlights
+" instead of repeating the code here.
+call JMinLineNumbers()
+call JMinLineNumbers()
+
+" Toggle option twice to activate it.
+"
+" This silly trick lets us use the toggle function to set these highlights
+" instead of repeating the code here.
+call JMinStrings()
+call JMinStrings()
+
+" Toggle option twice to activate it.
+"
+" This silly trick lets us use the toggle function to set these highlights
+" instead of repeating the code here.
+call JMinNumbers()
+call JMinNumbers()
+
+" Toggle option twice to activate it.
+"
+" This silly trick lets us use the toggle function to set these highlights
+" instead of repeating the code here.
+call JMinKeyword()
+call JMinKeyword()
+
+" Toggle option twice to activate it.
+"
+" This silly trick lets us use the toggle function to set these highlights
+" instead of repeating the code here.
+call JMinHTMLTags()
+call JMinHTMLTags()
+
+" Toggle option twice to activate it.
+"
+" This silly trick lets us use the toggle function to set these highlights
+" instead of repeating the code here.
+call JMinExtraFmt()
+call JMinExtraFmt()

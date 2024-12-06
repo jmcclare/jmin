@@ -448,6 +448,7 @@ function! JMinExtraFmt()
         call s:h("htmlBold", { "attr": s:none })
         call s:h("htmlItalic", { "attr": s:none })
         call s:h("mkdHeading", { "attr": s:none })
+        call s:h("Title", { "attr": s:none })
     else
         let g:jmin_extrafmt = 1
         call s:h("htmlH1", { "attr": s:html_h1_attr })
@@ -455,6 +456,7 @@ function! JMinExtraFmt()
         call s:h("htmlBold", { "attr": s:html_bold_attr })
         call s:h("htmlItalic", { "attr": s:html_italic_attr })
         call s:h("mkdHeading", { "attr": s:html_h1_attr })
+        call s:h("Title", { "attr": s:html_h1_attr })
     end
 endfunction
 command! JMinExtraFmt call JMinExtraFmt()
@@ -529,24 +531,6 @@ call s:h("Normal",        {"bg": s:norm_bg, "fg": s:norm_fg})
 " efficiency, and to not break the default links (so as to not mess up other
 " color schemes that depend on them), remove the unnecessary highlight (or no
 " highlight) declarations below.
-
-"
-" These are toggled by options. They default to normal, or unhighlighted.
-"
-
-" Toggle option twice to activate it.
-"
-" This silly trick lets us use the toggle function to set these highlights
-" instead of repeating the code here.
-call JMinKeyword()
-call JMinKeyword()
-
-" Toggle option twice to activate it.
-"
-" This silly trick lets us use the toggle function to set these highlights
-" instead of repeating the code here.
-call JMinExtraFmt()
-call JMinExtraFmt()
 
 call s:noh("Comment")
 call s:noh("Folded")
@@ -769,6 +753,7 @@ if has('nvim')
     "hi link @variable Identifier
     hi link @markup.raw.block.markdown String
     hi link @markup.raw.markdown_inline String
+    hi link @markup.raw String
     hi link @markup.heading.1.markdown htmlH1
     hi link @markup.heading.2.markdown htmlH1
     hi link @markup.heading.3.markdown htmlH1
@@ -791,3 +776,22 @@ call s:h("DiagnosticUnderlineHint", { "fg": s:diagnosticunderlinehint_fg, "bg": 
 call s:h("DiagnosticUnderlineOk", { "fg": s:diagnosticunderlineok_fg, "bg": s:diagnosticunderlineok_bg, "guisp": s:diagnosticunderlineok_guisp, "attr": s:diagnosticunderlineok_attr })
 call s:h("NormalFloat", { "fg": s:normalfloat_fg, "bg": s:normalfloat_bg })
 call s:h("FloatBorder", { "fg": s:floatborder_fg, "bg": s:floatborder_bg })
+
+
+"
+" These are toggled by options. They default to normal, or unhighlighted.
+"
+
+" Toggle option twice to activate it.
+"
+" This silly trick lets us use the toggle function to set these highlights
+" instead of repeating the code here.
+call JMinKeyword()
+call JMinKeyword()
+
+" Toggle option twice to activate it.
+"
+" This silly trick lets us use the toggle function to set these highlights
+" instead of repeating the code here.
+call JMinExtraFmt()
+call JMinExtraFmt()
