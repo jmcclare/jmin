@@ -54,7 +54,7 @@ let s:preproc_attr             = s:statement_attr
 let s:type_fg                  = s:statement_fg
 let s:type_attr                = s:statement_attr
 let s:html_h1_attr             = { "gui": "bold", "cterm": "bold" }
-let s:html_link_attr           = { "gui": "underline", "cterm": "bold" }
+let s:html_link_attr           = { "gui": "underline", "cterm": "underline" }
 let s:html_bold_attr           = { "gui": "bold", "cterm": "bold" }
 let s:html_italic_attr         = { "gui": "italic", "cterm": "italic" }
 
@@ -330,6 +330,8 @@ let s:indent_guides_attr       = { "gui": "reverse", "cterm": "reverse" }
 
 
 if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' || g:jmin_16 == 1 || s:term == 'linux'
+    let s:html_link_attr     = { "gui": "underline", "cterm": "bold" }
+    let s:html_italic_attr   = { "gui": "NONE", "cterm": "NONE" }
     let s:statusline_attr    = { "gui": "reverse", "cterm": "reverse" }
     let s:statusline_nc_attr = { "gui": "NONE", "cterm": "NONE" }
 
@@ -352,10 +354,6 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
 
     let s:qfline_attr        = { "gui": "reverse", "cterm": "reverse" }
     let s:qflinenr_attr      = { "gui": "bold", "cterm": "bold" }
-
-    let s:diffadd_attr       = { "gui": "reverse", "cterm": "reverse" }
-    let s:diffdelete_attr    = { "gui": "reverse", "cterm": "reverse" }
-    let s:difftext_attr      = { "gui": "NONE", "cterm": "NONE" }
 
     let s:spellbad_attr      = { "gui": "reverse", "cterm": "reverse" }
     let s:spellcap_attr      = { "gui": "reverse", "cterm": "reverse" }

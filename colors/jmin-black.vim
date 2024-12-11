@@ -924,19 +924,16 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     endif
 
     let s:comment_fg                   = s:color8
-    "let s:comment_attr                 = s:none
-    let s:comment_attr                 = { "gui": "italic", "cterm": "italic" }
+    let s:comment_attr                 = s:none
     "let s:todo             = s:color10
     let s:todo_fg                      = s:comment_fg
     let s:todo_attr                    = s:comment_attr
     let s:vim_comment_title_fg         = s:comment_fg
     let s:vim_comment_title_attr       = s:comment_attr
     let s:fold_fg                      = s:color8
-    "let s:fold_attr                    = { "gui": "italic", "cterm": "italic" }
     let s:fold_attr                    = s:none
     let s:linenr                    = s:color8
-    "let s:string                    = s:color14
-    let s:string                    = s:color6
+    let s:string                    = s:color14
     let s:constant                  = s:string
     "let s:statement_fg              = s:norm_fg
     let s:statement_fg              = s:bold_fg
@@ -948,12 +945,12 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     let s:html_fg                   = s:color8
     let s:html_h1_fg                = s:bold_fg
     let s:html_h1_attr              = { "gui": "bold", "cterm": "bold" }
-    let s:html_link_attr            = { "gui": "underline", "cterm": "bold" }
+    let s:html_link_attr            = { "gui": "bold", "cterm": "bold" }
     let s:html_bold_fg              = s:bold_fg
     let s:html_bold_attr            = { "gui": "bold", "cterm": "bold" }
-    let s:html_italic_attr          = { "gui": "italic", "cterm": "bold" }
+    let s:html_italic_attr          = { "gui": "bold", "cterm": "bold" }
 
-    let s:help_hypertext_jump_attr  = { "gui": "underline", "cterm": "bold" }
+    let s:help_hypertext_jump_attr  = { "gui": "bold", "cterm": "bold" }
 
     " Dividers
 
@@ -988,7 +985,7 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     "let s:cursorline_bg    = s:none
     let s:cursorline_bg    = s:norm_bg
     "let s:cursorline_attr  = { "gui": "NONE", "cterm": "NONE" }
-    let s:cursorline_attr  = { "gui": "INVERSE", "cterm": "INVERSE" }
+    let s:cursorline_attr  = { "gui": "reverse", "cterm": "reverse" }
     let s:cursorim_fg      = s:color0
     let s:cursorim_bg      = s:color14
     let s:cursorim_attr    = { "gui": "NONE", "cterm": "NONE" }
@@ -1048,7 +1045,7 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     let s:tablinesel_attr   = { "gui": "bold", "cterm": "bold" }
     "let s:tablinefill       = s:norm_fg
     let s:tablinefill    = s:statusline_nc_bg
-    let s:underlined_attr = { "gui": "underline", "cterm": "bold" }
+    let s:underlined_attr = { "gui": "bold", "cterm": "bold" }
     " Only NeoVim Diagnostics has these message types
     let s:infomsg_fg       = s:color14
     let s:infomsg_bg       = s:none
@@ -1131,7 +1128,7 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
 
     " Diff
     let s:diffadd_fg           = s:none
-    let s:diffadd_bg           = s:color6
+    let s:diffadd_bg           = s:color2
     let s:diffadd_attr         = { "gui": "NONE", "cterm": "NONE" }
     let s:diffchange_fg        = s:none
     let s:diffchange_bg        = s:none
@@ -1403,10 +1400,10 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
         let s:gitdiff_attr       = { "gui": "NONE", "cterm": "NONE" }
         let s:diffadded_fg       = s:none
         let s:diffadded_bg       = s:none
-        let s:diffadded_attr     = { "gui": "italic", "cterm": "NONE" }
+        let s:diffadded_attr     = { "gui": "NONE", "cterm": "NONE" }
         let s:diffremoved_fg     = s:none
         let s:diffremoved_bg     = s:none
-        let s:diffremoved_attr   = { "gui": "italic", "cterm": "NONE" }
+        let s:diffremoved_attr   = { "gui": "NONE", "cterm": "NONE" }
 
         let s:gitkeyword_fg   = s:none
         let s:gitkeyword_bg   = s:none
