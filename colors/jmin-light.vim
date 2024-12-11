@@ -418,6 +418,9 @@ let s:diagnosticok_attr    = s:okmsg_attr
 " The terminal cannot render undercurls, so it adds underlines instead. I
 " add underlines below to match the GUI style.
 "
+" Newer terminals can render separately coloured underlines, but I assume
+" anything that cannot do undercurls is an older terminal.
+"
 " The foreground colours will apply to the text and the underline.
 let s:diagnosticunderlineerror_fg   = s:errormsg_fg
 let s:diagnosticunderlineerror_bg   = s:errormsg_bg
@@ -445,22 +448,23 @@ let s:diagnosticunderlineok_attr    = { "gui": "underline", "cterm": "underline"
 " safely degrade to underlines. There will be no special colour, but there is
 " no direct way to test for support of these features.
 if (has('termguicolors') && &termguicolors) || has('gui_running')
-    " Set text to normal colours
+    " Set text colours to empty dictionaries so that the underlying text
+    " colour remains.
     " Set all styles to undercurl
-    let s:diagnosticunderlineerror_fg   = s:norm_fg
-    let s:diagnosticunderlineerror_bg   = s:norm_bg
+    let s:diagnosticunderlineerror_fg   = {}
+    let s:diagnosticunderlineerror_bg   = {}
     let s:diagnosticunderlineerror_attr = { "gui": "undercurl", "cterm": "undercurl" }
-    let s:diagnosticunderlinewarn_fg    = s:norm_fg
-    let s:diagnosticunderlinewarn_bg    = s:norm_bg
+    let s:diagnosticunderlinewarn_fg    = {}
+    let s:diagnosticunderlinewarn_bg    = {}
     let s:diagnosticunderlinewarn_attr  = { "gui": "undercurl", "cterm": "undercurl" }
-    let s:diagnosticunderlineinfo_fg    = s:norm_fg
-    let s:diagnosticunderlineinfo_bg    = s:norm_bg
+    let s:diagnosticunderlineinfo_fg    = {}
+    let s:diagnosticunderlineinfo_bg    = {}
     let s:diagnosticunderlineinfo_attr  = { "gui": "undercurl", "cterm": "undercurl" }
-    let s:diagnosticunderlinehint_fg    = s:norm_fg
-    let s:diagnosticunderlinehint_bg    = s:norm_bg
+    let s:diagnosticunderlinehint_fg    = {}
+    let s:diagnosticunderlinehint_bg    = {}
     let s:diagnosticunderlinehint_attr  = { "gui": "undercurl", "cterm": "undercurl" }
-    let s:diagnosticunderlineok_fg      = s:norm_fg
-    let s:diagnosticunderlineok_bg      = s:norm_bg
+    let s:diagnosticunderlineok_fg      = {}
+    let s:diagnosticunderlineok_bg      = {}
     let s:diagnosticunderlineok_attr    = { "gui": "undercurl", "cterm": "undercurl" }
 endif
 let s:normalfloat_fg                = s:none
@@ -1985,11 +1989,11 @@ call s:h("DiagnosticWarn", { "fg": s:diagnosticwarn_fg, "bg": s:diagnosticwarn_b
 call s:h("DiagnosticInfo", { "fg": s:diagnosticinfo_fg, "bg": s:diagnosticinfo_bg, "attr": s:diagnosticinfo_attr })
 call s:h("DiagnosticHint", { "fg": s:diagnostichint_fg, "bg": s:diagnostichint_bg, "attr": s:diagnostichint_attr })
 call s:h("DiagnosticOk", { "fg": s:diagnosticok_fg, "bg": s:diagnosticok_bg, "attr": s:diagnosticok_attr })
-call s:h("DiagnosticUnderlineError", { "fg": s:diagnosticunderlineerror_fg, "bg": s:diagnosticunderlineerror_bg, "guisp": s:diagnosticunderlineerror_guisp, "attr": s:diagnosticunderlineerror_attr })
-call s:h("DiagnosticUnderlineWarn", { "fg": s:diagnosticunderlinewarn_fg, "bg": s:diagnosticunderlinewarn_bg, "guisp": s:diagnosticunderlinewarn_guisp, "attr": s:diagnosticunderlinewarn_attr })
-call s:h("DiagnosticUnderlineInfo", { "fg": s:diagnosticunderlineinfo_fg, "bg": s:diagnosticunderlineinfo_bg, "guisp": s:diagnosticunderlineinfo_guisp, "attr": s:diagnosticunderlineinfo_attr })
-call s:h("DiagnosticUnderlineHint", { "fg": s:diagnosticunderlinehint_fg, "bg": s:diagnosticunderlinehint_bg, "guisp": s:diagnosticunderlinehint_guisp, "attr": s:diagnosticunderlinehint_attr })
-call s:h("DiagnosticUnderlineOk", { "fg": s:diagnosticunderlineok_fg, "bg": s:diagnosticunderlineok_bg, "guisp": s:diagnosticunderlineok_guisp, "attr": s:diagnosticunderlineok_attr })
+call s:hmod("DiagnosticUnderlineError", { "fg": s:diagnosticunderlineerror_fg, "bg": s:diagnosticunderlineerror_bg, "guisp": s:diagnosticunderlineerror_guisp, "attr": s:diagnosticunderlineerror_attr })
+call s:hmod("DiagnosticUnderlineWarn", { "fg": s:diagnosticunderlinewarn_fg, "bg": s:diagnosticunderlinewarn_bg, "guisp": s:diagnosticunderlinewarn_guisp, "attr": s:diagnosticunderlinewarn_attr })
+call s:hmod("DiagnosticUnderlineInfo", { "fg": s:diagnosticunderlineinfo_fg, "bg": s:diagnosticunderlineinfo_bg, "guisp": s:diagnosticunderlineinfo_guisp, "attr": s:diagnosticunderlineinfo_attr })
+call s:hmod("DiagnosticUnderlineHint", { "fg": s:diagnosticunderlinehint_fg, "bg": s:diagnosticunderlinehint_bg, "guisp": s:diagnosticunderlinehint_guisp, "attr": s:diagnosticunderlinehint_attr })
+call s:hmod("DiagnosticUnderlineOk", { "fg": s:diagnosticunderlineok_fg, "bg": s:diagnosticunderlineok_bg, "guisp": s:diagnosticunderlineok_guisp, "attr": s:diagnosticunderlineok_attr })
 call s:h("NormalFloat", { "fg": s:normalfloat_fg, "bg": s:normalfloat_bg })
 call s:h("FloatBorder", { "fg": s:floatborder_fg, "bg": s:floatborder_bg })
 
