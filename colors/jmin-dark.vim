@@ -1986,6 +1986,11 @@ if has('nvim')
     hi link @markup.heading.5.markdown htmlH1
     hi link @markup.heading.6.markdown htmlH1
     hi link @markup.quote.markdown Comment
+    hi link @tag.xml XMLTagName
+    hi link @tag.delimiter.xml XMLTag
+    hi link @tag.attribute.xml xmlAttrib
+    hi link @operator.xml xmlEqual
+    hi link @punctuation.delimiter.xml xmlAttribPunct
 endif
 
 " Diagnostics
