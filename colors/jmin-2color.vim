@@ -315,6 +315,20 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
     let s:spellcap_attr    = { "gui": "undercurl", "cterm": "undercurl" }
     let s:spelllocal_attr  = { "gui": "undercurl", "cterm": "undercurl" }
     let s:spellrare_attr   = { "gui": "undercurl", "cterm": "undercurl" }
+
+    " Vim does not handle undercurl gracefully in most terminals. The best it
+    " can do is substitute with underline. In some terminals undercurl does
+    " nothing regardless of the termguicolors setting. Here I target Vim and
+    " set cterm=underline.
+    "
+    " The only way I know of to target regular Vim is to target all but NeoVim.
+    if ! has('nvim')
+        " Set cterm styles to underline.
+        let s:spellbad_attr    = { "gui": "undercurl", "cterm": "underline" }
+        let s:spellcap_attr    = { "gui": "undercurl", "cterm": "underline" }
+        let s:spelllocal_attr  = { "gui": "undercurl", "cterm": "underline" }
+        let s:spellrare_attr   = { "gui": "undercurl", "cterm": "underline" }
+    endif
 endif
 
 let s:sneak_fg                 = s:norm_fg
