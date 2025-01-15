@@ -554,6 +554,15 @@ if g:jmin_extrafmt
     call s:h("htmlItalic", { "attr": s:html_italic_attr })
 end
 
+" mkdBlockquote is the NeoVim / Treesitter Markdown blockquote group.
+"
+" Vim only puts the angle brace “>” quote markers in its markdownBlockquote
+" group so there is no point in making that italic.
+"
+" As of 2025-01-15 I am not sure if NeoVim’s @markup.quote.markdown is still
+" used.
+hi link mkdBlockquote htmlItalic
+
 call s:h("helpHyperTextJump", { "attr": s:help_hypertext_jump_attr })
 
 " Faded
@@ -758,7 +767,8 @@ if has('nvim')
     hi link @markup.heading.4.markdown htmlH1
     hi link @markup.heading.5.markdown htmlH1
     hi link @markup.heading.6.markdown htmlH1
-    hi link @markup.quote.markdown Comment
+    " As of 2025-01-15 I am not sure if @markup.quote.markdown is still used.
+    hi link @markup.quote.markdown htmlItalic
 endif
 
 " Diagnostics
