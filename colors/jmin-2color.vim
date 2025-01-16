@@ -322,7 +322,7 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
     " set cterm=underline.
     "
     " The only way I know of to target regular Vim is to target all but NeoVim.
-    if ! has('nvim')
+    if ! has('nvim') && ! has('gui_running')
         " Set cterm styles to underline.
         let s:spellbad_attr    = { "gui": "undercurl", "cterm": "underline" }
         let s:spellcap_attr    = { "gui": "undercurl", "cterm": "underline" }
