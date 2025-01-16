@@ -587,16 +587,16 @@ let s:gitgutterchangedelete_fg = s:gitgutterchange_fg
 "
 " The foreground colours will apply to the text and the underline.
 let s:spellbad_fg      = s:bright_red
-let s:spellbad_bg      = s:norm_bg
+let s:spellbad_bg      = s:none
 let s:spellbad_attr    = { "gui": "underline", "cterm": "underline" }
 let s:spellcap_fg      = s:sky_blue
-let s:spellcap_bg      = s:norm_bg
+let s:spellcap_bg      = s:none
 let s:spellcap_attr    = { "gui": "underline", "cterm": "underline" }
 let s:spelllocal_fg    = s:cyan
-let s:spelllocal_bg    = s:norm_bg
+let s:spelllocal_bg    = s:none
 let s:spelllocal_attr  = { "gui": "underline", "cterm": "underline" }
 let s:spellrare_fg     = s:color13
-let s:spellrare_bg     = s:norm_bg
+let s:spellrare_bg     = s:none
 let s:spellrare_attr   = { "gui": "underline", "cterm": "underline" }
 
 " These will be colours for undercurls
@@ -611,23 +611,40 @@ let s:spellrare_guisp  = s:spellrare_fg
 " safely degrade to underlines. There will be no special colour, but there is
 " no direct way to test for support of these features.
 if (has('termguicolors') && &termguicolors) || has('gui_running')
-    " Set text colours to empty dictionaries so that s:hmod will set no
-    " colours for spelling error text. The text’s existing colours will be
-    " used instead.
+    " Set gui and cterm foreground colours to NONE. This tells Vim / NeoVim to
+    " not change those attributes for spelling error text. It will leave the
+    " underlying foreground colours intact.
     "
     " Set all styles to undercurl
-    let s:spellbad_fg      = {}
-    let s:spellbad_bg      = {}
+    let s:spellbad_fg      = s:none
+    let s:spellbad_bg      = s:none
     let s:spellbad_attr    = { "gui": "undercurl", "cterm": "undercurl" }
-    let s:spellcap_fg      = {}
-    let s:spellcap_bg      = {}
+    let s:spellcap_fg      = s:none
+    let s:spellcap_bg      = s:none
     let s:spellcap_attr    = { "gui": "undercurl", "cterm": "undercurl" }
-    let s:spelllocal_fg    = {}
-    let s:spelllocal_bg    = {}
+    let s:spelllocal_fg    = s:none
+    let s:spelllocal_bg    = s:none
     let s:spelllocal_attr  = { "gui": "undercurl", "cterm": "undercurl" }
-    let s:spellrare_fg     = {}
-    let s:spellrare_bg     = {}
+    let s:spellrare_fg     = s:none
+    let s:spellrare_bg     = s:none
     let s:spellrare_attr   = { "gui": "undercurl", "cterm": "undercurl" }
+
+    " Vim does not handle undercurl gracefully in most terminals. The best it
+    " can do is substitute with underline. In some terminals undercurl does
+    " nothing regardless of the termguicolors setting. Here I target Vim and
+    " set cterm=underline and I set the foreground colours again.
+    "
+    " The only way I know of to target regular Vim is to target all but NeoVim.
+    if ! has('nvim')
+        let s:spellbad_fg      = s:bright_red
+        let s:spellbad_attr    = { "gui": "undercurl", "cterm": "underline" }
+        let s:spellcap_fg      = s:sky_blue
+        let s:spellcap_attr    = { "gui": "undercurl", "cterm": "underline" }
+        let s:spelllocal_fg    = s:cyan
+        let s:spelllocal_attr  = { "gui": "undercurl", "cterm": "underline" }
+        let s:spellrare_fg     = s:color13
+        let s:spellrare_attr   = { "gui": "undercurl", "cterm": "underline" }
+    endif
 endif
 
 " Sneak jumpsearch plugin
@@ -863,17 +880,17 @@ if g:jmin_2color
     let s:gitgutterdelete_fg       = s:none
     let s:gitgutterchangedelete_fg = s:none
 
-    let s:spellbad_fg              = s:norm_fg
-    let s:spellbad_bg              = s:norm_bg
+    let s:spellbad_fg              = s:none
+    let s:spellbad_bg              = s:none
     let s:spellbad_attr            = { "gui": "underline", "cterm": "underline" }
-    let s:spellcap_fg              = s:norm_fg
-    let s:spellcap_bg              = s:norm_bg
+    let s:spellcap_fg              = s:none
+    let s:spellcap_bg              = s:none
     let s:spellcap_attr            = { "gui": "underline", "cterm": "underline" }
-    let s:spelllocal_fg            = s:norm_fg
-    let s:spelllocal_bg            = s:norm_bg
+    let s:spelllocal_fg            = s:none
+    let s:spelllocal_bg            = s:none
     let s:spelllocal_attr          = { "gui": "underline", "cterm": "underline" }
-    let s:spellrare_fg             = s:norm_fg
-    let s:spellrare_bg             = s:norm_bg
+    let s:spellrare_fg             = s:none
+    let s:spellrare_bg             = s:none
     let s:spellrare_attr           = { "gui": "underline", "cterm": "underline" }
 
     let s:spellbad_guisp           = s:norm_fg
@@ -887,6 +904,20 @@ if g:jmin_2color
         let s:spellcap_attr    = { "gui": "undercurl", "cterm": "undercurl" }
         let s:spelllocal_attr  = { "gui": "undercurl", "cterm": "undercurl" }
         let s:spellrare_attr   = { "gui": "undercurl", "cterm": "undercurl" }
+
+        " Vim does not handle undercurl gracefully in most terminals. The best it
+        " can do is substitute with underline. In some terminals undercurl does
+        " nothing regardless of the termguicolors setting. Here I target Vim and
+        " set cterm=underline.
+        "
+        " The only way I know of to target regular Vim is to target all but NeoVim.
+        if ! has('nvim')
+            " Set cterm styles to underline.
+            let s:spellbad_attr    = { "gui": "undercurl", "cterm": "underline" }
+            let s:spellcap_attr    = { "gui": "undercurl", "cterm": "underline" }
+            let s:spelllocal_attr  = { "gui": "undercurl", "cterm": "underline" }
+            let s:spellrare_attr   = { "gui": "undercurl", "cterm": "underline" }
+        endif
     endif
 
     let s:sneak_fg          = s:norm_fg
@@ -1884,10 +1915,10 @@ call s:h("GitGutterChange", {"fg": s:gitgutterchange_fg})
 call s:h("GitGutterDelete", {"fg": s:gitgutterdelete_fg})
 call s:h("GitGutterChangeDelete", {"fg": s:gitgutterchangedelete_fg})
 
-call s:hmod("SpellBad", { "fg": s:spellbad_fg, "bg": s:spellbad_bg, "guisp": s:spellbad_guisp, "attr": s:spellbad_attr })
-call s:hmod("SpellCap", { "fg": s:spellcap_fg, "bg": s:spellcap_bg, "guisp": s:spellcap_guisp, "attr": s:spellcap_attr })
-call s:hmod("SpellLocal", { "fg": s:spelllocal_fg, "bg": s:spelllocal_bg, "guisp": s:spelllocal_guisp, "attr": s:spelllocal_attr })
-call s:hmod("SpellRare", { "fg": s:spellrare_fg, "bg": s:spellrare_bg, "guisp": s:spellrare_guisp, "attr": s:spellrare_attr })
+call s:h("SpellBad", { "fg": s:spellbad_fg, "bg": s:spellbad_bg, "guisp": s:spellbad_guisp, "attr": s:spellbad_attr })
+call s:h("SpellCap", { "fg": s:spellcap_fg, "bg": s:spellcap_bg, "guisp": s:spellcap_guisp, "attr": s:spellcap_attr })
+call s:h("SpellLocal", { "fg": s:spelllocal_fg, "bg": s:spelllocal_bg, "guisp": s:spelllocal_guisp, "attr": s:spelllocal_attr })
+call s:h("SpellRare", { "fg": s:spellrare_fg, "bg": s:spellrare_bg, "guisp": s:spellrare_guisp, "attr": s:spellrare_attr })
 
 " Unhighlighted
 "
