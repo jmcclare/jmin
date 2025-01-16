@@ -57,6 +57,9 @@ let s:html_h1_attr             = { "gui": "bold", "cterm": "bold" }
 let s:html_link_attr           = { "gui": "underline", "cterm": "underline" }
 let s:html_bold_attr           = { "gui": "bold", "cterm": "bold" }
 let s:html_italic_attr         = { "gui": "italic", "cterm": "italic" }
+if g:jmin_no_italic
+    let s:html_italic_attr     = s:none
+endif
 
 let s:help_hypertext_jump_attr = { "gui": "underline", "cterm": "underline" }
 
@@ -208,43 +211,44 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
     let s:diagnosticunderlineok_bg      = s:norm_bg
     let s:diagnosticunderlineok_attr    = { "gui": "undercurl", "cterm": "undercurl" }
 endif
-let s:normalfloat_fg                = s:none
-let s:normalfloat_bg                = s:none
-let s:floatborder_fg                = s:none
-let s:floatborder_bg                = s:none
+let s:normalfloat_fg     = s:none
+let s:normalfloat_bg     = s:none
+let s:floatborder_fg     = s:none
+let s:floatborder_bg     = s:none
 
-let s:pmenu_fg                 = s:norm_fg
-let s:pmenu_bg                 = s:norm_bg
-let s:pmenu_attr               = { "cterm": "reverse", "gui": "reverse" }
-let s:pmenusel_fg              = s:norm_fg
-let s:pmenusel_bg              = s:norm_bg
-let s:pmenusel_attr            = { "cterm": "NONE", "gui": "NONE" }
-let s:pmenusbar_fg             = s:norm_fg
-let s:pmenusbar_bg             = s:none
-let s:pmenusbar_attr           = { "cterm": "reverse", "gui": "reverse" }
-let s:pmenuthumb_fg            = s:none
-let s:pmenuthumb_bg            = s:norm_bg
-let s:pmenuthumb_attr          = { "cterm": "NONE", "gui": "NONE" }
+let s:pmenu_fg           = s:norm_fg
+let s:pmenu_bg           = s:norm_bg
+let s:pmenu_attr         = { "cterm": "reverse", "gui": "reverse" }
+let s:pmenusel_fg        = s:norm_fg
+let s:pmenusel_bg        = s:norm_bg
+let s:pmenusel_attr      = { "cterm": "NONE", "gui": "NONE" }
+let s:pmenusbar_fg       = s:norm_fg
+let s:pmenusbar_bg       = s:none
+let s:pmenusbar_attr     = { "cterm": "reverse", "gui": "reverse" }
+let s:pmenuthumb_fg      = s:none
+let s:pmenuthumb_bg      = s:norm_bg
+let s:pmenuthumb_attr    = { "cterm": "NONE", "gui": "NONE" }
 
-let s:qffilename               = s:norm_fg
-let s:qfseparator   = s:norm_fg
-let s:qflinenr                 = s:norm_fg
-let s:qflinenr_attr            = { "gui": "italic", "cterm": "italic" }
-let s:qfline_fg                = s:norm_fg
-let s:qfline_bg                = s:norm_bg
-let s:qfline_attr              = { "gui": "reverse", "cterm": "reverse" }
+let s:qffilename         = s:norm_fg
+let s:qfseparator        = s:norm_fg
+let s:qflinenr           = s:norm_fg
+"let s:qflinenr_attr      = { "gui": "italic", "cterm": "italic" }
+let s:qflinenr_attr      = s:none
+let s:qfline_fg          = s:norm_fg
+let s:qfline_bg          = s:norm_bg
+let s:qfline_attr        = { "gui": "reverse", "cterm": "reverse" }
 
-let s:diffadd_fg               = s:norm_fg
-let s:diffadd_bg               = s:norm_bg
-let s:diffadd_attr             = { "gui": "reverse", "cterm": "reverse" }
-let s:diffchange_fg            = s:none
-let s:diffchange_bg            = s:none
-let s:diffdelete_fg            = s:norm_fg
-let s:diffdelete_bg            = s:norm_bg
-let s:diffdelete_attr          = { "gui": "reverse", "cterm": "reverse" }
-let s:difftext_fg              = s:norm_fg
-let s:difftext_bg              = s:norm_bg
-let s:difftext_attr            = { "gui": "reverse", "cterm": "reverse" }
+let s:diffadd_fg         = s:norm_fg
+let s:diffadd_bg         = s:norm_bg
+let s:diffadd_attr       = { "gui": "reverse", "cterm": "reverse" }
+let s:diffchange_fg      = s:none
+let s:diffchange_bg      = s:none
+let s:diffdelete_fg      = s:norm_fg
+let s:diffdelete_bg      = s:norm_bg
+let s:diffdelete_attr    = { "gui": "reverse", "cterm": "reverse" }
+let s:difftext_fg        = s:norm_fg
+let s:difftext_bg        = s:norm_bg
+let s:difftext_attr      = { "gui": "reverse", "cterm": "reverse" }
 
 let s:difffile_fg        = s:none
 let s:difffile_bg        = s:none
@@ -267,9 +271,15 @@ let s:gitdiff_attr       = { "gui": "NONE", "cterm": "NONE" }
 let s:diffadded_fg       = s:none
 let s:diffadded_bg       = s:none
 let s:diffadded_attr     = { "gui": "italic", "cterm": "NONE" }
+if g:jmin_no_italic
+    let s:diffadded_attr = s:none
+endif
 let s:diffremoved_fg     = s:none
 let s:diffremoved_bg     = s:none
 let s:diffremoved_attr   = { "gui": "italic", "cterm": "NONE" }
+if g:jmin_no_italic
+    let s:diffremoved_attr = s:none
+endif
 
 let s:gitkeyword_fg   = s:none
 let s:gitkeyword_bg   = s:none

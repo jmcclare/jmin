@@ -50,6 +50,16 @@ if !exists("g:jmin_colorize_bold")
     let g:jmin_colorize_bold = 1
 endif
 
+" Force no italic.
+"
+" Italics are only used when some of the other highlighting options are
+" active, like g:jmin_hlcomments, and g:jmin_extrafmt. With this disabled
+" those highlight options will still work, but they will not use
+" italics.
+if !exists("g:jmin_no_italic")
+    let g:jmin_no_italic = 0
+endif
+
 " Use 16 Colour Mode
 "
 " This makes it behave like a classic 16 colour terminal and disables non

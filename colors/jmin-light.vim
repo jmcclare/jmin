@@ -260,41 +260,45 @@ endif
 
 " These colours will only be applied below if the options to highlight these
 " are set to 1.
-let s:comment_fg                   = s:lighter_grey2
-"let s:comment_attr                 = s:none
-let s:comment_attr                 = { "gui": "italic", "cterm": "italic" }
-"let s:todo             = s:green
-let s:todo_fg                      = s:comment_fg
-let s:todo_attr                    = s:comment_attr
-let s:vim_comment_title_fg         = s:comment_fg
-let s:vim_comment_title_attr       = s:comment_attr
-let s:fold_fg                      = s:grey
-"let s:fold_attr                    = { "gui": "italic", "cterm": "italic" }
-let s:fold_attr                    = s:none
-let s:linenr                    = s:lighter_grey
-"let s:string                    = s:dark_grey
-"let s:string                    = s:dim_grey
-"let s:string                    = { "gui": "#767676", "cterm": "243" }
-"let s:string                    = { "gui": "#808080", "cterm": "244" }
-"let s:string                    = s:grey
-let s:string                    = s:dimmer_sky_blue
-let s:constant                  = s:string
-"let s:statement_fg              = s:norm_fg
-let s:statement_fg              = s:bold_fg
-let s:statement_attr            = { "gui": "bold", "cterm": "bold" }
-let s:preproc_fg                = s:statement_fg
-let s:preproc_attr              = s:statement_attr
-let s:type_fg                   = s:statement_fg
-let s:type_attr                 = s:statement_attr
-let s:html_fg                   = s:dim_grey
-let s:html_h1_fg                = s:bold_fg
-let s:html_h1_attr              = { "gui": "bold", "cterm": "bold" }
-let s:html_link_attr            = { "gui": "underline", "cterm": "underline" }
-let s:html_bold_fg              = s:bold_fg
-let s:html_bold_attr            = { "gui": "bold", "cterm": "bold" }
-let s:html_italic_attr          = { "gui": "italic", "cterm": "italic" }
+let s:comment_fg               = s:lighter_grey2
+let s:comment_attr             = { "gui": "italic", "cterm": "italic" }
+if g:jmin_no_italic
+    let s:comment_attr         = s:none
+endif
+let s:todo_fg                  = s:comment_fg
+let s:todo_attr                = s:comment_attr
+let s:vim_comment_title_fg     = s:comment_fg
+let s:vim_comment_title_attr   = s:comment_attr
+let s:fold_fg                  = s:grey
+"let s:fold_attr                = { "gui": "italic", "cterm": "italic" }
+let s:fold_attr                = s:none
+let s:linenr                   = s:lighter_grey
+"let s:string                   = s:dark_grey
+"let s:string                   = s:dim_grey
+"let s:string                   = { "gui": "#767676", "cterm": "243" }
+"let s:string                   = { "gui": "#808080", "cterm": "244" }
+"let s:string                   = s:grey
+let s:string                   = s:dimmer_sky_blue
+let s:constant                 = s:string
+"let s:statement_fg             = s:norm_fg
+let s:statement_fg             = s:bold_fg
+let s:statement_attr           = { "gui": "bold", "cterm": "bold" }
+let s:preproc_fg               = s:statement_fg
+let s:preproc_attr             = s:statement_attr
+let s:type_fg                  = s:statement_fg
+let s:type_attr                = s:statement_attr
+let s:html_fg                  = s:dim_grey
+let s:html_h1_fg               = s:bold_fg
+let s:html_h1_attr             = { "gui": "bold", "cterm": "bold" }
+let s:html_link_attr           = { "gui": "underline", "cterm": "underline" }
+let s:html_bold_fg             = s:bold_fg
+let s:html_bold_attr           = { "gui": "bold", "cterm": "bold" }
+let s:html_italic_attr         = { "gui": "italic", "cterm": "italic" }
+if g:jmin_no_italic
+    let s:html_italic_attr     = s:none
+endif
 
-let s:help_hypertext_jump_attr  = { "gui": "underline", "cterm": "underline" }
+let s:help_hypertext_jump_attr = { "gui": "underline", "cterm": "underline" }
 
 " Dividers
 
@@ -498,7 +502,7 @@ let s:qfseparator   = s:norm_fg
 let s:qflinenr      = s:linenr
 "let s:qflinenr      = s:comment_fg
 "let s:qflinenr_attr = { "gui": "italic", "cterm": "bold" }
-let s:qflinenr_attr = { "gui": "NONE", "cterm": "NONE" }
+let s:qflinenr_attr = s:none
 "let s:qflinenr_attr = s:comment_attr
 let s:qfline_fg     = s:cursorline_fg
 let s:qfline_bg     = s:cursorline_bg
@@ -853,9 +857,15 @@ if g:jmin_2color
     let s:diffadded_fg       = s:none
     let s:diffadded_bg       = s:none
     let s:diffadded_attr     = { "gui": "italic", "cterm": "NONE" }
+    if g:jmin_no_italic
+        let s:diffadded_attr = s:none
+    endif
     let s:diffremoved_fg     = s:none
     let s:diffremoved_bg     = s:none
     let s:diffremoved_attr   = { "gui": "italic", "cterm": "NONE" }
+    if g:jmin_no_italic
+        let s:diffremoved_attr = s:none
+    endif
 
     let s:gitkeyword_fg   = s:none
     let s:gitkeyword_bg   = s:none
@@ -954,36 +964,33 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
         let s:bold_fg = s:color8
     endif
 
-    let s:comment_fg                   = s:color8
-    "let s:comment_attr                 = s:none
-    let s:comment_attr                 = { "gui": "NONE", "cterm": "NONE" }
-    "let s:todo             = s:color2
-    let s:todo_fg                   = s:comment_fg
-    let s:todo_attr                 = s:comment_attr
-    let s:vim_comment_title_fg      = s:comment_fg
-    let s:vim_comment_title_attr    = s:comment_attr
-    let s:fold_fg                      = s:color8
-    "let s:fold_attr                    = { "gui": "italic", "cterm": "italic" }
-    let s:fold_attr                    = s:none
-    let s:linenr                    = s:color8
-    let s:string                    = s:color4
-    let s:constant                  = s:string
-    "let s:statement_fg              = s:norm_fg
-    let s:statement_fg              = s:bold_fg
-    let s:statement_attr            = { "gui": "bold", "cterm": "bold" }
-    let s:preproc_fg                = s:statement_fg
-    let s:preproc_attr              = s:statement_attr
-    let s:type_fg                   = s:statement_fg
-    let s:type_attr                 = s:statement_attr
-    let s:html_fg                   = s:color8
-    let s:html_h1_fg                = s:bold_fg
-    let s:html_h1_attr              = { "gui": "bold", "cterm": "bold" }
-    let s:html_link_attr            = { "gui": "bold", "cterm": "bold" }
-    let s:html_bold_fg              = s:bold_fg
-    let s:html_bold_attr            = { "gui": "bold", "cterm": "bold" }
-    let s:html_italic_attr          = { "gui": "bold", "cterm": "bold" }
+    let s:comment_fg               = s:color8
+    let s:comment_attr             = s:none
+    let s:todo_fg                  = s:comment_fg
+    let s:todo_attr                = s:comment_attr
+    let s:vim_comment_title_fg     = s:comment_fg
+    let s:vim_comment_title_attr   = s:comment_attr
+    let s:fold_fg                  = s:color8
+    let s:fold_attr                = s:none
+    let s:linenr                   = s:color8
+    let s:string                   = s:color4
+    let s:constant                 = s:string
+    "let s:statement_fg             = s:norm_fg
+    let s:statement_fg             = s:bold_fg
+    let s:statement_attr           = { "gui": "bold", "cterm": "bold" }
+    let s:preproc_fg               = s:statement_fg
+    let s:preproc_attr             = s:statement_attr
+    let s:type_fg                  = s:statement_fg
+    let s:type_attr                = s:statement_attr
+    let s:html_fg                  = s:color8
+    let s:html_h1_fg               = s:bold_fg
+    let s:html_h1_attr             = { "gui": "bold", "cterm": "bold" }
+    let s:html_link_attr           = { "gui": "bold", "cterm": "bold" }
+    let s:html_bold_fg             = s:bold_fg
+    let s:html_bold_attr           = { "gui": "bold", "cterm": "bold" }
+    let s:html_italic_attr         = { "gui": "bold", "cterm": "bold" }
 
-    let s:help_hypertext_jump_attr  = { "gui": "bold", "cterm": "bold" }
+    let s:help_hypertext_jump_attr = { "gui": "bold", "cterm": "bold" }
 
     " Dividers
 

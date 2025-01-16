@@ -102,6 +102,15 @@ them apply to `jmin-simple`.
 			global
 	Colorize bold text. Useful if your font cannot be displayed in bold.
 
+							*g:jmin_no_italic*
+`g:jmin_no_italic`	boolean (default 0)
+	Force no italic.
+
+	Italics are only used when some of the other highlighting options are
+	active, like g:jmin_hlcomments, and g:jmin_extrafmt. With this
+	disabled those highlight options will still work, but they will not
+	use italics.
+
 							*g:jmin_16*
 `g:jmin_16`	boolean	(default 0)
 			global
