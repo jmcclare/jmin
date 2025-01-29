@@ -52,6 +52,13 @@ if g:jmin_no_bold
     let s:bold    = s:none
 endif
 
+let s:italic         = { "gui": "italic", "cterm": "italic" }
+let s:gui_italic     = { "gui": "italic", "cterm": "NONE" }
+if g:jmin_no_italic
+    let s:italic     = s:none
+    let s:gui_italic = s:none
+endif
+
 let s:statement_fg             = s:norm_fg
 let s:statement_attr           = s:bold
 let s:preproc_fg               = s:statement_fg
@@ -61,10 +68,7 @@ let s:type_attr                = s:statement_attr
 let s:html_h1_attr             = s:bold
 let s:html_link_attr           = { "gui": "underline", "cterm": "underline" }
 let s:html_bold_attr           = s:bold
-let s:html_italic_attr         = { "gui": "italic", "cterm": "italic" }
-if g:jmin_no_italic
-    let s:html_italic_attr     = s:none
-endif
+let s:html_italic_attr         = s:italic
 
 let s:help_hypertext_jump_attr = { "gui": "underline", "cterm": "underline" }
 
@@ -77,7 +81,7 @@ let s:statusline_attr    = { "gui": "reverse", "cterm": "reverse" }
 
 let s:statusline_nc_bg   = s:norm_bg
 let s:statusline_nc_fg   = s:norm_fg
-let s:statusline_nc_attr = { "gui": "NONE", "cterm": "NONE" }
+let s:statusline_nc_attr = s:none
 let s:vertsplit          = s:norm_fg
 
 let s:search_fg          = s:norm_fg
@@ -120,7 +124,7 @@ let s:question           = s:norm_fg
 let s:todo               = s:norm_fg
 let s:warningmsg_fg      = s:norm_fg
 let s:warningmsg_bg      = s:none
-let s:warningmsg_attr    = { "gui": "NONE", "cterm": "NONE" }
+let s:warningmsg_attr    = s:none
 let s:visual_fg          = s:norm_fg
 let s:visual_bg          = s:norm_bg
 let s:visual_attr        = { "gui": "reverse", "cterm": "reverse" }
@@ -133,7 +137,7 @@ let s:tabline_bg         = s:norm_bg
 let s:tabline_attr       = { "gui": "reverse", "cterm": "reverse" }
 let s:tablinesel_fg      = s:none
 let s:tablinesel_bg      = s:none
-let s:tablinesel_attr    = { "gui": "NONE", "cterm": "NONE" }
+let s:tablinesel_attr    = s:none
 "let s:tablinesel_attr    = s:bold
 let s:tablinefill        = s:norm_bg
 let s:tablinefill_attr   = { "gui": "reverse", "cterm": "reverse" }
@@ -141,13 +145,13 @@ let s:underlined_attr    = { "gui": "underline", "cterm": "underline" }
 " Only NeoVim Diagnostics has these message types
 let s:infomsg_fg         = s:norm_fg
 let s:infomsg_bg         = s:none
-let s:infomsg_attr       = { "gui": "NONE", "cterm": "NONE" }
+let s:infomsg_attr       = s:none
 let s:hintmsg_fg         = s:norm_fg
 let s:hintmsg_bg         = s:none
-let s:hintmsg_attr       = { "gui": "NONE", "cterm": "NONE" }
+let s:hintmsg_attr       = s:none
 let s:okmsg_fg           = s:norm_fg
 let s:okmsg_bg           = s:none
-let s:okmsg_attr         = { "gui": "NONE", "cterm": "NONE" }
+let s:okmsg_attr         = s:none
 
 " Diagnostics
 
@@ -226,18 +230,18 @@ let s:pmenu_bg           = s:norm_bg
 let s:pmenu_attr         = { "cterm": "reverse", "gui": "reverse" }
 let s:pmenusel_fg        = s:norm_fg
 let s:pmenusel_bg        = s:norm_bg
-let s:pmenusel_attr      = { "cterm": "NONE", "gui": "NONE" }
+let s:pmenusel_attr      = s:none
 let s:pmenusbar_fg       = s:norm_fg
 let s:pmenusbar_bg       = s:none
 let s:pmenusbar_attr     = { "cterm": "reverse", "gui": "reverse" }
 let s:pmenuthumb_fg      = s:none
 let s:pmenuthumb_bg      = s:norm_bg
-let s:pmenuthumb_attr    = { "cterm": "NONE", "gui": "NONE" }
+let s:pmenuthumb_attr    = s:none
 
 let s:qffilename         = s:norm_fg
 let s:qfseparator        = s:norm_fg
 let s:qflinenr           = s:norm_fg
-"let s:qflinenr_attr      = { "gui": "italic", "cterm": "italic" }
+"let s:qflinenr_attr      = s:italic
 let s:qflinenr_attr      = s:none
 let s:qfline_fg          = s:norm_fg
 let s:qfline_bg          = s:norm_bg
@@ -272,19 +276,13 @@ let s:diffsubname_bg     = s:none
 let s:diffsubname_attr   = s:bold
 let s:gitdiff_fg         = s:none
 let s:gitdiff_bg         = s:none
-let s:gitdiff_attr       = { "gui": "NONE", "cterm": "NONE" }
+let s:gitdiff_attr       = s:none
 let s:diffadded_fg       = s:none
 let s:diffadded_bg       = s:none
-let s:diffadded_attr     = { "gui": "italic", "cterm": "NONE" }
-if g:jmin_no_italic
-    let s:diffadded_attr = s:none
-endif
+let s:diffadded_attr     = s:gui_italic
 let s:diffremoved_fg     = s:none
 let s:diffremoved_bg     = s:none
-let s:diffremoved_attr   = { "gui": "italic", "cterm": "NONE" }
-if g:jmin_no_italic
-    let s:diffremoved_attr = s:none
-endif
+let s:diffremoved_attr   = s:gui_italic
 
 let s:gitkeyword_fg   = s:none
 let s:gitkeyword_bg   = s:none
@@ -294,7 +292,7 @@ let s:githash_bg      = s:none
 let s:githash_attr    = s:bold
 let s:githead_fg      = s:none
 let s:githead_bg      = s:none
-let s:githead_attr    = { "gui": "NONE", "cterm": "NONE" }
+let s:githead_attr    = s:none
 
 let s:gitgutteradd_fg          = s:none
 let s:gitgutterchange_fg       = s:none
@@ -360,9 +358,9 @@ let s:indent_guides_attr       = { "gui": "reverse", "cterm": "reverse" }
 
 if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' || g:jmin_16 == 1 || s:term == 'linux'
     let s:html_link_attr     = { "gui": "underline", "cterm": "bold" }
-    let s:html_italic_attr   = { "gui": "NONE", "cterm": "NONE" }
+    let s:html_italic_attr   = s:none
     let s:statusline_attr    = { "gui": "reverse", "cterm": "reverse" }
-    let s:statusline_nc_attr = { "gui": "NONE", "cterm": "NONE" }
+    let s:statusline_nc_attr = s:none
 
     let s:search_attr        = { "gui": "reverse", "cterm": "reverse" }
     let s:incsearch_attr     = { "gui": "bold,reverse", "cterm": "bold,reverse" }
@@ -392,13 +390,13 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     " Only NeoVim Diagnostics has these message types
     let s:infomsg_fg       = s:norm_fg
     let s:infomsg_bg       = s:norm_bg
-    let s:infomsg_attr     = { "gui": "NONE", "cterm": "NONE" }
+    let s:infomsg_attr     = s:none
     let s:hintmsg_fg       = s:norm_fg
     let s:hintmsg_bg       = s:norm_bg
-    let s:hintmsg_attr     = { "gui": "NONE", "cterm": "NONE" }
+    let s:hintmsg_attr     = s:none
     let s:okmsg_fg         = s:norm_fg
     let s:okmsg_bg         = s:norm_bg
-    let s:okmsg_attr       = { "gui": "NONE", "cterm": "NONE" }
+    let s:okmsg_attr       = s:none
 
     " Diagnostics
 
@@ -428,16 +426,16 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     let s:diagnosticunderlineerror_attr = { "gui": "reverse", "cterm": "reverse" }
     let s:diagnosticunderlinewarn_fg    = s:warningmsg_fg
     let s:diagnosticunderlinewarn_bg    = s:warningmsg_bg
-    let s:diagnosticunderlinewarn_attr  = { "gui": "NONE", "cterm": "NONE" }
+    let s:diagnosticunderlinewarn_attr  = s:none
     let s:diagnosticunderlineinfo_fg    = s:infomsg_fg
     let s:diagnosticunderlineinfo_bg    = s:infomsg_bg
-    let s:diagnosticunderlineinfo_attr  = { "gui": "NONE", "cterm": "NONE" }
+    let s:diagnosticunderlineinfo_attr  = s:none
     let s:diagnosticunderlinehint_fg    = s:hintmsg_fg
     let s:diagnosticunderlinehint_bg    = s:hintmsg_bg
-    let s:diagnosticunderlinehint_attr  = { "gui": "NONE", "cterm": "NONE" }
+    let s:diagnosticunderlinehint_attr  = s:none
     let s:diagnosticunderlineok_fg      = s:okmsg_fg
     let s:diagnosticunderlineok_bg      = s:okmsg_bg
-    let s:diagnosticunderlineok_attr    = { "gui": "NONE", "cterm": "NONE" }
+    let s:diagnosticunderlineok_attr    = s:none
     let s:normalfloat_fg                = s:none
     let s:normalfloat_bg                = s:none
     let s:floatborder_fg                = s:none

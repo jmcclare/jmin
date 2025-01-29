@@ -38,7 +38,7 @@ let s:fg              = { "gui": "fg", "cterm": "fg" }
 let s:bg              = { "gui": "bg", "cterm": "bg" }
 " There is actually no use case for s:none. Anything I don’t explicitly set
 " with s:h gets set to NONE.
-let s:none            = {"gui": "NONE", "cterm": "NONE"}
+let s:none            = { "gui": "NONE", "cterm": "NONE" }
 
 "let s:white           = { "gui": "#FFFFFF", "cterm": "15" }
 " Use the 256 color pallette explicit white instead of the white basic
@@ -246,6 +246,12 @@ if exists("g:jmin_fg")
     let s:norm_fg = g:jmin_fg
 endif
 
+"let s:norm_bg           = s:extreme_near_white
+let s:norm_bg           = s:nearest_white
+if exists("g:jmin_bg")
+    let s:norm_bg = g:jmin_bg
+endif
+
 let s:bold_fg = s:norm_fg
 if g:jmin_colorize_bold
     let s:bold_fg = { "gui": "#506A73", "cterm": "242" }
@@ -256,20 +262,18 @@ if g:jmin_no_bold
     let s:bold    = s:none
 endif
 
-"let s:norm_bg           = s:extreme_near_white
-let s:norm_bg           = s:nearest_white
-if exists("g:jmin_bg")
-    let s:norm_bg = g:jmin_bg
+let s:italic         = { "gui": "italic", "cterm": "italic" }
+let s:gui_italic     = { "gui": "italic", "cterm": "NONE" }
+if g:jmin_no_italic
+    let s:italic     = s:none
+    let s:gui_italic = s:none
 endif
 
 
 " These colours will only be applied below if the options to highlight these
 " are set to 1.
 let s:comment_fg               = s:lighter_grey2
-let s:comment_attr             = { "gui": "italic", "cterm": "italic" }
-if g:jmin_no_italic
-    let s:comment_attr         = s:none
-endif
+let s:comment_attr             = s:italic
 let s:todo_fg                  = s:comment_fg
 let s:todo_attr                = s:comment_attr
 let s:vim_comment_title_fg     = s:comment_fg
@@ -298,10 +302,7 @@ let s:html_h1_attr             = s:bold
 let s:html_link_attr           = { "gui": "underline", "cterm": "underline" }
 let s:html_bold_fg             = s:bold_fg
 let s:html_bold_attr           = s:bold
-let s:html_italic_attr         = { "gui": "italic", "cterm": "italic" }
-if g:jmin_no_italic
-    let s:html_italic_attr     = s:none
-endif
+let s:html_italic_attr         = s:italic
 
 let s:help_hypertext_jump_attr = { "gui": "underline", "cterm": "underline" }
 
@@ -318,14 +319,14 @@ let s:statusline_attr    = { "gui": "reverse", "cterm": "reverse" }
 
 let s:statusline_nc_bg   = s:nearer_white2
 let s:statusline_nc_fg   = s:dim_grey
-let s:statusline_nc_attr = { "gui": "NONE", "cterm": "NONE" }
+let s:statusline_nc_attr = s:none
 let s:vertsplit          = s:nearer_white
 
 " Search
 
 let s:search_fg      = s:blue
 let s:search_bg      = s:palish_yellow
-let s:search_attr    = { "gui": "NONE", "cterm": "NONE" }
+let s:search_attr    = s:none
 let s:incsearch_fg   = s:search_fg
 let s:incsearch_bg   = s:search_bg
 let s:incsearch_attr = { "gui": "reverse", "cterm": "reverse" }
@@ -334,22 +335,22 @@ let s:incsearch_attr = { "gui": "reverse", "cterm": "reverse" }
 
 let s:cursorline_fg    = s:none
 let s:cursorline_bg    = s:nearer_white
-let s:cursorline_attr  = { "gui": "NONE", "cterm": "NONE" }
+let s:cursorline_attr  = s:none
 let s:cursorim_fg      = s:black
 let s:cursorim_bg      = s:color14
-let s:cursorim_attr    = { "gui": "NONE", "cterm": "NONE" }
+let s:cursorim_attr    = s:none
 let s:colorcolumn_fg   = s:cursorline_fg
 let s:colorcolumn_bg   = s:nearest_white
 let s:colorcolumn_attr = s:cursorline_attr
 let s:error_fg         = s:black
 let s:error_bg         = s:bright_red
-let s:error_attr       = { "gui": "NONE", "cterm": "NONE" }
+let s:error_attr       = s:none
 let s:errormsg_fg      = s:bright_red
 let s:errormsg_bg      = s:none
-let s:errormsg_attr    = { "gui": "NONE", "cterm": "NONE" }
+let s:errormsg_attr    = s:none
 "let s:matchparen_fg    = s:black
 "let s:matchparen_bg    = s:paler_sky_blue
-"let s:matchparen_attr  = { "gui": "NONE", "cterm": "NONE" }
+"let s:matchparen_attr  = s:none
 "let s:matchparen_fg    = s:norm_fg
 let s:matchparen_fg    = s:bold_fg
 let s:matchparen_bg    = s:norm_bg
@@ -373,7 +374,7 @@ let s:moremsg_attr     = s:bold
 let s:question         = s:dark_sky_blue
 let s:warningmsg_fg    = s:lighter_orange
 let s:warningmsg_bg    = s:none
-let s:warningmsg_attr  = { "gui": "NONE", "cterm": "NONE" }
+let s:warningmsg_attr  = s:none
 let s:visual_fg        = s:norm_fg
 let s:visual_bg        = s:norm_bg
 let s:visual_attr      = { "gui": "reverse", "cterm": "reverse" }
@@ -389,7 +390,7 @@ let s:tabline_attr     = s:statusline_nc_attr
 let s:tablinesel_fg    = s:none
 "let s:tablinesel_fg    = s:bold_fg
 let s:tablinesel_bg    = s:none
-let s:tablinesel_attr  = { "gui": "NONE", "cterm": "NONE" }
+let s:tablinesel_attr  = s:none
 "let s:tablinesel_attr  = s:bold
 "let s:tablinefill      = s:norm_bg
 let s:tablinefill      = s:lighter_grey
@@ -397,13 +398,13 @@ let s:underlined_attr  = { "gui": "underline", "cterm": "underline" }
 " Only NeoVim Diagnostics has these message types
 let s:infomsg_fg       = s:dark_cyan
 let s:infomsg_bg       = s:none
-let s:infomsg_attr     = { "gui": "NONE", "cterm": "NONE" }
+let s:infomsg_attr     = s:none
 let s:hintmsg_fg       = s:sky_blue
 let s:hintmsg_bg       = s:none
-let s:hintmsg_attr     = { "gui": "NONE", "cterm": "NONE" }
+let s:hintmsg_attr     = s:none
 let s:okmsg_fg         = s:light_green
 let s:okmsg_bg         = s:none
-let s:okmsg_attr       = { "gui": "NONE", "cterm": "NONE" }
+let s:okmsg_attr       = s:none
 
 " Diagnostics
 
@@ -488,17 +489,17 @@ let s:pmenu_bg      = s:norm_bg
 let s:pmenu_attr    = { "cterm": "reverse", "gui": "reverse" }
 let s:pmenusel_fg   = s:black
 let s:pmenusel_bg   = s:sky_blue
-let s:pmenusel_attr = { "cterm": "NONE", "gui": "NONE" }
+let s:pmenusel_attr = s:none
 " This color is not used. PmenuSbar does not use a foreground colour unless
 " you give it the reverse attribute.
 let s:pmenusbar_fg   = s:none
 let s:pmenusbar_bg   = s:grey
-let s:pmenusbar_attr = { "cterm": "NONE", "gui": "NONE" }
+let s:pmenusbar_attr = s:none
 " This color is not used. PmenuThumb does not use a foreground colour unless
 " you give it the reverse attribute.
 let s:pmenuthumb_fg   = s:none
 let s:pmenuthumb_bg   = s:near_white
-let s:pmenuthumb_attr = { "cterm": "NONE", "gui": "NONE" }
+let s:pmenuthumb_attr = s:none
 
 
 " Quickfix Window
@@ -517,7 +518,7 @@ let s:qfline_attr   = s:cursorline_attr
 
 let s:diffadd_fg           = s:none
 let s:diffadd_bg           = s:paler_green
-let s:diffadd_attr         = { "gui": "NONE", "cterm": "NONE" }
+let s:diffadd_attr         = s:none
 let s:diffchange_fg        = s:none
 "let s:diffchange_bg        = s:none
 " For full colour only, use a subtle tint of the background colour.
@@ -527,10 +528,10 @@ let s:diffchange_fg        = s:none
 let s:diffchange_bg        = { "gui": "#d0f2e7", "cterm": "NONE" }
 let s:diffdelete_fg        = s:near_white
 let s:diffdelete_bg        = s:nearer_white
-let s:diffdelete_attr      = { "gui": "NONE", "cterm": "NONE" }
+let s:diffdelete_attr      = s:none
 let s:difftext_fg          = s:none
 let s:difftext_bg          = s:diffadd_bg
-let s:difftext_attr        = { "gui": "NONE", "cterm": "NONE" }
+let s:difftext_attr        = s:none
 
 " Git Diff
 "let s:difffile_fg        = s:none
@@ -555,13 +556,13 @@ let s:diffsubname_bg     = s:none
 let s:diffsubname_attr   = s:bold
 let s:gitdiff_fg         = s:none
 let s:gitdiff_bg         = s:none
-let s:gitdiff_attr       = { "gui": "NONE", "cterm": "NONE" }
+let s:gitdiff_attr       = s:none
 let s:diffadded_fg       = s:light_green
 let s:diffadded_bg       = s:none
-let s:diffadded_attr     = { "gui": "NONE", "cterm": "NONE" }
+let s:diffadded_attr     = s:none
 let s:diffremoved_fg     = s:comment_fg
 let s:diffremoved_bg     = s:none
-let s:diffremoved_attr   = { "gui": "NONE", "cterm": "NONE" }
+let s:diffremoved_attr   = s:none
 
 " Git Log
 "let s:gitkeyword_fg   = s:none
@@ -574,7 +575,7 @@ let s:githash_bg      = s:none
 let s:githash_attr    = s:bold
 let s:githead_fg      = s:none
 let s:githead_bg      = s:none
-let s:githead_attr    = { "gui": "NONE", "cterm": "NONE" }
+let s:githead_attr    = s:none
 
 " Git Gutter
 let s:gitgutteradd_fg      = s:light_green
@@ -672,7 +673,7 @@ if g:jmin_2color
 
     let s:statusline_nc_bg   = s:norm_bg
     let s:statusline_nc_fg   = s:norm_fg
-    let s:statusline_nc_attr = { "gui": "NONE", "cterm": "NONE" }
+    let s:statusline_nc_attr = s:none
     let s:vertsplit          = s:norm_fg
 
     let s:search_fg          = s:norm_fg
@@ -716,7 +717,7 @@ if g:jmin_2color
     let s:question           = s:norm_fg
     let s:warningmsg_fg      = s:norm_fg
     let s:warningmsg_bg      = s:none
-    let s:warningmsg_attr    = { "gui": "NONE", "cterm": "NONE" }
+    let s:warningmsg_attr    = s:none
     let s:visual_fg          = s:norm_fg
     let s:visual_bg          = s:norm_bg
     let s:visual_attr        = { "gui": "reverse", "cterm": "reverse" }
@@ -729,19 +730,19 @@ if g:jmin_2color
     let s:tabline_attr       = { "gui": "reverse", "cterm": "reverse" }
     let s:tablinesel_fg      = s:none
     let s:tablinesel_bg      = s:none
-    let s:tablinesel_attr    = { "gui": "NONE", "cterm": "NONE" }
+    let s:tablinesel_attr    = s:none
     "let s:tablinesel_attr    = s:bold
     let s:tablinefill        = s:norm_fg
     " Only NeoVim Diagnostics has these message types
     let s:infomsg_fg         = s:norm_fg
     let s:infomsg_bg         = s:none
-    let s:infomsg_attr       = { "gui": "NONE", "cterm": "NONE" }
+    let s:infomsg_attr       = s:none
     let s:hintmsg_fg         = s:norm_fg
     let s:hintmsg_bg         = s:none
-    let s:hintmsg_attr       = { "gui": "NONE", "cterm": "NONE" }
+    let s:hintmsg_attr       = s:none
     let s:okmsg_fg           = s:norm_fg
     let s:okmsg_bg           = s:none
-    let s:okmsg_attr         = { "gui": "NONE", "cterm": "NONE" }
+    let s:okmsg_attr         = s:none
 
     " Diagnostics
 
@@ -820,13 +821,13 @@ if g:jmin_2color
     let s:pmenu_attr               = { "cterm": "reverse", "gui": "reverse" }
     let s:pmenusel_fg              = s:norm_fg
     let s:pmenusel_bg              = s:norm_bg
-    let s:pmenusel_attr            = { "cterm": "NONE", "gui": "NONE" }
+    let s:pmenusel_attr            = s:none
     let s:pmenusbar_fg             = s:norm_fg
     let s:pmenusbar_bg             = s:none
     let s:pmenusbar_attr           = { "cterm": "reverse", "gui": "reverse" }
     let s:pmenuthumb_fg            = s:none
     let s:pmenuthumb_bg            = s:norm_bg
-    let s:pmenuthumb_attr          = { "cterm": "NONE", "gui": "NONE" }
+    let s:pmenuthumb_attr          = s:none
 
     let s:qfline_fg                = s:norm_fg
     let s:qfline_bg                = s:norm_bg
@@ -861,19 +862,13 @@ if g:jmin_2color
     let s:diffsubname_attr   = s:bold
     let s:gitdiff_fg         = s:none
     let s:gitdiff_bg         = s:none
-    let s:gitdiff_attr       = { "gui": "NONE", "cterm": "NONE" }
+    let s:gitdiff_attr       = s:none
     let s:diffadded_fg       = s:none
     let s:diffadded_bg       = s:none
-    let s:diffadded_attr     = { "gui": "italic", "cterm": "NONE" }
-    if g:jmin_no_italic
-        let s:diffadded_attr = s:none
-    endif
+    let s:diffadded_attr     = s:italic
     let s:diffremoved_fg     = s:none
     let s:diffremoved_bg     = s:none
-    let s:diffremoved_attr   = { "gui": "italic", "cterm": "NONE" }
-    if g:jmin_no_italic
-        let s:diffremoved_attr = s:none
-    endif
+    let s:diffremoved_attr   = s:italic
 
     let s:gitkeyword_fg   = s:none
     let s:gitkeyword_bg   = s:none
@@ -883,7 +878,7 @@ if g:jmin_2color
     let s:githash_attr    = s:bold
     let s:githead_fg      = s:none
     let s:githead_bg      = s:none
-    let s:githead_attr    = { "gui": "NONE", "cterm": "NONE" }
+    let s:githead_attr    = s:none
 
     let s:gitgutteradd_fg          = s:none
     let s:gitgutterchange_fg       = s:none
@@ -1015,14 +1010,14 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     "let s:statusline_nc_fg   = s:color8
     let s:statusline_nc_bg   = s:color8
     let s:statusline_nc_fg   = s:color7
-    let s:statusline_nc_attr = { "gui": "NONE", "cterm": "NONE" }
+    let s:statusline_nc_attr = s:none
     let s:vertsplit         = s:color8
 
     " Search
 
     let s:search_fg      = s:color12
     let s:search_bg      = s:color11
-    let s:search_attr    = { "gui": "NONE", "cterm": "NONE" }
+    let s:search_attr    = s:none
     let s:incsearch_fg   = s:search_fg
     let s:incsearch_bg   = s:search_bg
     let s:incsearch_attr = { "gui": "reverse", "cterm": "reverse" }
@@ -1030,22 +1025,22 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     " Misc
     let s:cursorline_fg    = s:norm_bg
     let s:cursorline_bg    = s:norm_fg
-    let s:cursorline_attr  = { "gui": "NONE", "cterm": "NONE" }
+    let s:cursorline_attr  = s:none
     let s:cursorim_fg      = s:color0
     let s:cursorim_bg      = s:color14
-    let s:cursorim_attr    = { "gui": "NONE", "cterm": "NONE" }
+    let s:cursorim_attr    = s:none
     let s:colorcolumn_fg   = s:norm_fg
     let s:colorcolumn_bg   = s:color7
-    let s:colorcolumn_attr = { "gui": "NONE", "cterm": "NONE" }
+    let s:colorcolumn_attr = s:none
     let s:error_fg         = s:norm_fg
     let s:error_bg         = s:color9
-    let s:error_attr       = { "gui": "NONE", "cterm": "NONE" }
+    let s:error_attr       = s:none
     let s:errormsg_fg      = s:color9
     let s:errormsg_bg      = s:none
-    let s:errormsg_attr    = { "gui": "NONE", "cterm": "NONE" }
+    let s:errormsg_attr    = s:none
     "let s:matchparen_fg    = s:color0
     "let s:matchparen_bg    = s:color12
-    "let s:matchparen_attr  = { "gui": "NONE", "cterm": "NONE" }
+    "let s:matchparen_attr  = s:none
     "let s:matchparen_fg    = s:norm_fg
     let s:matchparen_fg    = s:bold_fg
     let s:matchparen_bg    = s:norm_bg
@@ -1067,7 +1062,7 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     let s:question         = s:color4
     let s:warningmsg_fg    = s:color11
     let s:warningmsg_bg    = s:none
-    let s:warningmsg_attr  = { "gui": "NONE", "cterm": "NONE" }
+    let s:warningmsg_attr  = s:none
     let s:visual_fg        = s:norm_fg
     let s:visual_bg        = s:norm_bg
     let s:visual_attr      = { "gui": "reverse", "cterm": "reverse" }
@@ -1082,24 +1077,24 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     let s:tabline_fg       = s:color7
     let s:tabline_bg       = s:color8
     "let s:tabline_attr     = { "gui": "reverse", "cterm": "reverse" }
-    let s:tabline_attr     = { "gui": "NONE", "cterm": "NONE" }
+    let s:tabline_attr     = s:none
     "let s:tablinesel_fg    = s:none
     let s:tablinesel_fg    = s:bold_fg
     let s:tablinesel_bg    = s:none
-    let s:tablinesel_attr  = { "gui": "NONE", "cterm": "NONE" }
+    let s:tablinesel_attr  = s:none
     "let s:tablinesel_attr  = s:bold
     let s:tablinefill      = s:norm_fg
     let s:underlined_attr  = s:bold
     " Only NeoVim Diagnostics has these message types
     let s:infomsg_fg       = s:color6
     let s:infomsg_bg       = s:none
-    let s:infomsg_attr     = { "gui": "NONE", "cterm": "NONE" }
+    let s:infomsg_attr     = s:none
     let s:hintmsg_fg       = s:color4
     let s:hintmsg_bg       = s:none
-    let s:hintmsg_attr     = { "gui": "NONE", "cterm": "NONE" }
+    let s:hintmsg_attr     = s:none
     let s:okmsg_fg         = s:color2
     let s:okmsg_bg         = s:none
-    let s:okmsg_attr       = { "gui": "NONE", "cterm": "NONE" }
+    let s:okmsg_attr       = s:none
 
     " Diagnostics
 
@@ -1126,19 +1121,19 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     " The foreground colours will apply to the text and the underline.
     let s:diagnosticunderlineerror_fg   = s:errormsg_fg
     let s:diagnosticunderlineerror_bg   = s:errormsg_bg
-    let s:diagnosticunderlineerror_attr = { "gui": "NONE", "cterm": "NONE" }
+    let s:diagnosticunderlineerror_attr = s:none
     let s:diagnosticunderlinewarn_fg    = s:warningmsg_fg
     let s:diagnosticunderlinewarn_bg    = s:warningmsg_bg
-    let s:diagnosticunderlinewarn_attr  = { "gui": "NONE", "cterm": "NONE" }
+    let s:diagnosticunderlinewarn_attr  = s:none
     let s:diagnosticunderlineinfo_fg    = s:infomsg_fg
     let s:diagnosticunderlineinfo_bg    = s:infomsg_bg
-    let s:diagnosticunderlineinfo_attr  = { "gui": "NONE", "cterm": "NONE" }
+    let s:diagnosticunderlineinfo_attr  = s:none
     let s:diagnosticunderlinehint_fg    = s:hintmsg_fg
     let s:diagnosticunderlinehint_bg    = s:hintmsg_bg
-    let s:diagnosticunderlinehint_attr  = { "gui": "NONE", "cterm": "NONE" }
+    let s:diagnosticunderlinehint_attr  = s:none
     let s:diagnosticunderlineok_fg      = s:okmsg_fg
     let s:diagnosticunderlineok_bg      = s:okmsg_bg
-    let s:diagnosticunderlineok_attr    = { "gui": "NONE", "cterm": "NONE" }
+    let s:diagnosticunderlineok_attr    = s:none
     let s:normalfloat_fg                = s:none
     let s:normalfloat_bg                = s:none
     let s:floatborder_fg                = s:vertsplit 
@@ -1150,20 +1145,20 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     let s:pmenu_attr               = { "cterm": "reverse", "gui": "reverse" }
     let s:pmenusel_fg              = s:color0
     let s:pmenusel_bg              = s:color14
-    let s:pmenusel_attr            = { "cterm": "NONE", "gui": "NONE" }
+    let s:pmenusel_attr            = s:none
     let s:pmenusbar_fg             = s:none
     let s:pmenusbar_bg             = s:color8
-    let s:pmenusbar_attr           = { "cterm": "NONE", "gui": "NONE" }
+    let s:pmenusbar_attr           = s:none
     let s:pmenuthumb_fg            = s:none
     let s:pmenuthumb_bg            = s:color7
-    let s:pmenuthumb_attr          = { "cterm": "NONE", "gui": "NONE" }
+    let s:pmenuthumb_attr          = s:none
 
     " Quickfix Window
     let s:qffilename  = s:fold_fg
     let s:qfseparator = s:norm_fg
     let s:qflinenr    = s:linenr
     "let s:qflinenr      = s:comment_fg
-    let s:qflinenr_attr = { "gui": "NONE", "cterm": "NONE" }
+    let s:qflinenr_attr = s:none
     "let s:qflinenr_attr = s:comment_attr
     let s:qfline_fg   = s:cursorline_fg
     let s:qfline_bg   = s:cursorline_bg
@@ -1172,15 +1167,15 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     " Diff
     let s:diffadd_fg           = s:none
     let s:diffadd_bg           = s:color14
-    let s:diffadd_attr         = { "gui": "NONE", "cterm": "NONE" }
+    let s:diffadd_attr         = s:none
     let s:diffchange_fg        = s:none
     let s:diffchange_bg        = s:none
     let s:diffdelete_fg        = s:color8
     let s:diffdelete_bg        = s:color0
-    let s:diffdelete_attr      = { "gui": "NONE", "cterm": "NONE" }
+    let s:diffdelete_attr      = s:none
     let s:difftext_fg          = s:none
     let s:difftext_bg          = s:diffadd_bg
-    let s:difftext_attr        = { "gui": "NONE", "cterm": "NONE" }
+    let s:difftext_attr        = s:none
 
     "let s:difffile_fg        = s:none
     let s:difffile_fg        = s:bold_fg
@@ -1204,13 +1199,13 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     let s:diffsubname_attr   = s:bold
     let s:gitdiff_fg         = s:none
     let s:gitdiff_bg         = s:none
-    let s:gitdiff_attr       = { "gui": "NONE", "cterm": "NONE" }
+    let s:gitdiff_attr       = s:none
     let s:diffadded_fg       = s:color2
     let s:diffadded_bg       = s:none
-    let s:diffadded_attr     = { "gui": "NONE", "cterm": "NONE" }
+    let s:diffadded_attr     = s:none
     let s:diffremoved_fg     = s:comment_fg
     let s:diffremoved_bg     = s:none
-    let s:diffremoved_attr   = { "gui": "NONE", "cterm": "NONE" }
+    let s:diffremoved_attr   = s:none
 
     "let s:gitkeyword_fg   = s:none
     let s:gitkeyword_fg   = s:bold_fg
@@ -1222,7 +1217,7 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     let s:githash_attr    = s:bold
     let s:githead_fg      = s:none
     let s:githead_bg      = s:none
-    let s:githead_attr    = { "gui": "NONE", "cterm": "NONE" }
+    let s:githead_attr    = s:none
 
     let s:gitgutteradd_fg      = s:color2
     let s:gitgutterchange_fg   = s:color3
@@ -1240,16 +1235,16 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     "
     let s:spellbad_fg      = s:color9
     let s:spellbad_bg      = s:norm_bg
-    let s:spellbad_attr    = { "gui": "NONE", "cterm": "NONE" }
+    let s:spellbad_attr    = s:none
     let s:spellcap_fg      = s:color12
     let s:spellcap_bg      = s:norm_bg
-    let s:spellcap_attr    = { "gui": "NONE", "cterm": "NONE" }
+    let s:spellcap_attr    = s:none
     let s:spelllocal_fg    = s:color6
     let s:spelllocal_bg    = s:norm_bg
-    let s:spelllocal_attr  = { "gui": "NONE", "cterm": "NONE" }
+    let s:spelllocal_attr  = s:none
     let s:spellrare_fg     = s:color5
     let s:spellrare_bg     = s:norm_bg
-    let s:spellrare_attr   = { "gui": "NONE", "cterm": "NONE" }
+    let s:spellrare_attr   = s:none
 
     " These will be colours for undercurls
     let s:spellbad_guisp   = s:spellbad_fg
@@ -1278,7 +1273,7 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
 
         let s:statusline_nc_bg   = s:norm_bg
         let s:statusline_nc_fg   = s:norm_fg
-        let s:statusline_nc_attr = { "gui": "NONE", "cterm": "NONE" }
+        let s:statusline_nc_attr = s:none
         let s:vertsplit          = s:norm_fg
 
         let s:search_fg          = s:norm_fg
@@ -1322,7 +1317,7 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
         let s:question           = s:norm_fg
         let s:warningmsg_fg      = s:norm_fg
         let s:warningmsg_bg      = s:none
-        let s:warningmsg_attr    = { "gui": "NONE", "cterm": "NONE" }
+        let s:warningmsg_attr    = s:none
         let s:visual_fg          = s:norm_fg
         let s:visual_bg          = s:norm_bg
         let s:visual_attr        = { "gui": "reverse", "cterm": "reverse" }
@@ -1335,19 +1330,19 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
         let s:tabline_attr       = { "gui": "reverse", "cterm": "reverse" }
         let s:tablinesel_fg      = s:none
         let s:tablinesel_bg      = s:none
-        let s:tablinesel_attr    = { "gui": "NONE", "cterm": "NONE" }
+        let s:tablinesel_attr    = s:none
         "let s:tablinesel_attr    = s:bold
         let s:tablinefill              = s:norm_fg
         " Only NeoVim Diagnostics has these message types
         let s:infomsg_fg         = s:norm_fg
         let s:infomsg_bg         = s:norm_bg
-        let s:infomsg_attr       = { "gui": "NONE", "cterm": "NONE" }
+        let s:infomsg_attr       = s:none
         let s:hintmsg_fg         = s:norm_fg
         let s:hintmsg_bg         = s:norm_bg
-        let s:hintmsg_attr       = { "gui": "NONE", "cterm": "NONE" }
+        let s:hintmsg_attr       = s:none
         let s:okmsg_fg           = s:norm_fg
         let s:okmsg_bg           = s:norm_bg
-        let s:okmsg_attr         = { "gui": "NONE", "cterm": "NONE" }
+        let s:okmsg_attr         = s:none
 
         " Diagnostics
 
@@ -1377,16 +1372,16 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
         let s:diagnosticunderlineerror_attr = { "gui": "reverse", "cterm": "reverse" }
         let s:diagnosticunderlinewarn_fg    = s:warningmsg_fg
         let s:diagnosticunderlinewarn_bg    = s:warningmsg_bg
-        let s:diagnosticunderlinewarn_attr  = { "gui": "NONE", "cterm": "NONE" }
+        let s:diagnosticunderlinewarn_attr  = s:none
         let s:diagnosticunderlineinfo_fg    = s:infomsg_fg
         let s:diagnosticunderlineinfo_bg    = s:infomsg_bg
-        let s:diagnosticunderlineinfo_attr  = { "gui": "NONE", "cterm": "NONE" }
+        let s:diagnosticunderlineinfo_attr  = s:none
         let s:diagnosticunderlinehint_fg    = s:hintmsg_fg
         let s:diagnosticunderlinehint_bg    = s:hintmsg_bg
-        let s:diagnosticunderlinehint_attr  = { "gui": "NONE", "cterm": "NONE" }
+        let s:diagnosticunderlinehint_attr  = s:none
         let s:diagnosticunderlineok_fg      = s:okmsg_fg
         let s:diagnosticunderlineok_bg      = s:okmsg_bg
-        let s:diagnosticunderlineok_attr    = { "gui": "NONE", "cterm": "NONE" }
+        let s:diagnosticunderlineok_attr    = s:none
         let s:normalfloat_fg                = s:none
         let s:normalfloat_bg                = s:none
         let s:floatborder_fg                = s:none
@@ -1397,13 +1392,13 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
         let s:pmenu_attr               = { "cterm": "reverse", "gui": "reverse" }
         let s:pmenusel_fg              = s:norm_fg
         let s:pmenusel_bg              = s:norm_bg
-        let s:pmenusel_attr            = { "cterm": "NONE", "gui": "NONE" }
+        let s:pmenusel_attr            = s:none
         let s:pmenusbar_fg             = s:norm_fg
         let s:pmenusbar_bg             = s:none
         let s:pmenusbar_attr           = { "cterm": "reverse", "gui": "reverse" }
         let s:pmenuthumb_fg            = s:none
         let s:pmenuthumb_bg            = s:norm_bg
-        let s:pmenuthumb_attr          = { "cterm": "NONE", "gui": "NONE" }
+        let s:pmenuthumb_attr          = s:none
 
         let s:qfline_fg                = s:norm_fg
         let s:qfline_bg                = s:norm_bg
@@ -1438,13 +1433,13 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
         let s:diffsubname_attr   = s:bold
         let s:gitdiff_fg         = s:none
         let s:gitdiff_bg         = s:none
-        let s:gitdiff_attr       = { "gui": "NONE", "cterm": "NONE" }
+        let s:gitdiff_attr       = s:none
         let s:diffadded_fg       = s:none
         let s:diffadded_bg       = s:none
-        let s:diffadded_attr     = { "gui": "NONE", "cterm": "NONE" }
+        let s:diffadded_attr     = s:none
         let s:diffremoved_fg     = s:none
         let s:diffremoved_bg     = s:none
-        let s:diffremoved_attr   = { "gui": "NONE", "cterm": "NONE" }
+        let s:diffremoved_attr   = s:none
 
         let s:gitkeyword_fg   = s:none
         let s:gitkeyword_bg   = s:none
@@ -1454,7 +1449,7 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
         let s:githash_attr    = s:bold
         let s:githead_fg      = s:none
         let s:githead_bg      = s:none
-        let s:githead_attr    = { "gui": "NONE", "cterm": "NONE" }
+        let s:githead_attr    = s:none
         let s:gitgutteradd_fg          = s:none
         let s:gitgutterchange_fg       = s:none
         let s:gitgutterdelete_fg       = s:none
