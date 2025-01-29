@@ -50,6 +50,16 @@ if !exists("g:jmin_colorize_bold")
     let g:jmin_colorize_bold = 1
 endif
 
+" Force no bold.
+"
+" Bold is only used when some of the other highlighting options are active,
+" like g:jmin_extrafmt. With this disabled those highlight options will still
+" work, but they will not use bold. The `g:jmin_colorize_bold` option will
+" still colorize bold elements even if this is set to 1.
+if !exists("g:jmin_no_bold")
+    let g:jmin_no_bold = 0
+endif
+
 " Force no italic.
 "
 " Italics are only used when some of the other highlighting options are

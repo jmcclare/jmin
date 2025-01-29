@@ -271,6 +271,11 @@ if g:jmin_colorize_bold
     let s:bold_fg = { "gui": "#506A73", "cterm": "242" }
 endif
 
+let s:bold        = { "gui": "bold", "cterm": "bold" }
+if g:jmin_no_bold
+    let s:bold    = s:none
+endif
+
 let s:norm_bg           = s:white
 if exists("g:jmin_bg")
     let s:norm_bg = g:jmin_bg
@@ -302,17 +307,17 @@ let s:string                   = s:dimmer_sky_blue
 let s:constant                 = s:string
 "let s:statement_fg             = s:norm_fg
 let s:statement_fg             = s:bold_fg
-let s:statement_attr           = { "gui": "bold", "cterm": "bold" }
+let s:statement_attr           = s:bold
 let s:preproc_fg               = s:statement_fg
 let s:preproc_attr             = s:statement_attr
 let s:type_fg                  = s:statement_fg
 let s:type_attr                = s:statement_attr
 let s:html_fg                  = s:dim_grey
 let s:html_h1_fg               = s:bold_fg
-let s:html_h1_attr             = { "gui": "bold", "cterm": "bold" }
+let s:html_h1_attr             = s:bold
 let s:html_link_attr           = { "gui": "underline", "cterm": "underline" }
 let s:html_bold_fg             = s:bold_fg
-let s:html_bold_attr           = { "gui": "bold", "cterm": "bold" }
+let s:html_bold_attr           = s:bold
 let s:html_italic_attr         = { "gui": "italic", "cterm": "italic" }
 if g:jmin_no_italic
     let s:html_italic_attr     = s:none
@@ -368,7 +373,7 @@ let s:errormsg_attr    = { "gui": "NONE", "cterm": "NONE" }
 "let s:matchparen_fg    = s:norm_fg
 let s:matchparen_fg    = s:bold_fg
 let s:matchparen_bg    = s:norm_bg
-let s:matchparen_attr  = { "gui": "bold", "cterm": "bold" }
+let s:matchparen_attr  = s:bold
 "let s:directory        = s:deep_sky_blue
 let s:directory        = s:norm_fg
 let s:symlink          = s:norm_fg
@@ -377,14 +382,14 @@ let s:nontext_bg       = s:none
 let s:signcolumn       = s:grey
 "let s:modemsg          = s:dark_sky_blue
 let s:modemsg          = s:norm_fg
-"let s:modemsg_attr     = { "gui": "bold", "cterm": "bold" }
+"let s:modemsg_attr     = s:bold
 " Some syntax groups could be linked to this (try some .cmake files for
 " examples), so I keep it completely unhighlighted.
 let s:modemsg_attr     = s:none
 "let s:moremsg          = s:dark_sky_blue
 "let s:moremsg          = s:norm_fg
 let s:moremsg          = s:bold_fg
-let s:moremsg_attr     = { "gui": "bold", "cterm": "bold" }
+let s:moremsg_attr     = s:bold
 let s:question         = s:dark_sky_blue
 let s:warningmsg_fg    = s:bright_orange
 let s:warningmsg_bg    = s:none
@@ -404,8 +409,8 @@ let s:tabline_attr     = s:statusline_nc_attr
 let s:tablinesel_fg    = s:none
 "let s:tablinesel_fg    = s:bold_fg
 let s:tablinesel_bg    = s:none
-"let s:tablinesel_attr   = { "gui": "bold", "cterm": "bold" }
-let s:tablinesel_attr  = { "gui": "NONE", "cterm": "NONE" }
+"let s:tablinesel_attr   = s:bold
+let s:tablinesel_attr  = s:none
 let s:tablinefill      = s:lighter_grey
 let s:underlined_attr  = { "gui": "underline", "cterm": "underline" }
 " Only NeoVim Diagnostics has these message types
@@ -521,7 +526,7 @@ let s:qfseparator   = s:norm_fg
 let s:qflinenr      = s:linenr
 "let s:qflinenr      = s:comment_fg
 "let s:qflinenr_attr = { "gui": "italic", "cterm": "bold" }
-let s:qflinenr_attr = { "gui": "NONE", "cterm": "NONE" }
+let s:qflinenr_attr = s:none
 "let s:qflinenr_attr = s:comment_attr
 let s:qfline_fg     = s:cursorline_fg
 let s:qfline_bg     = s:cursorline_bg
@@ -547,23 +552,23 @@ let s:difftext_attr            = { "gui": "NONE", "cterm": "NONE" }
 "let s:difffile_fg        = s:none
 let s:difffile_fg        = s:bold_fg
 let s:difffile_bg        = s:none
-let s:difffile_attr      = { "gui": "bold", "cterm": "bold" }
+let s:difffile_attr      = s:bold
 "let s:diffnewfile_fg     = s:none
 let s:diffnewfile_fg     = s:bold_fg
 let s:diffnewfile_bg     = s:none
-let s:diffnewfile_attr   = { "gui": "bold", "cterm": "bold" }
+let s:diffnewfile_attr   = s:bold
 "let s:diffindexline_fg   = s:none
 let s:diffindexline_fg   = s:bold_fg
 let s:diffindexline_bg   = s:none
-let s:diffindexline_attr = { "gui": "bold", "cterm": "bold" }
+let s:diffindexline_attr = s:bold
 "let s:diffline_fg        = s:none
 let s:diffline_fg        = s:bold_fg
 let s:diffline_bg        = s:none
-let s:diffline_attr      = { "gui": "bold", "cterm": "bold" }
+let s:diffline_attr      = s:bold
 "let s:diffsubname_fg     = s:none
 let s:diffsubname_fg     = s:bold_fg
 let s:diffsubname_bg     = s:none
-let s:diffsubname_attr   = { "gui": "bold", "cterm": "bold" }
+let s:diffsubname_attr   = s:bold
 let s:gitdiff_fg         = s:none
 let s:gitdiff_bg         = s:none
 let s:gitdiff_attr       = { "gui": "NONE", "cterm": "NONE" }
@@ -578,11 +583,11 @@ let s:diffremoved_attr   = { "gui": "NONE", "cterm": "NONE" }
 "let s:gitkeyword_fg   = s:none
 let s:gitkeyword_fg   = s:bold_fg
 let s:gitkeyword_bg   = s:none
-let s:gitkeyword_attr = { "gui": "bold", "cterm": "bold" }
+let s:gitkeyword_attr = s:bold
 "let s:githash_fg      = s:none
 let s:githash_fg      = s:bold_fg
 let s:githash_bg      = s:none
-let s:githash_attr    = { "gui": "bold", "cterm": "bold" }
+let s:githash_attr    = s:bold
 let s:githead_fg      = s:none
 let s:githead_bg      = s:none
 let s:githead_attr    = { "gui": "NONE", "cterm": "NONE" }
@@ -692,6 +697,9 @@ if g:jmin_2color
     let s:incsearch_fg       = s:search_fg
     let s:incsearch_bg       = s:search_bg
     let s:incsearch_attr     = { "gui": "bold,reverse", "cterm": "bold,reverse" }
+    if g:jmin_no_bold
+        let s:incsearch_attr = { "gui": "reverse", "cterm": "reverse" }
+    endif
 
     let s:cursorline_fg      = s:norm_fg
     let s:cursorline_bg      = s:norm_bg
@@ -710,17 +718,17 @@ if g:jmin_2color
     let s:errormsg_attr      = { "gui": "reverse", "cterm": "reverse" }
     let s:matchparen_fg      = s:norm_fg
     let s:matchparen_bg      = s:norm_bg
-    let s:matchparen_attr    = { "gui": "bold", "cterm": "bold" }
+    let s:matchparen_attr    = s:bold
     let s:directory          = s:norm_fg
     let s:symlink            = s:norm_fg
     let s:nontext_fg         = s:norm_fg
     let s:nontext_bg         = s:none
     let s:signcolumn         = s:norm_fg
     let s:modemsg            = s:norm_fg
-    "let s:modemsg_attr       = { "gui": "bold", "cterm": "bold" }
+    "let s:modemsg_attr       = s:bold
     let s:modemsg_attr       = s:none
     let s:moremsg            = s:norm_fg
-    let s:moremsg_attr       = { "gui": "bold", "cterm": "bold" }
+    let s:moremsg_attr       = s:bold
     let s:question           = s:norm_fg
     let s:warningmsg_fg      = s:norm_fg
     let s:warningmsg_bg      = s:none
@@ -738,7 +746,7 @@ if g:jmin_2color
     let s:tablinesel_fg      = s:none
     let s:tablinesel_bg      = s:none
     let s:tablinesel_attr    = { "gui": "NONE", "cterm": "NONE" }
-    "let s:tablinesel_attr    = { "gui": "bold", "cterm": "bold" }
+    "let s:tablinesel_attr    = s:bold
     let s:tablinefill        = s:norm_fg
     " Only NeoVim Diagnostics has these message types
     let s:infomsg_fg         = s:norm_fg
@@ -854,19 +862,19 @@ if g:jmin_2color
 
     let s:difffile_fg        = s:none
     let s:difffile_bg        = s:none
-    let s:difffile_attr      = { "gui": "bold", "cterm": "bold" }
+    let s:difffile_attr      = s:bold
     let s:diffnewfile_fg     = s:none
     let s:diffnewfile_bg     = s:none
-    let s:diffnewfile_attr   = { "gui": "bold", "cterm": "bold" }
+    let s:diffnewfile_attr   = s:bold
     let s:diffindexline_fg   = s:none
     let s:diffindexline_bg   = s:none
-    let s:diffindexline_attr = { "gui": "bold", "cterm": "bold" }
+    let s:diffindexline_attr = s:bold
     let s:diffline_fg        = s:none
     let s:diffline_bg        = s:none
-    let s:diffline_attr      = { "gui": "bold", "cterm": "bold" }
+    let s:diffline_attr      = s:bold
     let s:diffsubname_fg     = s:none
     let s:diffsubname_bg     = s:none
-    let s:diffsubname_attr   = { "gui": "bold", "cterm": "bold" }
+    let s:diffsubname_attr   = s:bold
     let s:gitdiff_fg         = s:none
     let s:gitdiff_bg         = s:none
     let s:gitdiff_attr       = { "gui": "NONE", "cterm": "NONE" }
@@ -885,10 +893,10 @@ if g:jmin_2color
 
     let s:gitkeyword_fg   = s:none
     let s:gitkeyword_bg   = s:none
-    let s:gitkeyword_attr = { "gui": "bold", "cterm": "bold" }
+    let s:gitkeyword_attr = s:bold
     let s:githash_fg      = s:none
     let s:githash_bg      = s:none
-    let s:githash_attr    = { "gui": "bold", "cterm": "bold" }
+    let s:githash_attr    = s:bold
     let s:githead_fg      = s:none
     let s:githead_bg      = s:none
     let s:githead_attr    = { "gui": "NONE", "cterm": "NONE" }
@@ -998,20 +1006,20 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     let s:constant                 = s:string
     "let s:statement_fg             = s:norm_fg
     let s:statement_fg             = s:bold_fg
-    let s:statement_attr           = { "gui": "bold", "cterm": "bold" }
+    let s:statement_attr           = s:bold
     let s:preproc_fg               = s:statement_fg
     let s:preproc_attr             = s:statement_attr
     let s:type_fg                  = s:statement_fg
     let s:type_attr                = s:statement_attr
     let s:html_fg                  = s:color8
     let s:html_h1_fg               = s:bold_fg
-    let s:html_h1_attr             = { "gui": "bold", "cterm": "bold" }
-    let s:html_link_attr           = { "gui": "bold", "cterm": "bold" }
+    let s:html_h1_attr             = s:bold
+    let s:html_link_attr           = s:bold
     let s:html_bold_fg             = s:bold_fg
-    let s:html_bold_attr           = { "gui": "bold", "cterm": "bold" }
-    let s:html_italic_attr         = { "gui": "bold", "cterm": "bold" }
+    let s:html_bold_attr           = s:bold
+    let s:html_italic_attr         = s:bold
 
-    let s:help_hypertext_jump_attr = { "gui": "bold", "cterm": "bold" }
+    let s:help_hypertext_jump_attr = s:bold
 
     " Dividers
 
@@ -1063,7 +1071,7 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     "let s:matchparen_fg    = s:norm_fg
     let s:matchparen_fg    = s:bold_fg
     let s:matchparen_bg    = s:norm_bg
-    let s:matchparen_attr  = { "gui": "bold", "cterm": "bold" }
+    let s:matchparen_attr  = s:bold
     "let s:directory        = s:color12
     let s:directory        = s:norm_fg
     let s:symlink          = s:norm_fg
@@ -1072,12 +1080,12 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     let s:signcolumn       = s:color8
     "let s:modemsg          = s:color4
     let s:modemsg          = s:norm_fg
-    "let s:modemsg_attr     = { "gui": "bold", "cterm": "bold" }
+    "let s:modemsg_attr     = s:bold
     let s:modemsg_attr     = s:none
     "let s:moremsg          = s:color4
     "let s:moremsg          = s:norm_fg
     let s:moremsg          = s:bold_fg
-    let s:moremsg_attr     = { "gui": "bold", "cterm": "bold" }
+    let s:moremsg_attr     = s:bold
     let s:question         = s:color4
     let s:warningmsg_fg    = s:color11
     let s:warningmsg_bg    = s:none
@@ -1101,10 +1109,10 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     let s:tablinesel_fg    = s:bold_fg
     let s:tablinesel_bg    = s:none
     let s:tablinesel_attr  = { "gui": "NONE", "cterm": "NONE" }
-    "let s:tablinesel_attr  = { "gui": "bold", "cterm": "bold" }
+    "let s:tablinesel_attr  = s:bold
     let s:tablinefill      = s:norm_fg
     "let s:tablinefill      = s:color0
-    let s:underlined_attr  = { "gui": "bold", "cterm": "bold" }
+    let s:underlined_attr  = s:bold
     " Only NeoVim Diagnostics has these message types
     let s:infomsg_fg       = s:color6
     let s:infomsg_bg       = s:none
@@ -1201,23 +1209,23 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     "let s:difffile_fg        = s:none
     let s:difffile_fg        = s:bold_fg
     let s:difffile_bg        = s:none
-    let s:difffile_attr      = { "gui": "bold", "cterm": "bold" }
+    let s:difffile_attr      = s:bold
     "let s:diffnewfile_fg     = s:none
     let s:diffnewfile_fg     = s:bold_fg
     let s:diffnewfile_bg     = s:none
-    let s:diffnewfile_attr   = { "gui": "bold", "cterm": "bold" }
+    let s:diffnewfile_attr   = s:bold
     "let s:diffindexline_fg   = s:none
     let s:diffindexline_fg   = s:bold_fg
     let s:diffindexline_bg   = s:none
-    let s:diffindexline_attr = { "gui": "bold", "cterm": "bold" }
+    let s:diffindexline_attr = s:bold
     "let s:diffline_fg        = s:none
     let s:diffline_fg        = s:bold_fg
     let s:diffline_bg        = s:none
-    let s:diffline_attr      = { "gui": "bold", "cterm": "bold" }
+    let s:diffline_attr      = s:bold
     "let s:diffsubname_fg     = s:none
     let s:diffsubname_fg     = s:bold_fg
     let s:diffsubname_bg     = s:none
-    let s:diffsubname_attr   = { "gui": "bold", "cterm": "bold" }
+    let s:diffsubname_attr   = s:bold
     let s:gitdiff_fg         = s:none
     let s:gitdiff_bg         = s:none
     let s:gitdiff_attr       = { "gui": "NONE", "cterm": "NONE" }
@@ -1231,11 +1239,11 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     "let s:gitkeyword_fg   = s:none
     let s:gitkeyword_fg   = s:bold_fg
     let s:gitkeyword_bg   = s:none
-    let s:gitkeyword_attr = { "gui": "bold", "cterm": "bold" }
+    let s:gitkeyword_attr = s:bold
     "let s:githash_fg      = s:none
     let s:githash_fg      = s:bold_fg
     let s:githash_bg      = s:none
-    let s:githash_attr    = { "gui": "bold", "cterm": "bold" }
+    let s:githash_attr    = s:bold
     let s:githead_fg      = s:none
     let s:githead_bg      = s:none
     let s:githead_attr    = { "gui": "NONE", "cterm": "NONE" }
@@ -1303,6 +1311,9 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
         let s:incsearch_fg       = s:search_fg
         let s:incsearch_bg       = s:search_bg
         let s:incsearch_attr     = { "gui": "bold,reverse", "cterm": "bold,reverse" }
+        if g:jmin_no_bold
+            let s:incsearch_attr = { "gui": "reverse", "cterm": "reverse" }
+        endif
 
         let s:cursorline_fg      = s:norm_fg
         let s:cursorline_bg      = s:norm_bg
@@ -1321,17 +1332,17 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
         let s:errormsg_attr      = { "gui": "reverse", "cterm": "reverse" }
         let s:matchparen_fg      = s:norm_fg
         let s:matchparen_bg      = s:norm_bg
-        let s:matchparen_attr    = { "gui": "bold", "cterm": "bold" }
+        let s:matchparen_attr    = s:bold
         let s:directory          = s:norm_fg
         let s:symlink            = s:norm_fg
         let s:nontext_fg         = s:norm_fg
         let s:nontext_bg         = s:none
         let s:signcolumn         = s:norm_fg
         let s:modemsg            = s:norm_fg
-        "let s:modemsg_attr       = { "gui": "bold", "cterm": "bold" }
+        "let s:modemsg_attr       = s:bold
         let s:modemsg_attr       = s:none
         let s:moremsg            = s:norm_fg
-        let s:moremsg_attr       = { "gui": "bold", "cterm": "bold" }
+        let s:moremsg_attr       = s:bold
         let s:question           = s:norm_fg
         let s:warningmsg_fg      = s:norm_fg
         let s:warningmsg_bg      = s:none
@@ -1349,7 +1360,7 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
         let s:tablinesel_fg      = s:none
         let s:tablinesel_bg      = s:none
         let s:tablinesel_attr    = { "gui": "NONE", "cterm": "NONE" }
-        "let s:tablinesel_attr    = { "gui": "bold", "cterm": "bold" }
+        "let s:tablinesel_attr    = s:bold
         let s:tablinefill        = s:norm_fg
         " Only NeoVim Diagnostics has these message types
         let s:infomsg_fg         = s:norm_fg
@@ -1436,19 +1447,19 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
 
         let s:difffile_fg        = s:none
         let s:difffile_bg        = s:none
-        let s:difffile_attr      = { "gui": "bold", "cterm": "bold" }
+        let s:difffile_attr      = s:bold
         let s:diffnewfile_fg     = s:none
         let s:diffnewfile_bg     = s:none
-        let s:diffnewfile_attr   = { "gui": "bold", "cterm": "bold" }
+        let s:diffnewfile_attr   = s:bold
         let s:diffindexline_fg   = s:none
         let s:diffindexline_bg   = s:none
-        let s:diffindexline_attr = { "gui": "bold", "cterm": "bold" }
+        let s:diffindexline_attr = s:bold
         let s:diffline_fg        = s:none
         let s:diffline_bg        = s:none
-        let s:diffline_attr      = { "gui": "bold", "cterm": "bold" }
+        let s:diffline_attr      = s:bold
         let s:diffsubname_fg     = s:none
         let s:diffsubname_bg     = s:none
-        let s:diffsubname_attr   = { "gui": "bold", "cterm": "bold" }
+        let s:diffsubname_attr   = s:bold
         let s:gitdiff_fg         = s:none
         let s:gitdiff_bg         = s:none
         let s:gitdiff_attr       = { "gui": "NONE", "cterm": "NONE" }
@@ -1461,10 +1472,10 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
 
         let s:gitkeyword_fg   = s:none
         let s:gitkeyword_bg   = s:none
-        let s:gitkeyword_attr = { "gui": "bold", "cterm": "bold" }
+        let s:gitkeyword_attr = s:bold
         let s:githash_fg      = s:none
         let s:githash_bg      = s:none
-        let s:githash_attr    = { "gui": "bold", "cterm": "bold" }
+        let s:githash_attr    = s:bold
         let s:githead_fg      = s:none
         let s:githead_bg      = s:none
         let s:githead_attr    = { "gui": "NONE", "cterm": "NONE" }
