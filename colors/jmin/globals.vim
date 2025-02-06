@@ -70,6 +70,11 @@ if !exists("g:jmin_no_italic")
     let g:jmin_no_italic = 0
 endif
 
+" Force no underlined text
+if !exists("g:jmin_no_underline")
+    let g:jmin_no_underline = 0
+endif
+
 " Use 16 Colour Mode
 "
 " This makes it behave like a classic 16 colour terminal and disables non

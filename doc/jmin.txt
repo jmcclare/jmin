@@ -121,6 +121,14 @@ them apply to `jmin-simple`.
 	disabled those highlight options will still work, but they will not
 	use italics.
 
+							*g:jmin_no_underline*
+`g:jmin_no_underline`	boolean (default 0)
+	Force no underlined or undercurled text.
+
+	Underlines are used by some of the other formatting options and for
+	spelling and by NeoVim diagnostics. This either replaces them with
+	text colours, or simply removes them.
+
 							*g:jmin_16*
 `g:jmin_16`	boolean	(default 0)
 			global

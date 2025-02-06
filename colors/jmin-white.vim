@@ -266,6 +266,11 @@ if exists("g:jmin_fg")
     let s:norm_fg = g:jmin_fg
 endif
 
+let s:norm_bg           = s:white
+if exists("g:jmin_bg")
+    let s:norm_bg = g:jmin_bg
+endif
+
 let s:bold_fg = s:norm_fg
 if g:jmin_colorize_bold
     let s:bold_fg = { "gui": "#506A73", "cterm": "242" }
@@ -276,26 +281,32 @@ if g:jmin_no_bold
     let s:bold    = s:none
 endif
 
-let s:norm_bg           = s:white
-if exists("g:jmin_bg")
-    let s:norm_bg = g:jmin_bg
+let s:italic         = { "gui": "italic", "cterm": "italic" }
+let s:gui_italic     = { "gui": "italic", "cterm": "NONE" }
+if g:jmin_no_italic
+    let s:italic     = s:none
+    let s:gui_italic = s:none
+endif
+
+let s:underline        = { "gui": "underline", "cterm": "underline" }
+let s:undercurl        = { "gui": "undercurl", "cterm": "undercurl" }
+if g:jmin_no_underline
+    let s:underline    = s:none
+    let s:undercurl    = s:none
 endif
 
 
 " These colours will only be applied below if the options to highlight these
 " are set to 1.
 let s:comment_fg               = s:lighter_grey
-let s:comment_attr             = { "gui": "italic", "cterm": "italic" }
-if g:jmin_no_italic
-    let s:comment_attr         = s:none
-endif
+let s:comment_attr             = s:italic
 "let s:todo_fg                  = s:green
 let s:todo_fg                  = s:comment_fg
 let s:todo_attr                = s:comment_attr
 let s:vim_comment_title_fg     = s:comment_fg
 let s:vim_comment_title_attr   = s:comment_attr
 let s:fold_fg                  = s:grey
-"let s:fold_attr                = { "gui": "italic", "cterm": "italic" }
+"let s:fold_attr                = s:italic
 let s:fold_attr                = s:none
 let s:linenr                   = s:near_white
 "let s:string                   = s:dark_grey
@@ -315,15 +326,12 @@ let s:type_attr                = s:statement_attr
 let s:html_fg                  = s:dim_grey
 let s:html_h1_fg               = s:bold_fg
 let s:html_h1_attr             = s:bold
-let s:html_link_attr           = { "gui": "underline", "cterm": "underline" }
+let s:html_link_attr           = s:underline
 let s:html_bold_fg             = s:bold_fg
 let s:html_bold_attr           = s:bold
-let s:html_italic_attr         = { "gui": "italic", "cterm": "italic" }
-if g:jmin_no_italic
-    let s:html_italic_attr     = s:none
-endif
+let s:html_italic_attr         = s:italic
 
-let s:help_hypertext_jump_attr = { "gui": "underline", "cterm": "underline" }
+let s:help_hypertext_jump_attr = s:underline
 
 " Dividers
 
@@ -352,77 +360,80 @@ let s:incsearch_attr = { "gui": "reverse", "cterm": "reverse" }
 
 " Misc
 
-let s:cursorline_fg    = s:none
-let s:cursorline_bg    = s:extreme_near_white
-let s:cursorline_attr  = s:none
-let s:cursorim_fg      = s:black
-let s:cursorim_bg      = s:color14
-let s:cursorim_attr    = s:none
-let s:colorcolumn_fg   = s:cursorline_fg
-let s:colorcolumn_bg   = s:more_extreme_near_white
-let s:colorcolumn_attr = s:cursorline_attr
-let s:error_fg         = s:black
-let s:error_bg         = s:bright_red
-let s:error_attr       = s:none
-let s:errormsg_fg      = s:bright_red
-let s:errormsg_bg      = s:none
-let s:errormsg_attr    = s:none
-"let s:matchparen_fg    = s:black
-"let s:matchparen_bg    = s:paler_sky_blue
-"let s:matchparen_attr  = s:none
-"let s:matchparen_fg    = s:norm_fg
-let s:matchparen_fg    = s:bold_fg
-let s:matchparen_bg    = s:norm_bg
-let s:matchparen_attr  = s:bold
-"let s:directory        = s:deep_sky_blue
-let s:directory        = s:norm_fg
-let s:symlink          = s:norm_fg
-let s:nontext_fg       = s:near_white
-let s:nontext_bg       = s:none
-let s:signcolumn       = s:grey
-"let s:modemsg          = s:dark_sky_blue
-let s:modemsg          = s:norm_fg
-"let s:modemsg_attr     = s:bold
+let s:cursorline_fg      = s:none
+let s:cursorline_bg      = s:extreme_near_white
+let s:cursorline_attr    = s:none
+let s:cursorim_fg        = s:black
+let s:cursorim_bg        = s:color14
+let s:cursorim_attr      = s:none
+let s:colorcolumn_fg     = s:cursorline_fg
+let s:colorcolumn_bg     = s:more_extreme_near_white
+let s:colorcolumn_attr   = s:cursorline_attr
+let s:error_fg           = s:black
+let s:error_bg           = s:bright_red
+let s:error_attr         = s:none
+let s:errormsg_fg        = s:bright_red
+let s:errormsg_bg        = s:none
+let s:errormsg_attr      = s:none
+"let s:matchparen_fg      = s:black
+"let s:matchparen_bg      = s:paler_sky_blue
+"let s:matchparen_attr    = s:none
+"let s:matchparen_fg      = s:norm_fg
+let s:matchparen_fg      = s:bold_fg
+let s:matchparen_bg      = s:norm_bg
+let s:matchparen_attr    = s:bold
+"let s:directory          = s:deep_sky_blue
+let s:directory          = s:norm_fg
+let s:symlink            = s:norm_fg
+let s:nontext_fg         = s:near_white
+let s:nontext_bg         = s:none
+let s:signcolumn         = s:grey
+"let s:modemsg            = s:dark_sky_blue
+let s:modemsg            = s:norm_fg
+"let s:modemsg_attr       = s:bold
 " Some syntax groups could be linked to this (try some .cmake files for
 " examples), so I keep it completely unhighlighted.
-let s:modemsg_attr     = s:none
-"let s:moremsg          = s:dark_sky_blue
-"let s:moremsg          = s:norm_fg
-let s:moremsg          = s:bold_fg
-let s:moremsg_attr     = s:bold
-let s:question         = s:dark_sky_blue
-let s:warningmsg_fg    = s:bright_orange
-let s:warningmsg_bg    = s:none
-let s:warningmsg_attr  = s:none
-let s:visual_fg        = s:norm_fg
-let s:visual_bg        = s:norm_bg
-let s:visual_attr      = { "gui": "reverse", "cterm": "reverse" }
-let s:visualnos_fg     = s:visual_fg
-let s:visualnos_bg     = s:visual_bg
-let s:visualnos_attr   = { "gui": "reverse,underline", "cterm": "reverse,underline" }
+let s:modemsg_attr       = s:none
+"let s:moremsg            = s:dark_sky_blue
+"let s:moremsg            = s:norm_fg
+let s:moremsg            = s:bold_fg
+let s:moremsg_attr       = s:bold
+let s:question           = s:dark_sky_blue
+let s:warningmsg_fg      = s:bright_orange
+let s:warningmsg_bg      = s:none
+let s:warningmsg_attr    = s:none
+let s:visual_fg          = s:norm_fg
+let s:visual_bg          = s:norm_bg
+let s:visual_attr        = { "gui": "reverse", "cterm": "reverse" }
+let s:visualnos_fg       = s:visual_fg
+let s:visualnos_bg       = s:visual_bg
+let s:visualnos_attr     = { "gui": "reverse,underline", "cterm": "reverse,underline" }
+if g:jmin_no_underline
+    let s:visualnos_attr = { "gui": "reverse", "cterm": "reverse" }
+endif
 " Unprintable characters: text displayed differently from what it really is.
 " But not 'listchars' whitespace.
-let s:specialkey       = s:lighter_grey
-let s:tabline_fg       = s:statusline_nc_fg
-let s:tabline_bg       = s:statusline_nc_bg
-let s:tabline_attr     = s:statusline_nc_attr
-let s:tablinesel_fg    = s:none
-"let s:tablinesel_fg    = s:bold_fg
-let s:tablinesel_bg    = s:none
-"let s:tablinesel_attr   = s:bold
-let s:tablinesel_attr  = s:none
-let s:tablinefill      = s:lighter_grey
-let s:underlined_attr  = { "gui": "underline", "cterm": "underline" }
+let s:specialkey         = s:lighter_grey
+let s:tabline_fg         = s:statusline_nc_fg
+let s:tabline_bg         = s:statusline_nc_bg
+let s:tabline_attr       = s:statusline_nc_attr
+let s:tablinesel_fg      = s:none
+"let s:tablinesel_fg      = s:bold_fg
+let s:tablinesel_bg      = s:none
+"let s:tablinesel_attr     = s:bold
+let s:tablinesel_attr    = s:none
+let s:tablinefill        = s:lighter_grey
+let s:underlined_attr    = s:underline
 " Only NeoVim Diagnostics has these message types
-let s:infomsg_fg       = s:dark_cyan
-let s:infomsg_bg       = s:none
-let s:infomsg_attr     = s:none
-let s:hintmsg_fg       = s:sky_blue
-let s:hintmsg_bg       = s:none
-let s:hintmsg_attr     = s:none
-let s:okmsg_fg         = s:light_green
-let s:okmsg_bg         = s:none
-let s:okmsg_attr       = s:none
+let s:infomsg_fg         = s:dark_cyan
+let s:infomsg_bg         = s:none
+let s:infomsg_attr       = s:none
+let s:hintmsg_fg         = s:sky_blue
+let s:hintmsg_bg         = s:none
+let s:hintmsg_attr       = s:none
+let s:okmsg_fg           = s:light_green
+let s:okmsg_bg           = s:none
+let s:okmsg_attr         = s:none
 
 " Diagnostics
 
@@ -450,32 +461,32 @@ let s:diagnosticok_attr    = s:okmsg_attr
 " anything that cannot do undercurls is an older terminal.
 "
 " The foreground colours will apply to the text and the underline.
-let s:diagnosticunderlineerror_fg   = s:errormsg_fg
-let s:diagnosticunderlineerror_bg   = s:errormsg_bg
+let s:diagnosticunderlineerror_fg    = s:errormsg_fg
+let s:diagnosticunderlineerror_bg    = s:errormsg_bg
 let s:diagnosticunderlineerror_guisp = s:errormsg_fg
-let s:diagnosticunderlineerror_attr = { "gui": "underline", "cterm": "underline" }
-let s:diagnosticunderlinewarn_fg    = s:warningmsg_fg
-let s:diagnosticunderlinewarn_bg    = s:warningmsg_bg
-let s:diagnosticunderlinewarn_guisp = s:warningmsg_fg
-let s:diagnosticunderlinewarn_attr  = { "gui": "underline", "cterm": "underline" }
-let s:diagnosticunderlineinfo_fg    = s:infomsg_fg
-let s:diagnosticunderlineinfo_bg    = s:infomsg_bg
-let s:diagnosticunderlineinfo_guisp = s:infomsg_fg
-let s:diagnosticunderlineinfo_attr  = { "gui": "underline", "cterm": "underline" }
-let s:diagnosticunderlinehint_fg    = s:hintmsg_fg
-let s:diagnosticunderlinehint_bg    = s:hintmsg_bg
-let s:diagnosticunderlinehint_guisp = s:hintmsg_fg
-let s:diagnosticunderlinehint_attr  = { "gui": "underline", "cterm": "underline" }
-let s:diagnosticunderlineok_fg      = s:okmsg_fg
-let s:diagnosticunderlineok_bg      = s:okmsg_bg
-let s:diagnosticunderlineok_guisp   = s:okmsg_fg
-let s:diagnosticunderlineok_attr    = { "gui": "underline", "cterm": "underline" }
+let s:diagnosticunderlineerror_attr  = s:underline
+let s:diagnosticunderlinewarn_fg     = s:warningmsg_fg
+let s:diagnosticunderlinewarn_bg     = s:warningmsg_bg
+let s:diagnosticunderlinewarn_guisp  = s:warningmsg_fg
+let s:diagnosticunderlinewarn_attr   = s:underline
+let s:diagnosticunderlineinfo_fg     = s:infomsg_fg
+let s:diagnosticunderlineinfo_bg     = s:infomsg_bg
+let s:diagnosticunderlineinfo_guisp  = s:infomsg_fg
+let s:diagnosticunderlineinfo_attr   = s:underline
+let s:diagnosticunderlinehint_fg     = s:hintmsg_fg
+let s:diagnosticunderlinehint_bg     = s:hintmsg_bg
+let s:diagnosticunderlinehint_guisp  = s:hintmsg_fg
+let s:diagnosticunderlinehint_attr   = s:underline
+let s:diagnosticunderlineok_fg       = s:okmsg_fg
+let s:diagnosticunderlineok_bg       = s:okmsg_bg
+let s:diagnosticunderlineok_guisp    = s:okmsg_fg
+let s:diagnosticunderlineok_attr     = s:underline
 " We assume a terminal with termguicolors (full, 16 million colour support) is
 " as good as GVim and can do separate underline colours and undercurls. In
 " full colour terminals that cannot do these things Vim and NeoVim should
 " safely degrade to underlines. There will be no special colour, but there is
 " no direct way to test for support of these features.
-if (has('termguicolors') && &termguicolors) || has('gui_running')
+if (has('termguicolors') && &termguicolors || has('gui_running')) && ! g:jmin_no_underline
     " Set text colours to empty dictionaries so that the underlying text
     " colour remains.
     " Set all styles to undercurl
@@ -525,7 +536,7 @@ let s:qffilename    = s:fold_fg
 let s:qfseparator   = s:norm_fg
 let s:qflinenr      = s:linenr
 "let s:qflinenr      = s:comment_fg
-"let s:qflinenr_attr = { "gui": "italic", "cterm": "bold" }
+"let s:qflinenr_attr = s:italic
 let s:qflinenr_attr = s:none
 "let s:qflinenr_attr = s:comment_attr
 let s:qfline_fg     = s:cursorline_fg
@@ -608,16 +619,16 @@ let s:gitgutterchangedelete_fg = s:gitgutterchange_fg
 " The foreground colours will apply to the text and the underline.
 let s:spellbad_fg      = s:bright_red
 let s:spellbad_bg      = s:none
-let s:spellbad_attr    = { "gui": "underline", "cterm": "underline" }
+let s:spellbad_attr    = s:underline
 let s:spellcap_fg      = s:sky_blue
 let s:spellcap_bg      = s:none
-let s:spellcap_attr    = { "gui": "underline", "cterm": "underline" }
+let s:spellcap_attr    = s:underline
 let s:spelllocal_fg    = s:cyan
 let s:spelllocal_bg    = s:none
-let s:spelllocal_attr  = { "gui": "underline", "cterm": "underline" }
+let s:spelllocal_attr  = s:underline
 let s:spellrare_fg     = s:color13
 let s:spellrare_bg     = s:none
-let s:spellrare_attr   = { "gui": "underline", "cterm": "underline" }
+let s:spellrare_attr   = s:underline
 
 " These will be colours for undercurls
 let s:spellbad_guisp   = s:spellbad_fg
@@ -630,7 +641,7 @@ let s:spellrare_guisp  = s:spellrare_fg
 " full colour terminals that cannot do these things Vim and NeoVim should
 " safely degrade to underlines. There will be no special colour, but there is
 " no direct way to test for support of these features.
-if (has('termguicolors') && &termguicolors) || has('gui_running')
+if (has('termguicolors') && &termguicolors || has('gui_running')) && ! g:jmin_no_underline
     " Set gui and cterm foreground colours to NONE. This tells Vim / NeoVim to
     " not change those attributes for spelling error text. It will leave the
     " underlying foreground colours intact.
@@ -739,6 +750,9 @@ if g:jmin_2color
     let s:visualnos_fg       = s:visual_fg
     let s:visualnos_bg       = s:visual_bg
     let s:visualnos_attr     = { "gui": "reverse,underline", "cterm": "reverse,underline" }
+    if g:jmin_no_underline
+        let s:visualnos_attr = { "gui": "reverse", "cterm": "reverse" }
+    endif
     let s:specialkey         = s:norm_fg
     let s:tabline_fg         = s:norm_fg
     let s:tabline_bg         = s:norm_bg
@@ -782,32 +796,32 @@ if g:jmin_2color
     " add underlines below to match the GUI style.
     "
     " The foreground colours will apply to the text and the underline.
-    let s:diagnosticunderlineerror_fg   = s:errormsg_fg
-    let s:diagnosticunderlineerror_bg   = s:errormsg_bg
+    let s:diagnosticunderlineerror_fg    = s:errormsg_fg
+    let s:diagnosticunderlineerror_bg    = s:errormsg_bg
     let s:diagnosticunderlineerror_guisp = s:errormsg_fg
-    let s:diagnosticunderlineerror_attr = { "gui": "underline", "cterm": "underline" }
-    let s:diagnosticunderlinewarn_fg    = s:warningmsg_fg
-    let s:diagnosticunderlinewarn_bg    = s:warningmsg_bg
-    let s:diagnosticunderlinewarn_guisp = s:warningmsg_fg
-    let s:diagnosticunderlinewarn_attr  = { "gui": "underline", "cterm": "underline" }
-    let s:diagnosticunderlineinfo_fg    = s:infomsg_fg
-    let s:diagnosticunderlineinfo_bg    = s:infomsg_bg
-    let s:diagnosticunderlineinfo_guisp = s:infomsg_fg
-    let s:diagnosticunderlineinfo_attr  = { "gui": "underline", "cterm": "underline" }
-    let s:diagnosticunderlinehint_fg    = s:hintmsg_fg
-    let s:diagnosticunderlinehint_bg    = s:hintmsg_bg
-    let s:diagnosticunderlinehint_guisp = s:hintmsg_fg
-    let s:diagnosticunderlinehint_attr  = { "gui": "underline", "cterm": "underline" }
-    let s:diagnosticunderlineok_fg      = s:okmsg_fg
-    let s:diagnosticunderlineok_bg      = s:okmsg_bg
-    let s:diagnosticunderlineok_guisp   = s:okmsg_fg
-    let s:diagnosticunderlineok_attr    = { "gui": "underline", "cterm": "underline" }
+    let s:diagnosticunderlineerror_attr  = s:underline
+    let s:diagnosticunderlinewarn_fg     = s:warningmsg_fg
+    let s:diagnosticunderlinewarn_bg     = s:warningmsg_bg
+    let s:diagnosticunderlinewarn_guisp  = s:warningmsg_fg
+    let s:diagnosticunderlinewarn_attr   = s:underline
+    let s:diagnosticunderlineinfo_fg     = s:infomsg_fg
+    let s:diagnosticunderlineinfo_bg     = s:infomsg_bg
+    let s:diagnosticunderlineinfo_guisp  = s:infomsg_fg
+    let s:diagnosticunderlineinfo_attr   = s:underline
+    let s:diagnosticunderlinehint_fg     = s:hintmsg_fg
+    let s:diagnosticunderlinehint_bg     = s:hintmsg_bg
+    let s:diagnosticunderlinehint_guisp  = s:hintmsg_fg
+    let s:diagnosticunderlinehint_attr   = s:underline
+    let s:diagnosticunderlineok_fg       = s:okmsg_fg
+    let s:diagnosticunderlineok_bg       = s:okmsg_bg
+    let s:diagnosticunderlineok_guisp    = s:okmsg_fg
+    let s:diagnosticunderlineok_attr     = s:underline
     " We assume a terminal with termguicolors (full, 16 million colour support) is
     " as good as GVim and can do separate underline colours and undercurls. In
     " full colour terminals that cannot do these things Vim and NeoVim should
     " safely degrade to underlines. There will be no special colour, but there is
     " no direct way to test for support of these features.
-    if (has('termguicolors') && &termguicolors) || has('gui_running')
+    if (has('termguicolors') && &termguicolors || has('gui_running')) && ! g:jmin_no_underline
         " Set text to normal colours
         " Set all styles to undercurl
         let s:diagnosticunderlineerror_fg   = s:norm_fg
@@ -880,16 +894,10 @@ if g:jmin_2color
     let s:gitdiff_attr       = s:none
     let s:diffadded_fg       = s:none
     let s:diffadded_bg       = s:none
-    let s:diffadded_attr     = { "gui": "italic", "cterm": "NONE" }
-    if g:jmin_no_italic
-        let s:diffadded_attr = s:none
-    endif
+    let s:diffadded_attr     = s:gui_italic
     let s:diffremoved_fg     = s:none
     let s:diffremoved_bg     = s:none
-    let s:diffremoved_attr   = { "gui": "italic", "cterm": "NONE" }
-    if g:jmin_no_italic
-        let s:diffremoved_attr = s:none
-    endif
+    let s:diffremoved_attr   = s:gui_italic
 
     let s:gitkeyword_fg   = s:none
     let s:gitkeyword_bg   = s:none
@@ -908,23 +916,23 @@ if g:jmin_2color
 
     let s:spellbad_fg              = s:none
     let s:spellbad_bg              = s:none
-    let s:spellbad_attr            = { "gui": "underline", "cterm": "underline" }
+    let s:spellbad_attr            = s:underline
     let s:spellcap_fg              = s:none
     let s:spellcap_bg              = s:none
-    let s:spellcap_attr            = { "gui": "underline", "cterm": "underline" }
+    let s:spellcap_attr            = s:underline
     let s:spelllocal_fg            = s:none
     let s:spelllocal_bg            = s:none
-    let s:spelllocal_attr          = { "gui": "underline", "cterm": "underline" }
+    let s:spelllocal_attr          = s:underline
     let s:spellrare_fg             = s:none
     let s:spellrare_bg             = s:none
-    let s:spellrare_attr           = { "gui": "underline", "cterm": "underline" }
+    let s:spellrare_attr           = s:underline
 
     let s:spellbad_guisp           = s:norm_fg
     let s:spellcap_guisp           = s:norm_fg
     let s:spelllocal_guisp         = s:norm_fg
     let s:spellrare_guisp          = s:norm_fg
 
-    if (has('termguicolors') && &termguicolors) || has('gui_running')
+    if (has('termguicolors') && &termguicolors || has('gui_running')) && ! g:jmin_no_underline
         " Set all styles to undercurl
         let s:spellbad_attr    = { "gui": "undercurl", "cterm": "undercurl" }
         let s:spellcap_attr    = { "gui": "undercurl", "cterm": "undercurl" }
@@ -999,7 +1007,7 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     let s:vim_comment_title_fg     = s:comment_fg
     let s:vim_comment_title_attr   = s:comment_attr
     let s:fold_fg                  = s:color8
-    "let s:fold_attr                = { "gui": "italic", "cterm": "italic" }
+    "let s:fold_attr                = s:italic
     let s:fold_attr                = s:none
     let s:linenr                   = s:color8
     let s:string                   = s:color4
