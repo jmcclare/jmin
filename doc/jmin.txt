@@ -1,59 +1,83 @@
-*jmin.txt*	A set of minimal Vim / Neovim colour schemes.
+*jmin.txt*	A set of minimal Vim / Neovim color schemes.
 
-J‐min colorschemes					*jmin*
+J‐Min Color Schemes							*jmin*
 
-J-min colorschemes come in dark and light varieties. The default settings only
-highlight comments and strings (and some text formatting for HTML / Markdown).
+		In NeoVim, type |gO| anywhere to see the table of contents.
 
-There is also an even simpler 2‐colour only version.
+==============================================================================
+Table of Contents					*jmin-table-of-contents*
 
-It includes the following colour schemes:
+1. Introduction						|jmin-introduction|
+2. Configuration					|jmin-config|
+3. Setting Custom Colors				|jmin-custom-colors|
+4. Key Mappings						|jmin-keys|
 
-* `jmin-black`
-* `jmin-dark`
-* `jmin-light`
-* `jmin-white`
-* `jmin-2color` — Uses foreground and background colours only
-* `jmin-simple` — Same as above, but only sets basic syntax colours
 
-All of these work in full colour, 256 colour, 16 colour and 2 colour
+==============================================================================
+1. Introduction						*jmin-introduction*
+
+J-min color schemes come in dark and light varieties. The default settings
+only highlight comments and strings (and some text formatting for HTML /
+Markdown).
+
+There is also an even simpler 2‐color only version.
+
+It includes the following color schemes:
+
+* *jmin-black*
+* *jmin-dark*
+* *jmin-light*
+* *jmin-white*
+* *jmin-2color* — Uses foreground and background colors only
+* *jmin-simple* — Same as jmin-2color, but only sets basic syntax colors
+
+Enable the color schemes like this:
+>vim
+    colorscheme jmin-dark " or jmin-black, jmin-light, etc.
+<
+Or, in NeoVim Lua:
+>lua
+    vim.cmd.colorscheme("jmin-dark")
+<
+
+All of these work in full color, 256 color, 16 color and 2 color
 terminals.
 
-This colorscheme uses undercurls in all but 16 and 2 colour terminals. To
+This color scheme uses undercurls in all but 16 and 2 color terminals. To
 ensure undercurl support in [Tmux](https://github.com/tmux/tmux) add the
 following to your Tmux config:
->
+>tmux
     # Undercurl and underscore support
     set -g default-terminal "${TERM}"
     set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'  # undercurl support
-    set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'  # underscore colours - needs tmux-3.0
+    set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'  # underscore colors - needs tmux-3.0
 <
 
-=============================================================================
-1. Configuration					*jmin-config*
+==============================================================================
+2. Configuration						*jmin-config*
 
 If you want to change these variables from the defaults you must do it before
-enabling the colorscheme.
+enabling the color scheme.
 
 There are also global variables to set the key mappings below in the key
 mappings section (|jmin-keys|).
 
 For example:
->
+>vim
 	let g:jmin_hlcomments = 0
-	colo jmin-light
+	colorscheme jmin-light
 <
 In Lua:
->
+>lua
 	vim.g.jmin_hlcomments = 0
 	vim.cmd.colorscheme("jmin-light")
 <
-Some of these settings do not apply to the `jmin-2color` colorscheme. None of
+Some of these settings do not apply to the `jmin-2color` color scheme. None of
 them apply to `jmin-simple`.
 							*g:jmin_contrast*
 `g:jmin_contrast`	string	(default "normal")
 			global
-	Changes the normal text colour to have more or less contrast with the
+	Changes the normal text color to have more or less contrast with the
 	background.
 
 	Valid values are:
@@ -82,10 +106,14 @@ them apply to `jmin-simple`.
 	Highlight built in language keywords and syntax—The `Statement`,
 	`PreProc` and `Type` highlight groups.
 
+	Works in `jmin-2color` color scheme.
+
 							*g:jmin_extrafmt*
 `g:jmin_extrafmt`	boolean	(default 1)
 			global
 	Extra Formatting; headings, bold and em in HTML and Markdown.
+
+	Works in `jmin-2color` color scheme.
 
 							*g:jmin_hlfolds*
 `g:jmin_hlfolds`	boolean	(default 1)
@@ -112,6 +140,8 @@ them apply to `jmin-simple`.
 	`g:jmin_colorize_bold` option will still colorize bold elements even
 	if this is set to 1.
 
+	Works in `jmin-2color` color scheme.
+
 							*g:jmin_no_italic*
 `g:jmin_no_italic`	boolean (default 0)
 	Force no italic.
@@ -121,25 +151,31 @@ them apply to `jmin-simple`.
 	disabled those highlight options will still work, but they will not
 	use italics.
 
+	Works in `jmin-2color` color scheme.
+
 							*g:jmin_no_underline*
 `g:jmin_no_underline`	boolean (default 0)
 	Force no underlined or undercurled text.
 
 	Underlines are used by some of the other formatting options and for
 	spelling and by NeoVim diagnostics. This either replaces them with
-	text colours, or simply removes them.
+	text colors, or simply removes them.
+
+	Works in `jmin-2color` color scheme.
 
 							*g:jmin_16*
 `g:jmin_16`	boolean	(default 0)
 			global
-	Use 16 colour mode.
+	Use 16 color mode.
 
-	This makes it behave like a classic 16 colour terminal and disables
-	non supported features like extended colours and underlines. Note that
+	This makes it behave like a classic 16 color terminal and disables
+	non supported features like extended colors and underlines. Note that
 	you can still enable some of that special formatting with options like
-	extra formatting. Technically, bold works in a 16 colour terminals (it
-	uses a brighter text colour), but only the extra styles will enable
+	extra formatting. Technically, bold works in a 16 color terminals (it
+	uses a brighter text color), but only the extra styles will enable
 	it.
+
+	Works in `jmin-2color` color scheme.
 
 							*g:jmin_hlhtml*
 `g:jmin_hlhtml`	boolean	(default 1)
@@ -155,72 +191,244 @@ them apply to `jmin-simple`.
 							*g:jmin_2color*
 `g:jmin_2color`	boolean	(default 0)
 			global
-	2 colours only. Highlighting is done entirely with swapping foreground
+	2 colors only. Highlighting is done entirely with swapping foreground
 	and background and a bit of underline, bold, and italics. Items marked
 	for highlighting with other options will still be highlighted. This
-	can be combined with 16 colour mode.
+	can be combined with 16 color mode.
+
+							*g:jmin_fg*
+`g:jmin_fg`	dict	(default unset)
+			global
+	Set this to override the foreground color.
+	
+	Ex: >vim
+	    let g:jmin_fg      = { "gui": "#00af00", "cterm": "34" }
+<
+	See |jmin-custom-colors| for more.
+
+							*g:jmin_bg*
+`g:jmin_bg`	dict	(default unset)
+			global
+	Set this to override the background color.
+	
+	Ex: >vim
+	    let g:jmin_bg      = { "gui": "#000000", "cterm": "0"  }
+<
+	See |jmin-custom-colors| for more.
+
+							*g:jmin_comment*
+`g:jmin_comment`	dict	(default unset)
+			global
+	Set this to override the comment color. This only has an effect if
+	comment highlighting is enabled. See `g:jmin_hlcomments`.
+	
+	Ex: >vim
+	    let g:jmin_comment = { "gui": "#005f00", "cterm": "22" }
+<
+	See |jmin-custom-colors| for more.
+
+							*g:jmin_string*
+`g:jmin_string`	dict	(default unset)
+			global
+	Set this to override the string color. This only has an effect if
+	string highlighting is enabled. See `g:jmin_hlstrs`.
+	
+	Ex: >vim
+	    let g:jmin_string  = { "gui": "#00ff5f", "cterm": "47" }
+<
+	See |jmin-custom-colors| for more.
+
+							*g:jmin_bold*
+`g:jmin_bold`	dict	(default unset)
+			global
+	Set this to override the bold color. This only has an effect if
+	bold text colorization is enabled. See `g:jmin_colorize_bold`.
+	
+	Ex: >vim
+	    let g:jmin_bold    = { "gui": "#00ff00", "cterm": "46" }
+<
+	See |jmin-custom-colors| for more.
 
 
-=============================================================================
-1. Key Mappings						*jmin-keys*
+==============================================================================
+3. Setting Custom Colors				*jmin-custom-colors*
 
-The colorschemes set some keyboard shortcuts for toggling the settings.
+You can set any of the following global variables to override the main colors
+of the schemes. You set these variables before loading the color scheme.
 
-					*g:jmin_toggle_comments_shortcut*
-<leader>jmc
+* `g:jmin_fg`
+* `g:jmin_bg`
+* `g:jmin_comment`
+* `g:jmin_string`
+* `g:jmin_bold`
+
+You can override colors in the following color schemes:
+
+* `jmin-black`
+* `jmin-dark`
+* `jmin-light`
+* `jmin-white`
+
+`jmin-2color` uses your terminal’s foreground and background colors. You can
+change those if you want.
+
+Here are some examples of setting custom colors.
+>vim
+    " sky blue text on white
+    let g:jmin_fg = { "gui": "#00AFFF", "cterm": "39" }
+    let g:jmin_bg = { "gui": "#FFFFFF", "cterm": "15" }
+    colorscheme jmin-white
+ 
+    " The Matrix
+    let g:jmin_fg      = { "gui": "#00af00", "cterm": "34" }
+    let g:jmin_bg      = { "gui": "#000000", "cterm": "0"  }
+    let g:jmin_comment = { "gui": "#005f00", "cterm": "22" }
+    let g:jmin_string  = { "gui": "#00ff5f", "cterm": "47" }
+    let g:jmin_bold    = { "gui": "#00ff00", "cterm": "46" }
+    colorscheme jmin-black
+<
+The `cterm` 256 color pallet values will be ignored in GVim, or a full
+color terminal with `:set termguicolors`, but the `cterm` parameter must be
+set. You can simply set `0` (black) for dark colors and `15` (white) for
+light colors.
+
+If you are setting dark custom colors, use one of the dark color schemes,
+and vice versa. That way the other user interface colors will match.
+
+In NeoVim Lua you can set these global dictionary variables like this:
+>lua
+    vim.g.jmin_fg = { gui = "#00AFFF", cterm = "39" }
+    vim.g.jmin_bg = { gui = "#FFFFFF", cterm = "15" }
+<
+Or like this:
+>lua
+    vim.cmd [[
+	let g:jmin_fg = { "gui": "#00AFFF", "cterm": "39" }
+	let g:jmin_bg = { "gui": "#FFFFFF", "cterm": "15" }
+    ]]
+<
+You can use these config options to create a new color scheme based on any of
+the J‐Min color schemes. Here is how you could create a Matrix color scheme.
+
+Put the following in your Vim / NeoVim config directory at
+`colors/thematrix.vim`.
+>vim
+    "
+    " This uses the J‐Min color schemes’ global settings to create a new color
+    " scheme based on jmin-black.
+    "
+
+    " Set Matrix colors
+    let g:jmin_fg      = { "gui": "#00af00", "cterm": "34" }
+    let g:jmin_bg      = { "gui": "#000000", "cterm": "0"  }
+    let g:jmin_comment = { "gui": "#005f00", "cterm": "22" }
+    let g:jmin_string  = { "gui": "#00ff5f", "cterm": "47" }
+    let g:jmin_bold    = { "gui": "#00ff00", "cterm": "46" }
+
+    runtime! colors/jmin-black.vim
+    let g:colors_name = "thematrix"
+
+    unlet g:jmin_fg
+    unlet g:jmin_bg
+    unlet g:jmin_comment
+    unlet g:jmin_string
+    unlet g:jmin_bold
+<
+
+==============================================================================
+4. Key Mappings							*jmin-keys*
+
+The color schemes set some keyboard shortcuts for toggling the settings.
+
+				*jmin_<Leader>jmc* *g:jmin_toggle_comments_shortcut*
+<Leader>jmc
 	Toggle comment highlighting.
+
 	Change shortcut by setting `g:jmin_toggle_comments_shortcut`
+	Change setting permanently by setting `g:jmin_hlcomments`
 
-					*g:jmin_toggle_strings_shortcut*
-<leader>jms
+				*jmin_<Leader>jms* *g:jmin_toggle_strings_shortcut*
+<Leader>jms
 	Toggle string highlighting.
+
 	Change shortcut by setting `g:jmin_toggle_strings_shortcut`
+	Change setting permanently by setting `g:jmin_hlstrs`
 
-					*g:jmin_toggle_numbers_shortcut*
-<leader>jmn
+				*jmin_<Leader>jmn* *g:jmin_toggle_numbers_shortcut*
+<Leader>jmn
 	Toggle numeric values highlighting.
+
 	Change shortcut by setting `g:jmin_toggle_numbers_shortcut`
+	Change setting permanently by setting `g:jmin_hlnum`
 
-					*g:jmin_toggle_keywords_shortcut*
-<leader>jmk
+				*jmin_<Leader>jmk* *g:jmin_toggle_keywords_shortcut*
+<Leader>jmk
 	Toggle built in language keywords highlighting.
+
 	Change shortcut by setting `g:jmin_toggle_keywords_shortcut`
+	Change setting permanently by setting `g:jmin_hlkeyword`
 
-					*g:jmin_toggle_extrafmt_shortcut*
-<leader>jme
+	Works in `jmin-2color` color scheme.
+
+				*jmin_<Leader>jme* *g:jmin_toggle_extrafmt_shortcut*
+<Leader>jme
 	Toggle built in extra formatting.
+
 	Change shortcut by setting `g:jmin_toggle_extrafmt_shortcut`
+	Change setting permanently by setting `g:jmin_extrafmt`
 
-					*g:jmin_toggle_folds_shortcut*
-<leader>jmf
+	Works in `jmin-2color` color scheme.
+
+				*jmin_<Leader>jmf* *g:jmin_toggle_folds_shortcut*
+<Leader>jmf
 	Toggle fold marker highlighting.
+
 	Change shortcut by setting `g:jmin_toggle_folds_shortcut`
+	Change setting permanently by setting `g:jmin_hlfolds`
 
-					*g:jmin_toggle_line_numbers_shortcut*
-<leader>jml
+			*jmin_<Leader>jml* *g:jmin_toggle_line_numbers_shortcut*
+<Leader>jml
 	Toggle line numbers highlighting.
+
 	Change shortcut by setting `g:jmin_toggle_line_numbers_shortcut`
+	Change setting permanently by setting `g:jmin_hllinenumbers`
 
-					*g:jmin_toggle_html_shortcut*
-<leader>jmh
+				*jmin_<Leader>jmh* *g:jmin_toggle_html_shortcut*
+<Leader>jmh
 	Toggle HTML highlighting.
+
 	Change shortcut by setting `g:jmin_toggle_html_shortcut`
+	Change setting permanently by setting `g:jmin_hlhtml`
 
-					*g:jmin_toggle_quickfix_shortcut*
-<leader>jmq
+				*jmin_<Leader>jmq* *g:jmin_toggle_quickfix_shortcut*
+<Leader>jmq
 	Toggle quickfix window highlighting.
+
 	Change shortcut by setting `g:jmin_toggle_quickfix_shortcut`
+	Change setting permanently by setting `g:jmin_hlquickfix`
 
-				*g:jmin_toggle_16color_terminal_shortcut*
-<leader>jmt
-	Toggle 16 color terminal mode. This can be combined with 2 color mode.
+			*jmin_<Leader>jmt* *g:jmin_toggle_16color_terminal_shortcut*
+<Leader>jmt
+	Toggle 16 color terminal mode. The ‘t’ stands for “terminal”. This can
+	be combined with 2 color mode.
+
 	Change shortcut by setting `g:jmin_toggle_16color_terminal_shortcut`
+	Change setting permanently by setting `g:jmin_16`
 
-					*g:jmin_toggle_2color_shortcut*
-<leader>jm2
+	Works in `jmin-2color` color scheme.
+
+				*jmin_<Leader>jm2* *g:jmin_toggle_2color_shortcut*
+<Leader>jm2
 	Toggle 2 color terminal mode. This can be combined with 16 color
 	terminal mode.
+
+	Unlike the `jmin-2color` color scheme this uses the current color
+	scheme’s foreground and background colors, not the terminal’s. This
+	will still colorize highlight groups like comments and strings if
+	their options are activated.
+
 	Change shortcut by setting `g:jmin_toggle_2color_shortcut`
+	Change setting permanently by setting `g:jmin_2color`
 
 
 vim:tw=78:ts=8:expandtab:noet:ft=help:norl:

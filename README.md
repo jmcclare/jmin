@@ -1,22 +1,22 @@
-# jmin Vim / Neovim Colour schemes #
+# jmin Vim / Neovim Color schemes #
 
-J-Min: A set of minimal Vim / Neovim colour schemes.
+J-Min: A set of minimal Vim / Neovim color schemes.
 
-J-Min colorschemes come in dark and light varieties. The default settings only
+J-Min color schemes come in dark and light varieties. The default settings only
 highlight comments and strings (and some text formatting for HTML / Markdown).
 
-There is also an even simpler 2‐colour only version.
+There is also an even simpler 2‐color only version.
 
-It includes the following colour schemes:
+It includes the following color schemes:
 
 * `jmin-black`
 * `jmin-dark`
 * `jmin-light`
 * `jmin-white`
-* `jmin-2color` — Uses foreground and background colours only
-* `jmin-simple` — Same as above, but only sets basic syntax colours
+* `jmin-2color` — Uses foreground and background colors only
+* `jmin-simple` — Same as jmin-2color, but only sets basic syntax colors
 
-All of these work in full colour, 256 colour, 16 colour and 2 colour terminals.
+All of these work in full color, 256 color, 16 color and 2 color terminals.
 
 
 ## Installation ##
@@ -61,14 +61,16 @@ Pathogen:
 
     git clone https://github.com/jmcclare/jmin.git ~/.vim/bundle/jmin
 
-This colorscheme uses undercurls in all but 16 and 2 colour terminals. To
+This color scheme uses undercurls in all but 16 and 2 color terminals. To
 ensure undercurl support in [Tmux](https://github.com/tmux/tmux) add the
 following to your Tmux config:
 
-    # Undercurl and underscore support
-    set -g default-terminal "${TERM}"
-    set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'  # undercurl support
-    set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'  # underscore colours - needs tmux-3.0
+```tmux
+# Undercurl and underscore support
+set -g default-terminal "${TERM}"
+set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'  # undercurl support
+set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'  # underscore colors - needs tmux-3.0
+```
 
 
 ## Configuration / Use ##
