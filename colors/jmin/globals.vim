@@ -121,9 +121,12 @@ endif
 "   let g:jmin_fg = { "gui": "#00AFFF", "cterm": "39" }
 "   let g:jmin_bg = { "gui": "#FFFFFF", "cterm": "15" }
 "
-"   " classic dark green screen
-"   let g:jmin_fg = { "gui": "#008000", "cterm": "2" }
-"   let g:jmin_bg = { "gui": "#000000", "cterm": "0"   }
+"   " Matrix colours
+"   let g:jmin_fg      = { "gui": "#00af00", "cterm": "34" }
+"   let g:jmin_bg      = { "gui": "#000000", "cterm": "0"  }
+"   let g:jmin_comment = { "gui": "#005f00", "cterm": "22" }
+"   let g:jmin_string  = { "gui": "#00ff5f", "cterm": "47" }
+"   let g:jmin_bold    = { "gui": "#00ff00", "cterm": "46" }
 "
 " Be careful with this. You can easily make everything unreadable. It’s better
 " to use dark backgrounds only with the dark jmin schemes and vice versa.
