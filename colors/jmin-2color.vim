@@ -66,6 +66,7 @@ if g:jmin_no_underline
     let s:undercurl    = s:none
 endif
 
+let s:comment_attr             = s:italic
 let s:statement_fg             = s:norm_fg
 let s:statement_attr           = s:bold
 let s:preproc_fg               = s:statement_fg
@@ -388,6 +389,7 @@ let s:indent_guides_attr       = { "gui": "reverse", "cterm": "reverse" }
 
 
 if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' || g:jmin_16 == 1 || s:term == 'linux'
+    let s:comment_attr       = s:none
     let s:html_link_attr     = s:bold
     let s:html_italic_attr   = s:none
     let s:statusline_attr    = { "gui": "reverse", "cterm": "reverse" }
@@ -477,6 +479,25 @@ endif
 "
 " Helper Functions
 "
+
+" Toggle comment style
+function! JMinComments()
+    if g:jmin_hlcomments
+        let g:jmin_hlcomments = 0
+        call s:noh("Comment")
+        "call s:noh("Todo")
+        "call s:noh("vimCommentTitle")
+    else
+        let g:jmin_hlcomments = 1
+        call s:h("Comment", {"attr": s:comment_attr})
+        "call s:h("Todo", {"fg": s:todo_fg, "attr": s:todo_attr})
+        ""hi! link Todo Comment
+        "call s:h("vimCommentTitle", {"fg": s:vim_comment_title_fg, "attr": s:vim_comment_title_attr})
+        ""hi! link vimCommentTitle Comment
+    end
+endfunction
+command! JMinComments call JMinComments()
+execute "map" g:jmin_toggle_comments_shortcut ":JMinComments<enter>"
 
 " Toggle keyword (Statement group) highlighitng
 function! JMinKeyword()
@@ -847,6 +868,13 @@ call s:h("FloatBorder", { "fg": s:floatborder_fg, "bg": s:floatborder_bg })
 "
 " These are toggled by options. They default to normal, or unhighlighted.
 "
+
+" Toggle option twice to activate it.
+"
+" This silly trick lets us use the toggle function to set these highlights
+" instead of repeating the code here.
+call JMinComments()
+call JMinComments()
 
 " Toggle option twice to activate it.
 "

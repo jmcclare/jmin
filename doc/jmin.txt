@@ -90,6 +90,8 @@ them apply to `jmin-simple`.
 			global
 	Highlight comments.
 
+	Works in `jmin-2color` color scheme.
+
 							*g:jmin_hlstrs*
 `g:jmin_hlstrs`		boolean	(default 1)
 			global
