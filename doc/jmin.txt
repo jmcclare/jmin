@@ -282,11 +282,11 @@ Here are some examples of setting custom colors.
     colorscheme jmin-white
  
     " The Matrix
-    let g:jmin_fg      = { "gui": "#00af00", "cterm": "34" }
+    let g:jmin_fg      = { "gui": "#00D75F", "cterm": "41" }
     let g:jmin_bg      = { "gui": "#000000", "cterm": "0"  }
-    let g:jmin_comment = { "gui": "#005f00", "cterm": "22" }
-    let g:jmin_string  = { "gui": "#00ff5f", "cterm": "47" }
-    let g:jmin_bold    = { "gui": "#00ff00", "cterm": "46" }
+    let g:jmin_comment = { "gui": "#005F00", "cterm": "22" }
+    let g:jmin_string  = { "gui": "#87FFAF", "cterm": "121" }
+    let g:jmin_bold    = { "gui": "#00FF87", "cterm": "48" }
     colorscheme jmin-black
 <
 The `cterm` 256 color pallet values will be ignored in GVim, or a full
@@ -321,11 +321,11 @@ Put the following in your Vim / NeoVim config directory at
     "
 
     " Set Matrix colors
-    let g:jmin_fg      = { "gui": "#00af00", "cterm": "34" }
+    let g:jmin_fg      = { "gui": "#00D75F", "cterm": "41" }
     let g:jmin_bg      = { "gui": "#000000", "cterm": "0"  }
-    let g:jmin_comment = { "gui": "#005f00", "cterm": "22" }
-    let g:jmin_string  = { "gui": "#00ff5f", "cterm": "47" }
-    let g:jmin_bold    = { "gui": "#00ff00", "cterm": "46" }
+    let g:jmin_comment = { "gui": "#005F00", "cterm": "22" }
+    let g:jmin_string  = { "gui": "#87FFAF", "cterm": "121" }
+    let g:jmin_bold    = { "gui": "#00FF87", "cterm": "48" }
 
     runtime! colors/jmin-black.vim
     let g:colors_name = "thematrix"
