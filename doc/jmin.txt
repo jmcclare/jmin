@@ -285,7 +285,7 @@ Here are some examples of setting custom colors.
     let g:jmin_fg      = { "gui": "#00D75F", "cterm": "41" }
     let g:jmin_bg      = { "gui": "#000000", "cterm": "0"  }
     let g:jmin_comment = { "gui": "#005F00", "cterm": "22" }
-    let g:jmin_string  = { "gui": "#87FFAF", "cterm": "121" }
+    let g:jmin_string  = { "gui": "#AFFFD7", "cterm": "158" }
     let g:jmin_bold    = { "gui": "#00FF87", "cterm": "48" }
     colorscheme jmin-black
 <
@@ -324,7 +324,7 @@ Put the following in your Vim / NeoVim config directory at
     let g:jmin_fg      = { "gui": "#00D75F", "cterm": "41" }
     let g:jmin_bg      = { "gui": "#000000", "cterm": "0"  }
     let g:jmin_comment = { "gui": "#005F00", "cterm": "22" }
-    let g:jmin_string  = { "gui": "#87FFAF", "cterm": "121" }
+    let g:jmin_string  = { "gui": "#AFFFD7", "cterm": "158" }
     let g:jmin_bold    = { "gui": "#00FF87", "cterm": "48" }
 
     runtime! colors/jmin-black.vim
