@@ -838,7 +838,7 @@ call s:h("SneakScope", {"fg": s:sneak_fg, "bg": s:sneakscope})
 call s:noh("IndentGuidesOdd")
 call s:h("IndentGuidesEven", { "fg": s:nontext_fg, "bg": s:indent_guides_bg, "attr": s:indent_guides_attr })
 
-" NeoVim specific groups.
+" NeoVim / Treesitter specific groups.
 " Vim will get a error if you try to highlight a group with an @ in its name.
 if has('nvim')
     call s:noh("@variable")
