@@ -541,6 +541,7 @@ let s:qfline_attr   = s:cursorline_attr
 
 " Diff
 
+" Side‐by‐Side Diff
 let s:diffadd_fg               = s:none
 "let s:diffadd_bg               = s:dim_cyan
 " A bit brighter, but it needs to be to make highlighted comments legible.
@@ -557,7 +558,7 @@ let s:difftext_fg              = s:none
 let s:difftext_bg              = s:diffadd_bg
 let s:difftext_attr            = s:none
 
-" Git Diff
+" Diff Text and Git Diff
 "let s:difffile_fg        = s:none
 let s:difffile_fg        = s:bold_fg
 let s:difffile_bg        = s:none
@@ -1546,6 +1547,7 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
 endif
 
 
+
 "
 " Helper Functions
 "
@@ -1845,7 +1847,6 @@ function! s:noh(group)
     call s:h(a:group,        {"bg": s:none, "fg": s:norm_fg, "attr": { "gui": "NONE", "cterm": "NONE" },})
 endfunction
 
-
 " Set both backgrounds to bg and both foregrounds to fg.
 function! s:default(group)
     call s:h(a:group, {"fg": {"gui": "fg", "cterm": "fg"}, "bg": {"gui": "bg", "cterm": "bg"}})
@@ -1951,12 +1952,12 @@ call JMinQuickfix()
 call JMinQuickfix()
 call s:h("QuickFixLine",        { "fg": s:qfline_fg, "bg": s:qfline_bg, "attr": s:qfline_attr })
 
-" Diff
+" Side‐by‐Side Diff
 call s:h("DiffAdd", { "fg": s:diffadd_fg, "bg": s:diffadd_bg, "attr": s:diffadd_attr })
 call s:h("DiffChange", {"fg": s:diffchange_fg, "bg": s:diffchange_bg})
 call s:h("DiffText", { "fg": s:difftext_fg, "bg": s:difftext_bg, "attr": s:difftext_attr })
 call s:h("DiffDelete", { "fg": s:diffdelete_fg, "bg": s:diffdelete_bg, "attr": s:diffdelete_attr })
-" Git Diff
+" Diff Text and Git Diff
 call s:h("diffFile", {"fg": s:difffile_fg, "bg": s:difffile_bg, "attr": s:difffile_attr})
 call s:h("diffNewFile", {"fg": s:diffnewfile_fg, "bg": s:diffnewfile_bg, "attr": s:diffnewfile_attr})
 call s:h("diffIndexLine", {"fg": s:diffindexline_fg, "bg": s:diffindexline_bg, "attr": s:diffindexline_attr})
@@ -1974,6 +1975,12 @@ call s:h("GitGutterAdd", {"fg": s:gitgutteradd_fg})
 call s:h("GitGutterChange", {"fg": s:gitgutterchange_fg})
 call s:h("GitGutterDelete", {"fg": s:gitgutterdelete_fg})
 call s:h("GitGutterChangeDelete", {"fg": s:gitgutterchangedelete_fg})
+" New Diff Groups. These seem to be used in diff format text.
+hi link Add diffAdded
+" I don’t have a group for changed diff text that does not set a background,
+" so I’ll use whatever I set for GitGutterChange.
+hi link Changed GitGutterChange
+hi link Removed diffRemoved
 
 call s:h("SpellBad", { "fg": s:spellbad_fg, "bg": s:spellbad_bg, "guisp": s:spellbad_guisp, "attr": s:spellbad_attr })
 call s:h("SpellCap", { "fg": s:spellcap_fg, "bg": s:spellcap_bg, "guisp": s:spellcap_guisp, "attr": s:spellcap_attr })
@@ -2066,7 +2073,7 @@ call s:h("SneakScope", {"fg": s:sneak_fg, "bg": s:sneakscope})
 call s:noh("IndentGuidesOdd")
 call s:h("IndentGuidesEven", { "fg": s:nontext_fg, "bg": s:indent_guides_bg })
 
-" NeoVim specific groups.
+" NeoVim / Treesitter specific groups.
 " Vim will get a error if you try to highlight a group with an @ in its name.
 if has('nvim')
     call s:noh("@variable")
@@ -2088,6 +2095,12 @@ if has('nvim')
     hi link @tag.attribute.xml xmlAttrib
     hi link @operator.xml xmlEqual
     hi link @punctuation.delimiter.xml xmlAttribPunct
+    " New Diff Groups.
+    " These are linked to the new regular groups (which I further link above)
+    " but I have to link these directly to have an effect.
+    hi link @diff.plus.diff diffAdded
+    hi link @diff.minus.diff diffRemoved
+    hi link @attribute.diff diffIndexLine
 endif
 
 " Diagnostics

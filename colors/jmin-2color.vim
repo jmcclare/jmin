@@ -697,12 +697,12 @@ call s:h("qfSeparator", { "fg": s:qfseparator, })
 call s:h("qfLineNr",        { "fg": s:qflinenr, "attr": s:qflinenr_attr })
 call s:h("QuickFixLine",        { "fg": s:qfline_fg, "bg": s:qfline_bg, "attr": s:qfline_attr })
 
-" Diff
+" Side‐by‐Side Diff
 call s:h("DiffAdd", { "fg": s:diffadd_fg, "bg": s:diffadd_bg, "attr": s:diffadd_attr })
 call s:h("DiffChange", {"fg": s:diffchange_fg, "bg": s:diffchange_bg})
 call s:h("DiffText", { "fg": s:difftext_fg, "bg": s:difftext_bg, "attr": s:difftext_attr })
 call s:h("DiffDelete", { "fg": s:diffdelete_fg, "bg": s:diffdelete_bg, "attr": s:diffdelete_attr })
-" Git Diff
+" Diff Text and Git Diff
 call s:h("diffFile", {"fg": s:difffile_fg, "bg": s:difffile_bg, "attr": s:difffile_attr})
 call s:h("diffNewFile", {"fg": s:diffnewfile_fg, "bg": s:diffnewfile_bg, "attr": s:diffnewfile_attr})
 call s:h("diffIndexLine", {"fg": s:diffindexline_fg, "bg": s:diffindexline_bg, "attr": s:diffindexline_attr})
@@ -720,6 +720,12 @@ call s:h("GitGutterAdd", {"fg": s:gitgutteradd_fg})
 call s:h("GitGutterChange", {"fg": s:gitgutterchange_fg})
 call s:h("GitGutterDelete", {"fg": s:gitgutterdelete_fg})
 call s:h("GitGutterChangeDelete", {"fg": s:gitgutterchangedelete_fg})
+" New Diff Groups. These seem to be used in diff format text.
+hi link Add diffAdded
+" I don’t have a group for changed diff text that does not set a background,
+" so I’ll use whatever I set for GitGutterChange.
+hi link Changed GitGutterChange
+hi link Removed diffRemoved
 
 call s:h("SpellBad", { "fg": s:spellbad_fg, "bg": s:spellbad_bg, "guisp": s:spellbad_guisp, "attr": s:spellbad_attr })
 call s:h("SpellCap", { "fg": s:spellcap_fg, "bg": s:spellcap_bg, "guisp": s:spellcap_guisp, "attr": s:spellcap_attr })
@@ -837,6 +843,8 @@ call s:h("IndentGuidesEven", { "fg": s:nontext_fg, "bg": s:indent_guides_bg, "at
 if has('nvim')
     call s:noh("@variable")
     "hi link @variable Identifier
+    hi link @tag.delimiter.html htmlTag
+    hi link @tag.html htmlTagName
     hi link @markup.raw.block.markdown String
     hi link @markup.raw.markdown_inline String
     hi link @markup.raw String
@@ -846,8 +854,18 @@ if has('nvim')
     hi link @markup.heading.4.markdown htmlH1
     hi link @markup.heading.5.markdown htmlH1
     hi link @markup.heading.6.markdown htmlH1
-    " As of 2025-01-15 I am not sure if @markup.quote.markdown is still used.
-    hi link @markup.quote.markdown htmlItalic
+    hi link @markup.quote.markdown Comment
+    hi link @tag.xml XMLTagName
+    hi link @tag.delimiter.xml XMLTag
+    hi link @tag.attribute.xml xmlAttrib
+    hi link @operator.xml xmlEqual
+    hi link @punctuation.delimiter.xml xmlAttribPunct
+    " New Diff Groups.
+    " These are linked to the new regular groups (which I further link above)
+    " but I have to link these directly to have an effect.
+    hi link @diff.plus.diff diffAdded
+    hi link @diff.minus.diff diffRemoved
+    hi link @attribute.diff diffIndexLine
 endif
 
 " Diagnostics
