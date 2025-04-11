@@ -2088,6 +2088,8 @@ if has('nvim')
     "hi link @variable Identifier
     hi link @tag.delimiter.html htmlTag
     hi link @tag.html htmlTagName
+    hi link @tag.attribute.html htmlTag
+    hi link @operator.html htmlTag
     hi link @markup.raw.block.markdown String
     hi link @markup.raw.markdown_inline String
     hi link @markup.raw String

@@ -621,6 +621,7 @@ call s:noh("htmlSpecialTagName")
 call s:noh("htmlArg")
 call s:noh("htmlString")
 call s:noh("htmlEndTag")
+call s:noh("xmlAttribPunct")
 
 call s:h("htmlH1", { "attr": s:none })
 call s:h("htmlLink", { "attr": s:none })
@@ -845,6 +846,8 @@ if has('nvim')
     "hi link @variable Identifier
     hi link @tag.delimiter.html htmlTag
     hi link @tag.html htmlTagName
+    hi link @tag.attribute.html htmlTag
+    hi link @operator.html htmlTag
     hi link @markup.raw.block.markdown String
     hi link @markup.raw.markdown_inline String
     hi link @markup.raw String
