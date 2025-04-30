@@ -256,7 +256,12 @@ let s:color15 = { "gui": "#FFFFFF", "cterm": "15" }
 "
 
 let s:norm_fg           = s:very_dark_grey
-if g:jmin_contrast  == 'low'
+" Common low contrast light background text color; see
+" http://bettermotherfuckingwebsite.com/
+if g:jmin_contrast == 'low'
+    let s:norm_fg       = s:darker_grey
+endif
+if g:jmin_contrast == 'lowest'
     let s:norm_fg       = s:dark_grey
 endif
 if g:jmin_contrast  == 'high' || g:jmin_contrast == 'max'

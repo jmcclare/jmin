@@ -235,8 +235,11 @@ let s:color15 = { "gui": "#FFFFFF", "cterm": "15" }
 " This is also probably the default black terminal foreground colour for older
 " systems.
 "let s:norm_fg = s:near_white
-let s:norm_fg = s:lighter_grey0
+let s:norm_fg = s:color7
 if g:jmin_contrast == 'low'
+    let s:norm_fg = s:lighter_grey0
+endif
+if g:jmin_contrast == 'lowest'
     let s:norm_fg = s:light_grey
 endif
 if g:jmin_contrast == 'high' || g:jmin_contrast == 'max'

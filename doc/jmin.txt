@@ -81,9 +81,10 @@ them apply to `jmin-simple`.
 	background.
 
 	Valid values are:
-	"low"
-	"normal"
 	"high"
+	"normal"
+	"low"
+	"lowest"
 
 							*g:jmin_hlcomments*
 `g:jmin_hlcomments`	boolean	(default 1)
