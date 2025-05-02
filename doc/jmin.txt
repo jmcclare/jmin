@@ -35,11 +35,14 @@ Enable the color schemes like this:
 >vim
     colorscheme jmin-dark " or jmin-black, jmin-light, etc.
 <
+Or:
+>vim
+    colo jmin-dark
+<
 Or, in NeoVim Lua:
 >lua
     vim.cmd.colorscheme("jmin-dark")
 <
-
 All of these work in full color, 256 color, 16 color and 2 color
 terminals.
 
@@ -74,6 +77,7 @@ In Lua:
 <
 Some of these settings do not apply to the `jmin-2color` color scheme. None of
 them apply to `jmin-simple`.
+
 							*g:jmin_contrast*
 `g:jmin_contrast`	string	(default "normal")
 			global
