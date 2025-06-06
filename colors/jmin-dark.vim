@@ -1028,7 +1028,7 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     let s:fold_attr                = s:none
     let s:linenr                   = s:color8
     "let s:string                   = s:color14
-    let s:string                   = s:color14
+    let s:string                   = s:color6
     let s:constant                 = s:string
     "let s:statement_fg             = s:norm_fg
     let s:statement_fg             = s:bold_fg
