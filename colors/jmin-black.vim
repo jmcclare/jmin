@@ -924,10 +924,10 @@ if g:jmin_2color
     let s:githead_bg      = s:none
     let s:githead_attr    = s:none
 
-    let s:gitgutteradd_fg          = s:none
-    let s:gitgutterchange_fg       = s:none
-    let s:gitgutterdelete_fg       = s:none
-    let s:gitgutterchangedelete_fg = s:none
+    let s:gitgutteradd_fg          = s:norm_fg
+    let s:gitgutterchange_fg       = s:norm_fg
+    let s:gitgutterdelete_fg       = s:norm_fg
+    let s:gitgutterchangedelete_fg = s:norm_fg
 
     let s:spellbad_fg              = s:none
     let s:spellbad_bg              = s:none
@@ -1514,10 +1514,10 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
         let s:githead_bg      = s:none
         let s:githead_attr    = s:none
 
-        let s:gitgutteradd_fg          = s:none
-        let s:gitgutterchange_fg       = s:none
-        let s:gitgutterdelete_fg       = s:none
-        let s:gitgutterchangedelete_fg = s:none
+        let s:gitgutteradd_fg          = s:norm_fg
+        let s:gitgutterchange_fg       = s:norm_fg
+        let s:gitgutterdelete_fg       = s:norm_fg
+        let s:gitgutterchangedelete_fg = s:norm_fg
 
         let s:spellbad_fg              = s:norm_fg
         let s:spellbad_bg              = s:norm_bg
