@@ -250,11 +250,13 @@ let s:pmenu_bg           = s:norm_bg
 let s:pmenu_attr         = { "cterm": "reverse", "gui": "reverse" }
 let s:pmenusel_fg        = s:norm_fg
 let s:pmenusel_bg        = s:norm_bg
-let s:pmenusel_attr      = s:none
+" This attribute list gets added to the list in s:pmenu_attr unless you add
+" the nocombine.
+let s:pmenusel_attr      = { "cterm": "nocombine,NONE", "gui": "nocombine,NONE" }
 let s:pmenusbar_fg       = s:norm_fg
-let s:pmenusbar_bg       = s:none
-let s:pmenusbar_attr     = { "cterm": "reverse", "gui": "reverse" }
-let s:pmenuthumb_fg      = s:none
+let s:pmenusbar_bg       = s:norm_bg
+let s:pmenusbar_attr     = s:none
+let s:pmenuthumb_fg      = s:norm_fg
 let s:pmenuthumb_bg      = s:norm_bg
 let s:pmenuthumb_attr    = s:none
 
