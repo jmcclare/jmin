@@ -14,7 +14,9 @@
 " schemes are applied.
 
 
-set fillchars=
+" Colorschemes typically do not set fillchars. The user may have preferences
+" they use regardless of color scheme.
+"set fillchars=
 let g:colors_name = ""
 
 
@@ -2537,7 +2539,7 @@ highlight manItalic cterm=italic gui=italic
 " The colours and attributes these set should be set above. `hi clear` also
 " seems to properly reset the Normal background colour and force a redraw.
 " Both of them set colours based on the current value of `background`.
-hi clear
+highlight clear
 syntax reset
 
 
@@ -2545,7 +2547,7 @@ syntax reset
 " Re-apply all highlighting found in included syntax files.
 "
 " NOTE: This takes a noticeable amount of time.
-"runtime! colors/minmono/default-syntax-hl.vim
+"runtime! colors/jmin/default-syntax-hl.vim
 
 
 

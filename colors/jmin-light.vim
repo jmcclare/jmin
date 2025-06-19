@@ -317,6 +317,8 @@ let s:preproc_fg               = s:statement_fg
 let s:preproc_attr             = s:statement_attr
 let s:type_fg                  = s:statement_fg
 let s:type_attr                = s:statement_attr
+let s:special_fg               = s:statement_fg
+let s:special_attr             = s:statement_attr
 let s:html_fg                  = s:dim_grey
 let s:html_h1_fg               = s:bold_fg
 let s:html_h1_attr             = s:bold
@@ -1034,6 +1036,8 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     let s:preproc_attr             = s:statement_attr
     let s:type_fg                  = s:statement_fg
     let s:type_attr                = s:statement_attr
+    let s:special_fg               = s:statement_fg
+    let s:special_attr             = s:statement_attr
     let s:html_fg                  = s:color8
     let s:html_h1_fg               = s:bold_fg
     let s:html_h1_attr             = s:bold
@@ -1598,18 +1602,20 @@ endfunction
 command! JMinNumbers call JMinNumbers()
 execute "map" g:jmin_toggle_numbers_shortcut ":JMinNumbers<enter>"
 
-" Toggle keyword (Statement group) highlighitng
+" Toggle builtin language keyword highlighitng
 function! JMinKeyword()
     if g:jmin_hlkeyword
         let g:jmin_hlkeyword = 0
         call s:noh("Statement")
         call s:noh("PreProc")
         call s:noh("Type")
+        call s:noh("Special")
     else
         let g:jmin_hlkeyword = 1
         call s:h("Statement", {"fg": s:statement_fg, "attr": s:statement_attr})
         call s:h("PreProc",   {"fg": s:preproc_fg, "attr": s:preproc_attr})
         call s:h("Type",      {"fg": s:type_fg, "attr": s:type_attr})
+        call s:h("Special",   {"fg": s:special_fg, "attr": s:special_attr})
     end
 endfunction
 command! JMinKeyword call JMinKeyword()
@@ -2091,6 +2097,9 @@ if has('nvim')
     hi link @diff.plus.diff diffAdded
     hi link @diff.minus.diff diffRemoved
     hi link @attribute.diff diffIndexLine
+    "hi link @module.python @module
+    call s:noh("@module.python")
+    hi link @type.builtin.python Type
 endif
 
 " Diagnostics
