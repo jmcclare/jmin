@@ -1062,7 +1062,11 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     let s:statusline_bg = s:norm_bg
     let s:statusline_attr  = { "gui": "reverse", "cterm": "reverse" }
 
-    let s:statusline_nc_bg = s:color8
+    "let s:statusline_nc_bg   = s:color8
+    " The Ubuntu framebuffer terminal does not allow you to set any of the
+    " “bold” 16 basic colors as a background color. That includes bold black
+    " (dark grey).
+    let s:statusline_nc_bg   = s:color0
     let s:statusline_nc_fg = s:color7
     let s:statusline_nc_attr = s:none
     let s:vertsplit = s:color8
@@ -1131,19 +1135,23 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     " Unprintable characters: text displayed differently from what it really is.
     " But not 'listchars' whitespace.
     let s:specialkey       = s:color7
-    "let s:tabline_fg       = s:norm_fg
-    "let s:tabline_bg       = s:norm_bg
-    "let s:tabline_attr     = { "gui": "reverse", "cterm": "reverse" }
-    let s:tabline_fg       = s:statusline_nc_fg
-    let s:tabline_bg       = s:statusline_nc_bg
-    let s:tabline_attr     = s:statusline_nc_attr
+    "let s:tabline_fg        = s:norm_fg
+    "let s:tabline_bg        = s:norm_bg
+    "let s:tabline_attr      = { "gui": "reverse", "cterm": "reverse" }
+    "let s:tabline_fg       = s:statusline_nc_fg
+    "let s:tabline_bg       = s:statusline_nc_bg
+    "let s:tabline_attr     = s:statusline_nc_attr
+    let s:tabline_fg       = s:color8
+    let s:tabline_bg       = s:color7
+    let s:tabline_attr     = s:none
     "let s:tablinesel_fg    = s:none
     let s:tablinesel_fg    = s:bold_fg
     let s:tablinesel_bg    = s:none
     let s:tablinesel_attr  = s:none
     "let s:tablinesel_attr  = s:bold
     "let s:tablinefill      = s:norm_fg
-    let s:tablinefill      = s:statusline_nc_bg
+    "let s:tablinefill      = s:statusline_nc_bg
+    let s:tablinefill      = s:tabline_bg
     let s:underlined_attr  = s:bold
     " Only NeoVim Diagnostics has these message types
     let s:infomsg_fg       = s:color14
@@ -1207,7 +1215,9 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     let s:pmenusel_bg              = s:color14
     let s:pmenusel_attr            = s:none
     let s:pmenusbar_fg             = s:none
-    let s:pmenusbar_bg             = s:color8
+    "let s:pmenusbar_bg             = s:color8
+    " This is actually set as a background color, so no bold colors.
+    let s:pmenusbar_bg             = s:color0
     let s:pmenusbar_attr           = s:none
     let s:pmenuthumb_fg            = s:none
     let s:pmenuthumb_bg            = s:color7
