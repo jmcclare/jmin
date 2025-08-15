@@ -1919,9 +1919,10 @@ call s:h("SignColumn", {"fg": s:signcolumn})
 call s:h("SpecialKey", {"fg": s:specialkey})
 call s:h("StatusLine", {"fg": s:statusline_fg, "bg": s:statusline_bg, "attr": s:statusline_attr})
 call s:h("StatusLineNC", { "fg": s:statusline_nc_fg, "bg": s:statusline_nc_bg, "attr": s:statusline_nc_attr })
-" VertSplit is used in Vim. Only the background colour matters.
-call s:h("VertSplit", {"bg": s:vertsplit})
-" VertSplit is used in Neovim for the same thing. fg and bg matter. fg is a
+" VertSplit is used in Vim. The default (despite what the built in help says)
+" is empty space, so you have to set the background color.
+call s:h("VertSplit", {"fg": s:vertsplit, "bg": s:vertsplit})
+" WinSeparator is used in Neovim for the same thing. fg and bg matter. fg is a
 " vertical bar.
 call s:h("WinSeparator", {"fg": s:vertsplit})
 

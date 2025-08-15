@@ -104,13 +104,15 @@ if !exists("g:jmin_2color")
 endif
 if g:jmin_2color
     " Fill empty space in the non‐current status line.
-    set fillchars=stlnc:-
+    " Warning: Color schemes should generally not change fillchars.
+    "set fillchars+=stlnc:-
 else
     " Set it to space
     "set fillchars=stlnc:\ 
     " Better method, clear fillchars altogether. This is the only fillchar we
     " set here.
-    set fillchars=
+    " Warning: Color schemes should generally not change fillchars.
+    "set fillchars=
 endif
 
 " g:jmin_fg and g:jmin_bg let you override the main foreground and

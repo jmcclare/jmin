@@ -26,7 +26,8 @@ let g:colors_name = "jmin-2color"
 let s:term=$TERM
 
 " We are always in 2 colour mode, so always set this.
-set fillchars=stlnc:-
+" Warning: Color schemes should generally not change fillchars.
+"set fillchars=stlnc:-
 
 " The key for this colour scheme is setting every colour to NONE so that we
 " end up using the terminal’s current foreground and background colours.
@@ -658,7 +659,13 @@ call s:h("SignColumn", {"fg": s:signcolumn})
 call s:h("SpecialKey", {"fg": s:specialkey})
 call s:h("StatusLine", { "fg": s:statusline_fg, "bg": s:statusline_bg, "attr": s:statusline_attr })
 call s:h("StatusLineNC", { "fg": s:statusline_nc_fg, "bg": s:statusline_nc_bg, "attr": s:statusline_nc_attr })
+" VertSplit is used in Vim. The default (despite what the built in help says)
+" is empty space, unless VertSplit is unset, then it default to a vertical
+" bar. In other color schemes I have to set the background color. here it gets
+" a vertical bar, so normal unset foreground and background work.
 call s:h("VertSplit", {"fg": s:vertsplit})
+" WinSeparator is used in Neovim for the same thing. fg and bg matter. fg is a
+" vertical bar.
 call s:h("WinSeparator", {"fg": s:vertsplit})
 
 " Highlighted
