@@ -1075,7 +1075,7 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     " Search
 
     let s:search_fg      = s:color11
-    let s:search_bg      = s:color12
+    let s:search_bg      = s:color4
     let s:search_attr    = s:none
     let s:incsearch_fg   = s:search_fg
     let s:incsearch_bg   = s:search_bg
@@ -1091,7 +1091,7 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     "let s:cursorline_attr  = s:none
     let s:cursorline_attr  = { "gui": "reverse", "cterm": "reverse" }
     let s:cursorim_fg      = s:color0
-    let s:cursorim_bg      = s:color14
+    let s:cursorim_bg      = s:color6
     let s:cursorim_attr    = s:none
     let s:colorcolumn_fg   = s:cursorline_fg
     let s:colorcolumn_bg   = s:cursorline_bg
@@ -1114,7 +1114,7 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     let s:symlink          = s:norm_fg
     let s:nontext_fg       = s:color8
     let s:nontext_bg       = s:none
-    let s:signcolumn       = s:color8
+    let s:signcolumn       = s:color0
     "let s:modemsg          = s:color5
     let s:modemsg          = s:norm_fg
     "let s:modemsg_attr     = s:bold
@@ -1333,10 +1333,10 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     " They all use the same foreground colour
     let s:sneak_fg = s:color0
     " These are their individual background colours
-    let s:sneaklabelmask = s:color14
-    let s:sneaktarget = s:color14
-    let s:sneaklabeltarget = s:color14
-    let s:sneakscope = s:color14
+    let s:sneaklabelmask   = s:color6
+    let s:sneaktarget      = s:color6
+    let s:sneaklabeltarget = s:color6
+    let s:sneakscope       = s:color6
 
     " indent-guides
     " You can only set the first 0 terminal colours as background colours in
@@ -1951,6 +1951,8 @@ call s:h("ModeMsg", {"fg": s:modemsg, "attr": s:modemsg_attr})
 call s:h("MoreMsg", {"fg": s:moremsg, "attr": s:moremsg_attr})
 call s:h("Pmenu", { "fg": s:pmenu_fg, "bg": s:pmenu_bg, "attr": s:pmenu_attr })
 call s:h("PmenuSel", { "fg": s:pmenusel_fg, "bg": s:pmenusel_bg, "attr": s:pmenusel_attr })
+" Setting the foreground color here does nothing. The scrollbar will be the
+" pmenu background color and the scrollbar background will be what you set here.
 call s:h("PmenuSbar", { "fg": s:pmenusbar_fg, "bg": s:pmenusbar_bg, "attr": s:pmenusbar_attr })
 call s:h("PmenuThumb", { "fg": s:pmenuthumb_fg, "bg": s:pmenuthumb_bg, "attr": s:pmenuthumb_attr })
 call s:noh("WildMenu")

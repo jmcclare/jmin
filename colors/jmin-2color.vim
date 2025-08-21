@@ -692,6 +692,8 @@ call s:h("ModeMsg", {"fg": s:modemsg, "attr": s:modemsg_attr})
 call s:h("MoreMsg", {"fg": s:moremsg, "attr": s:moremsg_attr})
 call s:h("Pmenu", { "fg": s:pmenu_fg, "bg": s:pmenu_bg, "attr": s:pmenu_attr })
 call s:h("PmenuSel", { "fg": s:pmenusel_fg, "bg": s:pmenusel_bg, "attr": s:pmenusel_attr })
+" Setting the foreground color here does nothing. The scrollbar will be the
+" pmenu background color and the scrollbar background will be what you set here.
 call s:h("PmenuSbar", { "fg": s:pmenusbar_fg, "bg": s:pmenusbar_bg, "attr": s:pmenusbar_attr })
 call s:h("PmenuThumb", { "fg": s:pmenuthumb_fg, "bg": s:pmenuthumb_bg, "attr": s:pmenuthumb_attr })
 call s:noh("WildMenu")

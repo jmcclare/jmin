@@ -1059,17 +1059,15 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     let s:statusline_bg = s:norm_bg
     let s:statusline_attr  = { "gui": "reverse", "cterm": "reverse" }
 
-    "let s:statusline_nc_bg   = s:color7
-    "let s:statusline_nc_fg   = s:color8
-    let s:statusline_nc_bg   = s:color8
-    let s:statusline_nc_fg   = s:color7
+    let s:statusline_nc_bg   = s:color7
+    let s:statusline_nc_fg   = s:color8
     let s:statusline_nc_attr = s:none
     let s:vertsplit         = s:color8
 
     " Search
 
     let s:search_fg      = s:color12
-    let s:search_bg      = s:color11
+    let s:search_bg      = s:color3
     let s:search_attr    = s:none
     let s:incsearch_fg   = s:search_fg
     let s:incsearch_bg   = s:search_bg
@@ -1080,13 +1078,13 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     let s:cursorline_bg    = s:norm_fg
     let s:cursorline_attr  = s:none
     let s:cursorim_fg      = s:color0
-    let s:cursorim_bg      = s:color14
+    let s:cursorim_bg      = s:color6
     let s:cursorim_attr    = s:none
     let s:colorcolumn_fg   = s:norm_fg
     let s:colorcolumn_bg   = s:color7
     let s:colorcolumn_attr = s:none
     let s:error_fg         = s:norm_fg
-    let s:error_bg         = s:color9
+    let s:error_bg         = s:color1
     let s:error_attr       = s:none
     let s:errormsg_fg      = s:color9
     let s:errormsg_bg      = s:none
@@ -1103,7 +1101,7 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     let s:symlink          = s:norm_fg
     let s:nontext_fg       = s:color8
     let s:nontext_bg       = s:none
-    let s:signcolumn       = s:color8
+    let s:signcolumn       = s:norm_bg
     "let s:modemsg          = s:color4
     let s:modemsg          = s:norm_fg
     "let s:modemsg_attr     = s:bold
@@ -1125,10 +1123,8 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     " Unprintable characters: text displayed differently from what it really is.
     " But not 'listchars' whitespace.
     let s:specialkey       = s:color7
-    "let s:tabline_fg       = s:norm_fg
-    "let s:tabline_bg       = s:norm_bg
-    let s:tabline_fg       = s:color7
-    let s:tabline_bg       = s:color8
+    let s:tabline_fg       = s:norm_bg
+    let s:tabline_bg       = s:norm_fg
     "let s:tabline_attr     = { "gui": "reverse", "cterm": "reverse" }
     let s:tabline_attr     = s:none
     "let s:tablinesel_fg    = s:none
@@ -1197,10 +1193,10 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     let s:pmenu_bg                 = s:norm_bg
     let s:pmenu_attr               = { "cterm": "reverse", "gui": "reverse" }
     let s:pmenusel_fg              = s:color0
-    let s:pmenusel_bg              = s:color14
+    let s:pmenusel_bg              = s:color6
     let s:pmenusel_attr            = s:none
     let s:pmenusbar_fg             = s:none
-    let s:pmenusbar_bg             = s:color8
+    let s:pmenusbar_bg             = s:color0
     let s:pmenusbar_attr           = s:none
     let s:pmenuthumb_fg            = s:none
     let s:pmenuthumb_bg            = s:color7
@@ -1219,7 +1215,7 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
 
     " Diff
     let s:diffadd_fg           = s:none
-    let s:diffadd_bg           = s:color14
+    let s:diffadd_bg           = s:color6
     let s:diffadd_attr         = s:none
     let s:diffchange_fg        = s:none
     let s:diffchange_bg        = s:none
@@ -1310,13 +1306,13 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     " They all use the same foreground colour
     let s:sneak_fg          = s:color0
     " These are their individual background colours
-    let s:sneaklabelmask    = s:color14
-    let s:sneaktarget       = s:color14
-    let s:sneaklabeltarget  = s:color14
-    let s:sneakscope        = s:color14
+    let s:sneaklabelmask    = s:color6
+    let s:sneaktarget       = s:color6
+    let s:sneaklabeltarget  = s:color6
+    let s:sneakscope        = s:color6
 
     " indent-guides
-    let s:indent_guides_bg = s:color8
+    let s:indent_guides_bg = s:color0
 
 
     if g:jmin_2color
@@ -1926,6 +1922,8 @@ call s:h("ModeMsg", {"fg": s:modemsg, "attr": s:modemsg_attr})
 call s:h("MoreMsg", {"fg": s:moremsg, "attr": s:moremsg_attr})
 call s:h("Pmenu", { "fg": s:pmenu_fg, "bg": s:pmenu_bg, "attr": s:pmenu_attr })
 call s:h("PmenuSel", { "fg": s:pmenusel_fg, "bg": s:pmenusel_bg, "attr": s:pmenusel_attr })
+" Setting the foreground color here does nothing. The scrollbar will be the
+" pmenu background color and the scrollbar background will be what you set here.
 call s:h("PmenuSbar", { "fg": s:pmenusbar_fg, "bg": s:pmenusbar_bg, "attr": s:pmenusbar_attr })
 call s:h("PmenuThumb", { "fg": s:pmenuthumb_fg, "bg": s:pmenuthumb_bg, "attr": s:pmenuthumb_attr })
 call s:noh("WildMenu")
