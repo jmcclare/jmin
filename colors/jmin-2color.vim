@@ -393,6 +393,13 @@ let s:indent_guides_bg         = s:norm_bg
 let s:indent_guides_attr       = { "gui": "reverse", "cterm": "reverse" }
 
 
+" We use the bold attribute in this section in case you are actually in a 16
+" color terminal that has a bold color. A true 2 color terminal should ignore
+" it. A modern terminal will use a bold font.
+"
+" This means modern terminals will not perfectly match the simple framebuffer
+" terminal, and we are not strictly 2 color, but it makes the color scheme
+" more functional.
 if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' || g:jmin_16 == 1 || s:term == 'linux'
     let s:comment_attr       = s:none
     let s:html_link_attr     = s:bold

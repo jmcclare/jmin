@@ -1031,7 +1031,7 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     let s:constant                 = s:string
     "let s:statement_fg             = s:norm_fg
     let s:statement_fg             = s:bold_fg
-    let s:statement_attr           = s:bold
+    let s:statement_attr           = s:none
     let s:preproc_fg               = s:statement_fg
     let s:preproc_attr             = s:statement_attr
     let s:type_fg                  = s:statement_fg
@@ -1040,13 +1040,13 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     let s:special_attr             = s:statement_attr
     let s:html_fg                  = s:color8
     let s:html_h1_fg               = s:bold_fg
-    let s:html_h1_attr             = s:bold
-    let s:html_link_attr           = s:bold
+    let s:html_h1_attr             = s:none
+    let s:html_link_attr           = s:none
     let s:html_bold_fg             = s:bold_fg
-    let s:html_bold_attr           = s:bold
-    let s:html_italic_attr         = s:bold
+    let s:html_bold_attr           = s:none
+    let s:html_italic_attr         = s:none
 
-    let s:help_hypertext_jump_attr = s:bold
+    let s:help_hypertext_jump_attr = s:none
 
     " Dividers
 
@@ -1060,7 +1060,7 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     let s:statusline_attr  = { "gui": "reverse", "cterm": "reverse" }
 
     let s:statusline_nc_bg   = s:color7
-    let s:statusline_nc_fg   = s:color8
+    let s:statusline_nc_fg   = s:color0
     let s:statusline_nc_attr = s:none
     let s:vertsplit         = s:color8
 
@@ -1095,7 +1095,7 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     "let s:matchparen_fg    = s:norm_fg
     let s:matchparen_fg    = s:bold_fg
     let s:matchparen_bg    = s:norm_bg
-    let s:matchparen_attr  = s:bold
+    let s:matchparen_attr  = s:none
     "let s:directory        = s:color12
     let s:directory        = s:norm_fg
     let s:symlink          = s:norm_fg
@@ -1109,7 +1109,7 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     "let s:moremsg          = s:color4
     "let s:moremsg          = s:norm_fg
     let s:moremsg          = s:bold_fg
-    let s:moremsg_attr     = s:bold
+    let s:moremsg_attr     = s:none
     let s:question         = s:color4
     let s:warningmsg_fg    = s:color11
     let s:warningmsg_bg    = s:none
@@ -1133,7 +1133,7 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     let s:tablinesel_attr  = s:none
     "let s:tablinesel_attr  = s:bold
     let s:tablinefill      = s:norm_fg
-    let s:underlined_attr  = s:bold
+    let s:underlined_attr  = s:none
     " Only NeoVim Diagnostics has these message types
     let s:infomsg_fg       = s:color6
     let s:infomsg_bg       = s:none
@@ -1229,23 +1229,23 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     "let s:difffile_fg        = s:none
     let s:difffile_fg        = s:bold_fg
     let s:difffile_bg        = s:none
-    let s:difffile_attr      = s:bold
+    let s:difffile_attr      = s:none
     "let s:diffnewfile_fg     = s:none
     let s:diffnewfile_fg     = s:bold_fg
     let s:diffnewfile_bg     = s:none
-    let s:diffnewfile_attr   = s:bold
+    let s:diffnewfile_attr   = s:none
     "let s:diffindexline_fg   = s:none
     let s:diffindexline_fg   = s:bold_fg
     let s:diffindexline_bg   = s:none
-    let s:diffindexline_attr = s:bold
+    let s:diffindexline_attr = s:none
     "let s:diffline_fg        = s:none
     let s:diffline_fg        = s:bold_fg
     let s:diffline_bg        = s:none
-    let s:diffline_attr      = s:bold
+    let s:diffline_attr      = s:none
     "let s:diffsubname_fg     = s:none
     let s:diffsubname_fg     = s:bold_fg
     let s:diffsubname_bg     = s:none
-    let s:diffsubname_attr   = s:bold
+    let s:diffsubname_attr   = s:none
     let s:gitdiff_fg         = s:none
     let s:gitdiff_bg         = s:none
     let s:gitdiff_attr       = s:none
@@ -1259,11 +1259,11 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     "let s:gitkeyword_fg   = s:none
     let s:gitkeyword_fg   = s:bold_fg
     let s:gitkeyword_bg   = s:none
-    let s:gitkeyword_attr = s:bold
+    let s:gitkeyword_attr = s:none
     "let s:githash_fg      = s:none
     let s:githash_fg      = s:bold_fg
     let s:githash_bg      = s:none
-    let s:githash_attr    = s:bold
+    let s:githash_attr    = s:none
     let s:githead_fg      = s:none
     let s:githead_bg      = s:none
     let s:githead_attr    = s:none
@@ -1315,6 +1315,7 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     let s:indent_guides_bg = s:color0
 
 
+    " I allow bold attribute here to make terminal 2 color more functional.
     if g:jmin_2color
         let s:statusline_fg      = s:norm_fg
         let s:statusline_bg      = s:norm_bg
