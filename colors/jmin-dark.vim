@@ -519,6 +519,9 @@ let s:pmenu_bg         = s:norm_bg
 let s:pmenu_attr       = { "cterm": "reverse", "gui": "reverse" }
 let s:pmenusel_fg      = s:nearest_black
 let s:pmenusel_bg      = s:pale_sky_blue
+" This attribute list gets added to the list in s:pmenu_attr unless you add
+" nocombine.
+"let s:pmenusel_attr            = { "cterm": "nocombine,NONE", "gui": "nocombine,NONE" }
 let s:pmenusel_attr    = s:none
 " This color is not used. PmenuSbar does not use a foreground colour unless
 " you give it the reverse attribute.
@@ -863,7 +866,10 @@ if g:jmin_2color
     let s:pmenu_attr               = { "cterm": "reverse", "gui": "reverse" }
     let s:pmenusel_fg              = s:norm_fg
     let s:pmenusel_bg              = s:norm_bg
-    let s:pmenusel_attr            = s:none
+    " This attribute list gets added to the list in s:pmenu_attr unless you add
+    " nocombine.
+    let s:pmenusel_attr            = { "cterm": "nocombine,NONE", "gui": "nocombine,NONE" }
+    "let s:pmenusel_attr            = s:none
     let s:pmenusbar_fg             = s:norm_fg
     let s:pmenusbar_bg             = s:none
     let s:pmenusbar_attr           = { "cterm": "reverse", "gui": "reverse" }
@@ -997,7 +1003,6 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     " Colours for 16 colour terminals
     "
 
-    let s:norm_bg = s:color0
     let s:norm_fg = s:color7
     if g:jmin_contrast == 'low'
         " Only 1 shade of light grey, so it stays the same.
@@ -1010,14 +1015,29 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
         " on white.
         let s:norm_fg = s:color15
     endif
+    " This will cause problems if the custom fg’s cterm color is not one of
+    " 0–15, but that’s up to the user.
+    if exists("g:jmin_fg")
+        let s:norm_fg = g:jmin_fg
+    endif
+    let s:norm_bg = s:color0
+    if exists("g:jmin_bg")
+        let s:norm_bg = g:jmin_bg
+    endif
 
     let s:bold_fg = s:norm_fg
     if g:jmin_colorize_bold
         "let s:bold_fg = s:color8
         let s:bold_fg = s:color15
+        if exists("g:jmin_bold")
+            let s:bold_fg = g:jmin_bold
+        endif
     endif
 
     let s:comment_fg               = s:color8
+    if exists("g:jmin_comment")
+        let s:comment_fg           = g:jmin_comment
+    endif
     "let s:comment_attr             = s:none
     let s:comment_attr             = s:none
     "let s:todo                     = s:color10
@@ -1031,6 +1051,9 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     let s:linenr                   = s:color8
     "let s:string                   = s:color14
     let s:string                   = s:color6
+    if exists("g:jmin_string")
+        let s:string               = g:jmin_string
+    endif
     let s:constant                 = s:string
     "let s:statement_fg             = s:norm_fg
     let s:statement_fg             = s:bold_fg
@@ -1214,6 +1237,9 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     let s:pmenu_attr               = { "cterm": "reverse", "gui": "reverse" }
     let s:pmenusel_fg              = s:color0
     let s:pmenusel_bg              = s:color14
+    " This attribute list gets added to the list in s:pmenu_attr unless you add
+    " nocombine.
+    "let s:pmenusel_attr            = { "cterm": "nocombine,NONE", "gui": "nocombine,NONE" }
     let s:pmenusel_attr            = s:none
     let s:pmenusbar_fg             = s:none
     "let s:pmenusbar_bg             = s:color8
@@ -1468,7 +1494,10 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
         let s:pmenu_attr               = { "cterm": "reverse", "gui": "reverse" }
         let s:pmenusel_fg              = s:norm_fg
         let s:pmenusel_bg              = s:norm_bg
-        let s:pmenusel_attr            = s:none
+        " This attribute list gets added to the list in s:pmenu_attr unless you add
+        " nocombine.
+        let s:pmenusel_attr            = { "cterm": "nocombine,NONE", "gui": "nocombine,NONE" }
+        "let s:pmenusel_attr            = s:none
         let s:pmenusbar_fg             = s:norm_fg
         let s:pmenusbar_bg             = s:none
         let s:pmenusbar_attr           = { "cterm": "reverse", "gui": "reverse" }
@@ -1950,6 +1979,8 @@ call s:h("MatchParen", { "fg": s:matchparen_fg, "bg": s:matchparen_bg, "attr": s
 call s:h("ModeMsg", {"fg": s:modemsg, "attr": s:modemsg_attr})
 call s:h("MoreMsg", {"fg": s:moremsg, "attr": s:moremsg_attr})
 call s:h("Pmenu", { "fg": s:pmenu_fg, "bg": s:pmenu_bg, "attr": s:pmenu_attr })
+" This attribute list gets added to the list in s:pmenu_attr unless you add
+" nocombine.
 call s:h("PmenuSel", { "fg": s:pmenusel_fg, "bg": s:pmenusel_bg, "attr": s:pmenusel_attr })
 " Setting the foreground color here does nothing. The scrollbar will be the
 " pmenu background color and the scrollbar background will be what you set here.

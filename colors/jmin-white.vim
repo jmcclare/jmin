@@ -535,8 +535,11 @@ let s:floatborder_bg                = s:normalfloat_bg
 let s:pmenu_fg         = s:norm_fg
 let s:pmenu_bg         = s:norm_bg
 let s:pmenu_attr       = { "cterm": "reverse", "gui": "reverse" }
-let s:pmenusel_fg      = s:black
+let s:pmenusel_fg      = s:norm_bg
 let s:pmenusel_bg      = s:sky_blue
+" This attribute list gets added to the list in s:pmenu_attr unless you add
+" nocombine.
+"let s:pmenusel_attr            = { "cterm": "nocombine,NONE", "gui": "nocombine,NONE" }
 let s:pmenusel_attr    = s:none
 " This color is not used. PmenuSbar does not use a foreground colour unless
 " you give it the reverse attribute.
@@ -876,7 +879,10 @@ if g:jmin_2color
     let s:pmenu_attr               = { "cterm": "reverse", "gui": "reverse" }
     let s:pmenusel_fg              = s:norm_fg
     let s:pmenusel_bg              = s:norm_bg
-    let s:pmenusel_attr            = s:none
+    " This attribute list gets added to the list in s:pmenu_attr unless you add
+    " nocombine.
+    let s:pmenusel_attr            = { "cterm": "nocombine,NONE", "gui": "nocombine,NONE" }
+    "let s:pmenusel_attr            = s:none
     let s:pmenusbar_fg             = s:norm_fg
     let s:pmenusbar_bg             = s:none
     let s:pmenusbar_attr           = { "cterm": "reverse", "gui": "reverse" }
@@ -1009,6 +1015,21 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     " Colours for 16 colour terminals
     "
 
+    " Pure black is the only option.
+    let s:norm_fg           = s:color0
+    if g:jmin_contrast == 'low'
+        " Setting pure black again here just in case.
+        let s:norm_fg          = s:color0
+    end
+    if g:jmin_contrast == 'high'
+        " Setting pure black again here just in case.
+        let s:norm_fg          = s:color0
+    end
+    " This will cause problems if the custom fg’s cterm color is not one of
+    " 0–15, but that’s up to the user.
+    if exists("g:jmin_fg")
+        let s:norm_fg = g:jmin_fg
+    endif
     "
     " As far as I can tell you can only use the first 8 standard terminal colors
     " as background colours in the Linux—or at least Ubuntu—framebuffer terminal.
@@ -1020,16 +1041,9 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     " colorscheme work in the framebuffer terminal.
     "
     let s:norm_bg           = s:color7
-    " Pure black is the only option.
-    let s:norm_fg           = s:color0
-    if g:jmin_contrast == 'low'
-        " Setting pure black again here just in case.
-        let s:norm_fg          = s:color0
-    end
-    if g:jmin_contrast == 'high'
-        " Setting pure black again here just in case.
-        let s:norm_fg          = s:color0
-    end
+    if exists("g:jmin_bg")
+        let s:norm_bg = g:jmin_bg
+    endif
 
     let s:bold_fg = s:norm_fg
     if g:jmin_colorize_bold
@@ -1037,6 +1051,9 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     endif
 
     let s:comment_fg               = s:color8
+    if exists("g:jmin_comment")
+        let s:comment_fg           = g:jmin_comment
+    endif
     "let s:comment_attr             = s:none
     let s:comment_attr             = s:none
     "let s:todo_fg                  = s:color2
@@ -1049,6 +1066,9 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     let s:fold_attr                = s:none
     let s:linenr                   = s:color8
     let s:string                   = s:color4
+    if exists("g:jmin_string")
+        let s:string               = g:jmin_string
+    endif
     let s:constant                 = s:string
     "let s:statement_fg             = s:norm_fg
     let s:statement_fg             = s:bold_fg
@@ -1215,8 +1235,11 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     let s:pmenu_fg                 = s:norm_fg
     let s:pmenu_bg                 = s:norm_bg
     let s:pmenu_attr               = { "cterm": "reverse", "gui": "reverse" }
-    let s:pmenusel_fg              = s:color0
+    let s:pmenusel_fg              = s:color7
     let s:pmenusel_bg              = s:color6
+    " This attribute list gets added to the list in s:pmenu_attr unless you add
+    " nocombine.
+    "let s:pmenusel_attr            = { "cterm": "nocombine,NONE", "gui": "nocombine,NONE" }
     let s:pmenusel_attr            = s:none
     let s:pmenusbar_fg             = s:none
     let s:pmenusbar_bg             = s:color0
@@ -1466,7 +1489,10 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
         let s:pmenu_attr               = { "cterm": "reverse", "gui": "reverse" }
         let s:pmenusel_fg              = s:norm_fg
         let s:pmenusel_bg              = s:norm_bg
-        let s:pmenusel_attr            = s:none
+        " This attribute list gets added to the list in s:pmenu_attr unless you add
+        " nocombine.
+        let s:pmenusel_attr            = { "cterm": "nocombine,NONE", "gui": "nocombine,NONE" }
+        "let s:pmenusel_attr            = s:none
         let s:pmenusbar_fg             = s:norm_fg
         let s:pmenusbar_bg             = s:none
         let s:pmenusbar_attr           = { "cterm": "reverse", "gui": "reverse" }
@@ -1947,6 +1973,8 @@ call s:h("MatchParen", { "fg": s:matchparen_fg, "bg": s:matchparen_bg, "attr": s
 call s:h("ModeMsg", {"fg": s:modemsg, "attr": s:modemsg_attr})
 call s:h("MoreMsg", {"fg": s:moremsg, "attr": s:moremsg_attr})
 call s:h("Pmenu", { "fg": s:pmenu_fg, "bg": s:pmenu_bg, "attr": s:pmenu_attr })
+" This attribute list gets added to the list in s:pmenu_attr unless you add
+" nocombine.
 call s:h("PmenuSel", { "fg": s:pmenusel_fg, "bg": s:pmenusel_bg, "attr": s:pmenusel_attr })
 " Setting the foreground color here does nothing. The scrollbar will be the
 " pmenu background color and the scrollbar background will be what you set here.

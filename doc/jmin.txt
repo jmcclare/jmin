@@ -281,26 +281,44 @@ change those if you want.
 
 Here are some examples of setting custom colors.
 >vim
+    " Change the string color to orange
+    let g:jmin_string  = { "gui": "#DCA149", "cterm": "3" }
+    colorscheme jmin-dark
+
     " sky blue text on white
     let g:jmin_fg = { "gui": "#00AFFF", "cterm": "39" }
     let g:jmin_bg = { "gui": "#FFFFFF", "cterm": "15" }
     colorscheme jmin-white
  
     " The Matrix
+    " These colors work for 16 million and 256 color terminals.
     let g:jmin_fg      = { "gui": "#00D75F", "cterm": "41" }
     let g:jmin_bg      = { "gui": "#000000", "cterm": "0"  }
     let g:jmin_comment = { "gui": "#005F00", "cterm": "22" }
     let g:jmin_string  = { "gui": "#AFFFD7", "cterm": "158" }
     let g:jmin_bold    = { "gui": "#00FF87", "cterm": "48" }
     colorscheme jmin-black
+ 
+    " The Matrix
+    " These colors work for 16 million and 16 color terminals.
+    let g:jmin_fg      = { "gui": "#00D75F", "cterm": "10" }
+    let g:jmin_bg      = { "gui": "#000000", "cterm": "0"  }
+    let g:jmin_comment = { "gui": "#005F00", "cterm": "2" }
+    let g:jmin_string  = { "gui": "#AFFFD7", "cterm": "15" }
+    let g:jmin_bold    = { "gui": "#5FFFAF", "cterm": "7" }
+    colorscheme jmin-black
 <
-The `cterm` 256 color pallet values will be ignored in GVim, or a full
-color terminal with `:set termguicolors`, but the `cterm` parameter must be
-set. You can simply set `0` (black) for dark colors and `15` (white) for
-light colors.
+The `cterm` 256 color pallet values will be ignored in GVim, or a full color
+terminal with `:set termguicolors`, but the `cterm` parameter must be set. You
+can simply set the cterm color to `0` (black) for dark colors and `7` (light
+grey) for light colors if you never use a low color terminal.
 
 If you are setting dark custom colors, use one of the dark color schemes,
 and vice versa. That way the other user interface colors will match.
+
+If your cterm colors are all basic 16 color terminal colors (colors 0–15) your
+custom colors will work in 16 color terminals. Remember, Linux framebuffer
+terminals seem to restrict background colors to colors 0–7.
 
 In NeoVim Lua you can set these global dictionary variables like this:
 >lua
@@ -326,11 +344,11 @@ Put the following in your Vim / NeoVim config directory at
     "
 
     " Set Matrix colors
-    let g:jmin_fg      = { "gui": "#00D75F", "cterm": "41" }
+    let g:jmin_fg      = { "gui": "#00D75F", "cterm": "10" }
     let g:jmin_bg      = { "gui": "#000000", "cterm": "0"  }
-    let g:jmin_comment = { "gui": "#005F00", "cterm": "22" }
-    let g:jmin_string  = { "gui": "#AFFFD7", "cterm": "158" }
-    let g:jmin_bold    = { "gui": "#00FF87", "cterm": "48" }
+    let g:jmin_comment = { "gui": "#005F00", "cterm": "2" }
+    let g:jmin_string  = { "gui": "#AFFFD7", "cterm": "15" }
+    let g:jmin_bold    = { "gui": "#5FFFAF", "cterm": "7" }
 
     runtime! colors/jmin-black.vim
     let g:colors_name = "thematrix"
@@ -341,6 +359,10 @@ Put the following in your Vim / NeoVim config directory at
     unlet g:jmin_string
     unlet g:jmin_bold
 <
+If you turn on 2 color mode most of the interface will use only your custom
+foregound and background colors. See |g:jmin_2color| and
+|g:jmin_toggle_2color_shortcut|.
+
 
 ==============================================================================
 4. Key Mappings							*jmin-keys*
