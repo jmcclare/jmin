@@ -555,7 +555,7 @@ let s:pmenuthumb_attr  = s:none
 " Quickfix Window
 
 let s:qffilename    = s:fold_fg
-let s:qfseparator   = s:norm_fg
+let s:qfseparator   = s:norm_bg
 let s:qflinenr      = s:linenr
 "let s:qflinenr      = s:comment_fg
 "let s:qflinenr_attr = s:italic
@@ -1250,7 +1250,7 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
 
     " Quickfix Window
     let s:qffilename  = s:fold_fg
-    let s:qfseparator = s:norm_fg
+    let s:qfseparator = s:norm_bg
     let s:qflinenr    = s:linenr
     "let s:qflinenr      = s:comment_fg
     let s:qflinenr_attr = s:none
@@ -1771,12 +1771,24 @@ function! JMinQuickfix()
     if g:jmin_hlquickfix
         let g:jmin_hlquickfix = 0
         call s:noh("qfFileName")
-        call s:noh("qfSeparator")
+        " Vim uses qfSeparator.
+        " NeoVin uses qfSeparator1 and qfSeparator2.
+        "call s:noh("qfSeparator")
+        "call s:noh("qfSeparator1")
+        "call s:noh("qfSeparator2")
+        highlight clear qfSeparator
+        highlight link qfSeparator Delimiter
+        highlight clear qfSeparator1
+        highlight link qfSeparator1 Delimiter
+        highlight clear qfSeparator2
+        highlight link qfSeparator2 Delimiter
         call s:h("qfLineNr", { "attr": s:qflinenr_attr, })
     else
         let g:jmin_hlquickfix = 1
         call s:h("qfFileName", {"fg": s:qffilename})
         call s:h("qfSeparator", { "fg": s:qfseparator, })
+        call s:h("qfSeparator1", { "fg": s:qfseparator, })
+        call s:h("qfSeparator2", { "fg": s:qfseparator, })
         call s:h("qfLineNr",   {"fg": s:qflinenr, "attr": s:qflinenr_attr })
     end
 endfunction
