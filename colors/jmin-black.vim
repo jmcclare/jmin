@@ -1092,7 +1092,8 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     " (dark grey).
     "let s:statusline_nc_bg   = s:color0
     let s:statusline_nc_bg   = s:none
-    let s:statusline_nc_fg   = s:color7
+    "let s:statusline_nc_fg   = s:color7
+    let s:statusline_nc_fg   = s:color8
     let s:statusline_nc_attr = s:none
     let s:vertsplit          = s:color8
 
