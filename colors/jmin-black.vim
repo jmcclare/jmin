@@ -294,9 +294,9 @@ if exists("g:jmin_comment")
 endif
 let s:comment_attr             = s:italic
 let s:todo_fg                  = s:comment_fg
-let s:todo_attr                = s:comment_attr
+let s:todo_attr                = s:bold
 let s:vim_comment_title_fg     = s:comment_fg
-let s:vim_comment_title_attr   = s:comment_attr
+let s:vim_comment_title_attr   = s:bold
 let s:fold_fg                  = s:dark_grey
 "let s:fold_attr                = s:italic
 let s:fold_attr                = s:none
@@ -1044,9 +1044,9 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     endif
     let s:comment_attr             = s:none
     let s:todo_fg                  = s:comment_fg
-    let s:todo_attr                = s:comment_attr
+    let s:todo_attr                = s:none
     let s:vim_comment_title_fg     = s:comment_fg
-    let s:vim_comment_title_attr   = s:comment_attr
+    let s:vim_comment_title_attr   = s:none
     let s:fold_fg                  = s:color8
     let s:fold_attr                = s:none
     let s:linenr                   = s:color8

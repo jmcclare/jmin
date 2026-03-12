@@ -135,7 +135,10 @@ let s:modemsg_attr       = s:none
 let s:moremsg            = s:norm_fg
 let s:moremsg_attr       = s:bold
 let s:question           = s:norm_fg
-let s:todo               = s:norm_fg
+let s:todo_fg            = s:norm_fg
+let s:todo_attr          = s:bold
+let s:vim_comment_title_fg   = s:norm_fg
+let s:vim_comment_title_attr = s:bold
 let s:warningmsg_fg      = s:norm_fg
 let s:warningmsg_bg      = s:none
 let s:warningmsg_attr    = s:none
@@ -417,6 +420,9 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
 
     let s:matchparen_attr    = s:bold
 
+    let s:todo_attr          = s:none
+    let s:vim_comment_title_attr = s:none
+
     let s:visual_attr        = { "gui": "reverse", "cterm": "reverse" }
     let s:visualnos_attr     = { "gui": "reverse", "cterm": "reverse" }
 
@@ -497,14 +503,14 @@ function! JMinComments()
     if g:jmin_hlcomments
         let g:jmin_hlcomments = 0
         call s:noh("Comment")
-        "call s:noh("Todo")
+        call s:noh("Todo")
         "call s:noh("vimCommentTitle")
     else
         let g:jmin_hlcomments = 1
         call s:h("Comment", {"attr": s:comment_attr})
-        "call s:h("Todo", {"fg": s:todo_fg, "attr": s:todo_attr})
+        call s:h("Todo", {"fg": s:todo_fg, "attr": s:todo_attr})
         ""hi! link Todo Comment
-        "call s:h("vimCommentTitle", {"fg": s:vim_comment_title_fg, "attr": s:vim_comment_title_attr})
+        call s:h("vimCommentTitle", {"fg": s:vim_comment_title_fg, "attr": s:vim_comment_title_attr})
         ""hi! link vimCommentTitle Comment
     end
 endfunction
@@ -705,7 +711,6 @@ call s:h("PmenuSbar", { "fg": s:pmenusbar_fg, "bg": s:pmenusbar_bg, "attr": s:pm
 call s:h("PmenuThumb", { "fg": s:pmenuthumb_fg, "bg": s:pmenuthumb_bg, "attr": s:pmenuthumb_attr })
 call s:noh("WildMenu")
 call s:h("Question", {"fg": s:question})
-call s:h("Todo", {"fg": s:todo})
 call s:h("WarningMsg", { "fg": s:warningmsg_fg, "bg": s:warningmsg_bg, "attr": s:warningmsg_attr })
 call s:h("Visual", { "fg": s:visual_fg, "bg": s:visual_bg, "attr": s:visual_attr })
 call s:h("VisualNOS", { "fg": s:visualnos_fg, "bg": s:visualnos_bg, "attr": s:visualnos_attr })
