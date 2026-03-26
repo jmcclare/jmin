@@ -266,6 +266,8 @@ let s:pmenuthumb_fg      = s:norm_fg
 let s:pmenuthumb_bg      = s:norm_bg
 let s:pmenuthumb_attr    = s:none
 
+let s:cmpitemabbrmatch_attr = s:bold
+
 let s:qffilename         = s:norm_fg
 let s:qfseparator        = s:norm_fg
 let s:qflinenr           = s:norm_fg
@@ -709,6 +711,7 @@ call s:h("PmenuSel", { "fg": s:pmenusel_fg, "bg": s:pmenusel_bg, "attr": s:pmenu
 " pmenu background color and the scrollbar background will be what you set here.
 call s:h("PmenuSbar", { "fg": s:pmenusbar_fg, "bg": s:pmenusbar_bg, "attr": s:pmenusbar_attr })
 call s:h("PmenuThumb", { "fg": s:pmenuthumb_fg, "bg": s:pmenuthumb_bg, "attr": s:pmenuthumb_attr })
+call s:h("CmpItemAbbrMatch", { "attr": s:cmpitemabbrmatch_attr })
 call s:noh("WildMenu")
 call s:h("Question", {"fg": s:question})
 call s:h("WarningMsg", { "fg": s:warningmsg_fg, "bg": s:warningmsg_bg, "attr": s:warningmsg_attr })
