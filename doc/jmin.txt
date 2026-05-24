@@ -115,6 +115,11 @@ them apply to `jmin-simple`.
 
 	Works in `jmin-2color` color scheme.
 
+							*g:jmin_hlfns*
+`g:jmin_hlfns`	boolean	(default 0)
+			global
+	Highlight function names, both in declarations and function calls.
+
 							*g:jmin_extrafmt*
 `g:jmin_extrafmt`	boolean	(default 1)
 			global
@@ -268,6 +273,7 @@ of the schemes. You set these variables before loading the color scheme.
 * `g:jmin_comment`
 * `g:jmin_string`
 * `g:jmin_bold`
+* `g:jmin_function`
 
 You can override colors in the following color schemes:
 
@@ -292,20 +298,31 @@ Here are some examples of setting custom colors.
  
     " The Matrix
     " These colors work for 16 million and 256 color terminals.
-    let g:jmin_fg      = { "gui": "#00D75F", "cterm": "41" }
-    let g:jmin_bg      = { "gui": "#000000", "cterm": "0"  }
-    let g:jmin_comment = { "gui": "#005F00", "cterm": "22" }
-    let g:jmin_string  = { "gui": "#AFFFD7", "cterm": "158" }
-    let g:jmin_bold    = { "gui": "#00FF87", "cterm": "48" }
+    let g:jmin_fg       = { "gui": "#00D75F", "cterm": "41" }
+    let g:jmin_bg       = { "gui": "#000000", "cterm": "0"  }
+    let g:jmin_comment  = { "gui": "#005F00", "cterm": "22" }
+    let g:jmin_string   = { "gui": "#AFFFD7", "cterm": "158" }
+    let g:jmin_bold     = { "gui": "#00FF87", "cterm": "48" }
+    let g:jmin_function = { "gui": "#00FF87", "cterm": "48" }
     colorscheme jmin-black
  
     " The Matrix
     " These colors work for 16 million and 16 color terminals.
-    let g:jmin_fg      = { "gui": "#00D75F", "cterm": "10" }
-    let g:jmin_bg      = { "gui": "#000000", "cterm": "0"  }
-    let g:jmin_comment = { "gui": "#005F00", "cterm": "2" }
-    let g:jmin_string  = { "gui": "#AFFFD7", "cterm": "15" }
-    let g:jmin_bold    = { "gui": "#5FFFAF", "cterm": "7" }
+    let g:jmin_fg       = { "gui": "#00D75F", "cterm": "10" }
+    let g:jmin_bg       = { "gui": "#000000", "cterm": "0"  }
+    let g:jmin_comment  = { "gui": "#005F00", "cterm": "2" }
+    let g:jmin_string   = { "gui": "#AFFFD7", "cterm": "15" }
+    let g:jmin_bold     = { "gui": "#00D75F", "cterm": "10" }
+    let g:jmin_function = { "gui": "#5FFFAF", "cterm": "7" }
+    colorscheme jmin-black
+
+    " Amber terminal
+    let g:jmin_fg       = { "gui": "#FFBC2B", "cterm": "11" }
+    let g:jmin_bg       = { "gui": "#1B1107", "cterm": "0"  }
+    let g:jmin_comment  = { "gui": "#845A00", "cterm": "3" }
+    let g:jmin_string   = { "gui": "#FAE2AF", "cterm": "15" }
+    let g:jmin_bold     = { "gui": "#FFBC2B", "cterm": "11" }
+    let g:jmin_function = { "gui": "#FFEC36", "cterm": "7" }
     colorscheme jmin-black
 <
 The `cterm` 256 color pallet values will be ignored in GVim, or a full color
@@ -328,8 +345,8 @@ In NeoVim Lua you can set these global dictionary variables like this:
 Or like this:
 >lua
     vim.cmd [[
-	let g:jmin_fg = { "gui": "#00AFFF", "cterm": "39" }
-	let g:jmin_bg = { "gui": "#FFFFFF", "cterm": "15" }
+        let g:jmin_fg = { "gui": "#00AFFF", "cterm": "39" }
+        let g:jmin_bg = { "gui": "#FFFFFF", "cterm": "15" }
     ]]
 <
 You can use these config options to create a new color scheme based on any of
@@ -344,11 +361,17 @@ Put the following in your Vim / NeoVim config directory at
     "
 
     " Set Matrix colors
-    let g:jmin_fg      = { "gui": "#00D75F", "cterm": "10" }
-    let g:jmin_bg      = { "gui": "#000000", "cterm": "0"  }
-    let g:jmin_comment = { "gui": "#005F00", "cterm": "2" }
-    let g:jmin_string  = { "gui": "#AFFFD7", "cterm": "15" }
-    let g:jmin_bold    = { "gui": "#5FFFAF", "cterm": "7" }
+    let g:jmin_fg       = { "gui": "#00D75F", "cterm": "10" }
+    let g:jmin_bg       = { "gui": "#000000", "cterm": "0"  }
+    let g:jmin_comment  = { "gui": "#005F00", "cterm": "2" }
+    let g:jmin_string   = { "gui": "#AFFFD7", "cterm": "15" }
+    let g:jmin_bold     = { "gui": "#FFBC2B", "cterm": "11" }
+    let g:jmin_function = { "gui": "#FFEC36", "cterm": "7" }
+    let g:jmin_2color   = 1
+    let g:jmin_hlfolds  = 0
+    let g:jmin_hlquickfix = 0
+    let g:jmin_hllinenumbers = 0
+    let g:jmin_hlhtml = 0
 
     runtime! colors/jmin-black.vim
     let g:colors_name = "thematrix"
@@ -358,6 +381,48 @@ Put the following in your Vim / NeoVim config directory at
     unlet g:jmin_comment
     unlet g:jmin_string
     unlet g:jmin_bold
+    unlet g:jmin_function
+    unlet g:jmin_2color
+    unlet g:jmin_hlfolds
+    unlet g:jmin_hlquickfix
+    unlet g:jmin_hllinenumbers
+    unlet g:jmin_hlhtml
+<
+Here is a colorscheme that looks like an old fashioned amber terminal. Put the
+following in your Vim / NeoVim config directory at `colors/amber.vim`.
+>vim
+    "
+    " This uses the J‐Min color schemes’ global settings to create a new color
+    " scheme based on jmin-black.
+    "
+
+    " Set amber terminal colors
+    let g:jmin_fg       = { "gui": "#FFBC2B", "cterm": "11" }
+    let g:jmin_bg       = { "gui": "#1B1107", "cterm": "0"  }
+    let g:jmin_comment  = { "gui": "#845A00", "cterm": "3" }
+    let g:jmin_string   = { "gui": "#FAE2AF", "cterm": "15" }
+    let g:jmin_bold     = { "gui": "#FFBC2B", "cterm": "11" }
+    let g:jmin_function = { "gui": "#FFEC36", "cterm": "7" }
+    let g:jmin_2color   = 1
+    let g:jmin_hlfolds  = 0
+    let g:jmin_hlquickfix = 0
+    let g:jmin_hllinenumbers = 0
+    let g:jmin_hlhtml = 0
+
+    runtime! colors/jmin-black.vim
+    let g:colors_name = "amber"
+
+    unlet g:jmin_fg
+    unlet g:jmin_bg
+    unlet g:jmin_comment
+    unlet g:jmin_string
+    unlet g:jmin_bold
+    unlet g:jmin_function
+    unlet g:jmin_2color
+    unlet g:jmin_hlfolds
+    unlet g:jmin_hlquickfix
+    unlet g:jmin_hllinenumbers
+    unlet g:jmin_hlhtml
 <
 If you turn on 2 color mode most of the interface will use only your custom
 foregound and background colors. See |g:jmin_2color| and
@@ -399,6 +464,13 @@ The color schemes set some keyboard shortcuts for toggling the settings.
 
 	Works in `jmin-2color` color scheme.
 
+				*jmin_<Leader>jmf* *g:jmin_toggle_functions_shortcut*
+<Leader>jmf
+	Toggle function name highlighting.
+
+	Change shortcut by setting `g:jmin_toggle_functions_shortcut`
+	Change setting permanently by setting `g:jmin_hlfns`
+
 				*jmin_<Leader>jme* *g:jmin_toggle_extrafmt_shortcut*
 <Leader>jme
 	Toggle built in extra formatting.
@@ -408,8 +480,8 @@ The color schemes set some keyboard shortcuts for toggling the settings.
 
 	Works in `jmin-2color` color scheme.
 
-				*jmin_<Leader>jmf* *g:jmin_toggle_folds_shortcut*
-<Leader>jmf
+				*jmin_<Leader>jmm* *g:jmin_toggle_folds_shortcut*
+<Leader>jmm
 	Toggle fold marker highlighting.
 
 	Change shortcut by setting `g:jmin_toggle_folds_shortcut`

@@ -109,7 +109,7 @@ let s:lighter_red     = { "gui": "#D70000", "cterm": "160" }
 let s:red             = { "gui": "#870000", "cterm": "88" }
 let s:dark_red        = { "gui": "#5F0000", "cterm": "52" }
 
-let s:brighter_orange = { "gui": "#FFAF00", "cterm": "214" }
+let s:bright_orange2  = { "gui": "#FFD787", "cterm": "222" }
 let s:bright_orange   = { "gui": "#FF8700", "cterm": "208" }
 let s:lighter_orange  = { "gui": "#D78700", "cterm": "172" }
 let s:orange          = { "gui": "#AF5F00", "cterm": "130" }
@@ -230,6 +230,10 @@ let s:color15 = { "gui": "#FFFFFF", "cterm": "15" }
 "
 " Set named colors for groups
 "
+" The actual highlighting is done below. The colours here can be either
+" foreground or background colours. Most highlighting groups only need one or
+" the other. The names are appended with `_fg` or `_bg` to clarify.
+"
 
 " Close to the Ubuntu framebuffer terminal standard text foreground colour.
 " This is also probably the default black terminal foreground colour for older
@@ -316,6 +320,10 @@ let s:type_fg                  = s:statement_fg
 let s:type_attr                = s:statement_attr
 let s:special_fg               = s:statement_fg
 let s:special_attr             = s:statement_attr
+let s:function                 = s:bright_orange2
+if exists("g:jmin_function")
+    let s:function             = g:jmin_function
+endif
 let s:html_fg                  = s:grey
 let s:html_h1_fg               = s:bold_fg
 let s:html_h1_attr             = s:bold
@@ -1067,6 +1075,7 @@ if &t_Co == 8 || g:term_colors == '8' || &t_Co == 16 || g:term_colors == '16' ||
     let s:type_attr                = s:statement_attr
     let s:special_fg               = s:statement_fg
     let s:special_attr             = s:statement_attr
+    let s:function                 = s:color3
     let s:html_fg                  = s:color8
     let s:html_h1_fg               = s:bold_fg
     let s:html_h1_attr             = s:none
@@ -1682,6 +1691,23 @@ endfunction
 command! JMinKeyword call JMinKeyword()
 execute "map" g:jmin_toggle_keywords_shortcut ":JMinKeyword<enter>"
 
+" Toggle function name highlighting
+function! JMinFunctions()
+    if g:jmin_hlfns
+        let g:jmin_hlfns = 0
+        call s:noh("Function")
+        call s:noh("shFunctionExpr")
+        call s:noh("vimUserFunc")
+    else
+        let g:jmin_hlfns = 1
+        call s:h("Function",       {"fg": s:function})
+        call s:h("shFunctionExpr", {"fg": s:function})
+        call s:h("vimUserFunc",    {"fg": s:function})
+    end
+endfunction
+command! JMinFunctions call JMinFunctions()
+execute "map" g:jmin_toggle_functions_shortcut ":JMinFunctions<enter>"
+
 " Toggle extra formatting
 function! JMinExtraFmt()
     if g:jmin_extrafmt
@@ -2089,7 +2115,6 @@ call s:noh("Directive")
 "call s:noh("Float")
 " I don’t think this exists. I am not sure where I found it.
 call s:noh("Format")
-call s:noh("Function")
 call s:noh("Identifier")
 call s:noh("Ignore")
 " Leave Include alone. It should be linked to PreProc.
@@ -2241,6 +2266,13 @@ call JMinNumbers()
 " instead of repeating the code here.
 call JMinKeyword()
 call JMinKeyword()
+
+" Toggle option twice to activate it.
+"
+" This silly trick lets us use the toggle function to set these highlights
+" instead of repeating the code here.
+call JMinFunctions()
+call JMinFunctions()
 
 " Toggle option twice to activate it.
 "

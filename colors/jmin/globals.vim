@@ -20,6 +20,11 @@ if !exists("g:jmin_hlstrs")
     let g:jmin_hlstrs = 1
 endif
 
+" Highlight function names
+if !exists("g:jmin_hlfns")
+    let g:jmin_hlfns = 0
+endif
+
 " Highlight numbers
 if !exists("g:jmin_hlnum")
     let g:jmin_hlnum = 0
@@ -155,11 +160,14 @@ endif
 if !exists("g:jmin_toggle_keywords_shortcut")
     let g:jmin_toggle_keywords_shortcut = '<leader>jmk'
 endif
+if !exists("g:jmin_toggle_functions_shortcut")
+    let g:jmin_toggle_functions_shortcut = '<leader>jmf'
+endif
 if !exists("g:jmin_toggle_extrafmt_shortcut")
     let g:jmin_toggle_extrafmt_shortcut = '<leader>jme'
 endif
 if !exists("g:jmin_toggle_folds_shortcut")
-    let g:jmin_toggle_folds_shortcut = '<leader>jmf'
+    let g:jmin_toggle_folds_shortcut = '<leader>jmm'
 endif
 if !exists("g:jmin_toggle_line_numbers_shortcut")
     let g:jmin_toggle_line_numbers_shortcut = '<leader>jml'
